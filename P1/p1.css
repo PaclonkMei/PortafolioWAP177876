@@ -1,0 +1,107 @@
+body {
+  min-height: 100vh;
+}
+
+.archive-shell {
+  position: relative;
+  margin-top: 1rem;
+  min-height: 680px;
+  padding: clamp(1rem, 3vw, 2.2rem);
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(216, 255, 62, 0.055), transparent 24%),
+    rgba(7, 11, 12, 0.34);
+  overflow: hidden;
+}
+
+.archive-shell::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px solid rgba(36, 242, 208, 0.08);
+  pointer-events: none;
+}
+
+.archive-heading {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  padding: clamp(1.3rem, 4vw, 3rem) 0;
+}
+
+.archive-heading h1 {
+  margin: 0;
+  color: var(--acid);
+  font-size: clamp(3rem, 8vw, 7.5rem);
+  line-height: 0.8;
+  letter-spacing: -0.055em;
+}
+
+.archive-heading p {
+  max-width: 720px;
+  color: #b7c4bd;
+  line-height: 1.65;
+}
+
+.archive-list {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.archive-card {
+  min-height: 250px;
+  display: grid;
+  align-content: space-between;
+  padding: 1.2rem;
+  border: 1px solid rgba(216, 255, 62, 0.34);
+  background: rgba(11, 17, 18, 0.9);
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.archive-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--cyan);
+  background: rgba(36, 242, 208, 0.045);
+}
+
+.archive-card small {
+  color: var(--cyan);
+  font: 0.68rem var(--font-mono);
+}
+
+.archive-card h2 {
+  margin: 0.4rem 0;
+  color: var(--acid);
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+}
+
+.archive-card p {
+  color: #aebbb4;
+  line-height: 1.55;
+}
+
+.archive-card .status {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line-soft);
+  color: var(--muted);
+  font: 0.65rem var(--font-mono);
+}
+
+.archive-card.locked {
+  opacity: 0.42;
+  cursor: default;
+}
+
+@media (max-width: 760px) {
+  .archive-list {
+    grid-template-columns: 1fr;
+  }
+}

