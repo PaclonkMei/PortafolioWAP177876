@@ -326,12 +326,33 @@ if __name__ == &quot;__main__&quot;:
       <section class="activity-section">
         <div class="section-title">
           <h2>05 // EVIDENCE SLOTS</h2>
-          <span>CAPTURES TO BE ATTACHED</span>
+          <span>LABORATORY CAPTURES</span>
         </div>
+
         <div class="evidence-grid">
-          <div class="evidence-slot"><div><strong>CAPTURE_01</strong><span>EMISOR EN EJECUCIÓN + TIMESTAMPS</span></div></div>
-          <div class="evidence-slot"><div><strong>CAPTURE_02</strong><span>REGISTRO LOCAL GENERADO</span></div></div>
-          <div class="evidence-slot"><div><strong>CAPTURE_03</strong><span>RECEPCIÓN DE TELEMETRÍA EN KALI</span></div></div>
+          <figure class="evidence-slot">
+            <img src="Evidencias/capture_01.png" alt="Emisor en ejecución mostrando eventos y marcas de tiempo">
+            <figcaption>
+              <strong>CAPTURE_01</strong>
+              <span>EMISOR EN EJECUCIÓN + TIMESTAMPS</span>
+            </figcaption>
+          </figure>
+
+          <figure class="evidence-slot">
+            <img src="Evidencias/capture_02.png" alt="Archivo de registro local generado por el emisor">
+            <figcaption>
+              <strong>CAPTURE_02</strong>
+              <span>REGISTRO LOCAL GENERADO</span>
+            </figcaption>
+          </figure>
+
+          <figure class="evidence-slot">
+            <img src="Evidencias/capture_03.png" alt="Recepción de telemetría en Kali Linux">
+            <figcaption>
+              <strong>CAPTURE_03</strong>
+              <span>RECEPCIÓN DE TELEMETRÍA EN KALI</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -345,17 +366,6 @@ if __name__ == &quot;__main__&quot;:
           <article class="analysis-card"><h3>Asociación temporal</h3><p>Cada registro contiene una marca temporal y un identificador secuencial. Esta estructura permite reconstruir el orden de los eventos y calcular cuánto tiempo transcurrió entre dos registros consecutivos.</p></article>
           <article class="analysis-card"><h3>Telemetría de laboratorio</h3><p>El emisor conserva primero una copia local y después intenta transmitir el evento por HTTP. El receptor almacena además el instante de recepción, por lo que puede compararse el momento de captura con el momento de llegada.</p></article>
           <article class="analysis-card"><h3>Implicaciones de seguridad</h3><p>La misma técnica de captura de entrada puede representar un riesgo cuando se utiliza sin autorización. Por ello la práctica limita el receptor a direcciones privadas o loopback, requiere ejecución visible y se detiene explícitamente con ESC.</p></article>
-        </div>
-      </section>
-
-      <section class="activity-section">
-        <div class="section-title">
-          <h2>07 // REPORT PACKAGE</h2>
-          <span>DELIVERABLE STATUS</span>
-        </div>
-        <div class="presentation-slot">
-          <div><strong>PRESENTACIÓN DE LA ACTIVIDAD</strong><small>Informe con implementación, pruebas, capturas y análisis.</small></div>
-          <span class="pending">PENDING // ATTACH PRESENTATION</span>
         </div>
       </section>
     </main>

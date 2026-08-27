@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-LAB_TOKEN = "cambia-este-token"
+LAB_TOKEN = "lab-control-2026"
 LOG_FILE = Path(__file__).with_name("telemetria_recibida.txt")
 
 

