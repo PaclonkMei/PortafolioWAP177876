@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXORA // Access Gateway</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #080b0d;
+      color: #eef7eb;
+      font-family: Arial, sans-serif;
+    }
+    .login-panel {
+      width: min(420px, calc(100% - 32px));
+      padding: 32px;
+      border: 1px solid #24f2d0;
+      background: #0d1416;
+    }
+    .brand {
+      margin-bottom: 6px;
+      color: #d8ff3e;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    .node {
+      margin-bottom: 28px;
+      color: #24f2d0;
+      font-size: 12px;
+    }
+    .alert {
+      padding: 14px;
+      margin-bottom: 24px;
+      border-left: 3px solid #d8ff3e;
+      background: rgba(216, 255, 62, 0.06);
+      line-height: 1.5;
+    }
+    label {
+      display: block;
+      margin: 16px 0 6px;
+      font-size: 12px;
+      color: #91a49c;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #42524c;
+      background: #06090a;
+      color: white;
+    }
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px;
+      border: 0;
+      background: #d8ff3e;
+      color: #071006;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .lab {
+      margin-top: 24px;
+      color: #65746d;
+      font-size: 11px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main class="login-panel">
+    <div class="brand">NEXORA</div>
+    <div class="node">SECURE ACCESS GATEWAY // LAB NODE</div>
+    <div class="alert">
+      <strong>Su sesión ha expirado.</strong><br>
+      Inicie sesión nuevamente para continuar.
+    </div>
+    <form method="POST">
+      <label for="username">USUARIO</label>
+      <input id="username" name="username" type="text" autocomplete="off" required>
+      <label for="password">CONTRASEÑA</label>
+      <input id="password" name="password" type="password" autocomplete="off" required>
+      <button type="submit">RESTAURAR SESIÓN</button>
+    </form>
+    <div class="lab">ENTORNO FICTICIO // LABORATORIO CONTROLADO</div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,17 @@
+ACTIVIDAD 04 // INTEGRACIÓN RÁPIDA
+
+Sube estos archivos dentro de:
+P1/Actividades/
+
+- Act04.html
+- actividad04.css
+- nexora_lab.html
+- Evidencias04/
+
+La página espera que el CSS global del portafolio siga ubicado en:
+../../styles.css
+
+Para enlazarla desde P1/index.html utiliza:
+href="Actividades/Act04.html"
+
+Las 15 capturas fueron extraídas del archivo ODT en el mismo orden en que aparecen en el documento.

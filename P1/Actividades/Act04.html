@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actividad 04: simulación controlada de ingeniería social con SET, Mailpit y Credential Harvester en localhost.">
+  <meta name="theme-color" content="#080b0d">
+  <title>ACT04 // Una página demasiado convincente</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="actividad04.css">
+</head>
+<body>
+  <div class="page-frame act04-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>SOCIAL ENGINEERING ANALYSIS NODE</span>
+          <small>CONTROLLED LABORATORY // PARTIAL 01</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>LOCALHOST ONLY</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../index.html"><span>01</span>PARCIAL 01</a>
+        <a class="nav-item" href="Act02.html"><span>02</span>ACTIVIDAD 03</a>
+        <a class="nav-item active" href="Act04.html"><span>03</span>ACTIVIDAD 04</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="activity-hero phishing-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">SMTP 127.0.0.1:1025<br>HTTP 127.0.0.1:80<br>POST username=LAB_USER<br>HARVESTER // LOCAL NODE</div>
+
+        <div class="hero-grid">
+          <div>
+            <p class="activity-kicker">ACTIVITY 04 // SOCIAL ENGINEERING LAB</p>
+            <h1>UNA PÁGINA DEMASIADO <span>CONVINCENTE</span></h1>
+            <p>
+              Simulación controlada de una campaña de ingeniería social mediante Social-Engineer Toolkit (SET), un buzón SMTP local y un portal ficticio creado exclusivamente para el laboratorio. El objetivo fue observar el recorrido de la información desde un formulario web hasta el registro generado por Credential Harvester.
+            </p>
+          </div>
+
+          <aside class="mission-card">
+            <header>MISSION PARAMETERS // ACT04</header>
+            <dl>
+              <div><dt>PLATFORM</dt><dd>Kali Linux</dd></div>
+              <div><dt>TOOLSET</dt><dd>SET + Mailpit</dd></div>
+              <div><dt>MAIL NODE</dt><dd>127.0.0.1:1025</dd></div>
+              <div><dt>WEB NODE</dt><dd>127.0.0.1:80</dd></div>
+              <div><dt>METHOD</dt><dd>Credential Harvester</dd></div>
+              <div><dt>SCOPE</dt><dd>Laboratorio local autorizado</dd></div>
+            </dl>
+          </aside>
+        </div>
+
+        <div class="safety-strip">
+          <span>NO REAL SERVICES</span>
+          <span>NO PERSONAL CREDENTIALS</span>
+          <span>NO EXTERNAL DOMAINS</span>
+          <span>NO INTERNET EXPOSURE</span>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>01 // OBJECTIVE BRIEF</h2>
+          <span>MISSION CONTEXT</span>
+        </div>
+        <div class="objectives-grid">
+          <article class="text-panel">
+            <p>
+              Implementamos una simulación de phishing dentro de un entorno controlado para comprender cómo una página aparentemente legítima puede inducir a un usuario a proporcionar información. La práctica se centró en la configuración de SET, la creación de un portal ficticio, la recepción local del correo y el análisis de la petición HTTP generada por el formulario.
+            </p>
+            <ul class="objective-list">
+              <li>Configurar Social-Engineer Toolkit dentro de Kali Linux.</li>
+              <li>Preparar un correo de laboratorio mediante un servidor SMTP local.</li>
+              <li>Importar una página ficticia en Credential Harvester.</li>
+              <li>Observar el envío de parámetros mediante una petición HTTP POST.</li>
+              <li>Identificar señales de phishing y proponer controles de protección.</li>
+            </ul>
+          </article>
+          <aside class="requirement-panel">
+            <div class="requirement"><span>01</span><div><strong>CONTROLLED MAIL</strong><small>MAILPIT // LOCAL SMTP</small></div><span class="state">READY</span></div>
+            <div class="requirement"><span>02</span><div><strong>FICTIONAL PORTAL</strong><small>NEXORA ACCESS GATEWAY</small></div><span class="state">READY</span></div>
+            <div class="requirement"><span>03</span><div><strong>POST CAPTURE</strong><small>SET // CREDENTIAL HARVESTER</small></div><span class="state">READY</span></div>
+            <div class="requirement"><span>04</span><div><strong>LOCAL REPORT</strong><small>SET XML REPORT</small></div><span class="state">READY</span></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>02 // SCENARIO</h2>
+          <span>SIMULATED PHISHING CAMPAIGN</span>
+        </div>
+        <div class="scenario-grid">
+          <article class="scenario-copy">
+            <span class="scenario-tag">INCIDENT_SIM // SESSION EXPIRED</span>
+            <h3>Un portal familiar, una solicitud inesperada.</h3>
+            <p>
+              El escenario representa a un usuario que recibe un mensaje marcado como urgente y es dirigido hacia un portal de autenticación aparentemente institucional. El portal muestra un aviso de sesión expirada y solicita usuario y contraseña para continuar.
+            </p>
+            <p>
+              Para evitar involucrar servicios o personas reales, toda la simulación permaneció en <strong>localhost</strong>. El correo fue capturado por Mailpit y el sitio NEXORA fue creado específicamente para esta actividad.
+            </p>
+          </article>
+          <div class="scenario-terminal">
+            <span>SIMULATION_BOUNDARIES</span>
+            <code>target = lab_user@local.test</code>
+            <code>smtp = 127.0.0.1:1025</code>
+            <code>web = http://127.0.0.1/</code>
+            <code>credentials = TEST_DATA_ONLY</code>
+            <code>external_exposure = FALSE</code>
+          </div>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>03 // LAB CONFIGURATION</h2>
+          <span>LOCAL INFRASTRUCTURE</span>
+        </div>
+        <div class="lab-grid">
+          <article class="lab-card">
+            <span>NODE 01</span>
+            <h3>Mailpit</h3>
+            <p>Buzón SMTP de laboratorio utilizado para recibir los mensajes sin enviarlos hacia Internet.</p>
+            <pre><code>mailpit --listen 127.0.0.1:8025 \
+        --smtp 127.0.0.1:1025</code></pre>
+          </article>
+          <article class="lab-card">
+            <span>NODE 02</span>
+            <h3>Social-Engineer Toolkit</h3>
+            <p>SET generó el mensaje de prueba y posteriormente ejecutó Credential Harvester sobre el portal importado.</p>
+            <pre><code>sudo setoolkit</code></pre>
+          </article>
+          <article class="lab-card">
+            <span>NODE 03</span>
+            <h3>NEXORA Portal</h3>
+            <p>Página ficticia con campos <code>username</code> y <code>password</code>, creada únicamente para el laboratorio.</p>
+            <a class="data-button" href="nexora_lab.html" download>DOWNLOAD // LAB PORTAL</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>04 // SIMULATION FLOW</h2>
+          <span>END-TO-END PATH</span>
+        </div>
+        <div class="attack-flow">
+          <div class="flow-node"><span>01</span><strong>SET MAILER</strong><small>Genera el mensaje de laboratorio.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><span>02</span><strong>MAILPIT</strong><small>Recibe el correo en 127.0.0.1:1025.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><span>03</span><strong>NEXORA</strong><small>Portal ficticio solicita datos de prueba.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><span>04</span><strong>HTTP POST</strong><small>El navegador transmite los parámetros.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><span>05</span><strong>HARVESTER</strong><small>SET registra los parámetros recibidos.</small></div>
+        </div>
+      </section>
+
+      <section class="activity-section evidence-section">
+        <div class="section-title">
+          <h2>05 // EVIDENCE LOG</h2>
+          <span>15 LABORATORY CAPTURES</span>
+        </div>
+
+        <div class="evidence-phase">
+          <div class="phase-head"><span>PHASE A</span><strong>LOCAL SMTP + MAILPIT</strong></div>
+          <div class="evidence-grid">
+            <figure class="evidence-card"><a href="Evidencias04/capture_01.png" target="_blank"><img src="Evidencias04/capture_01.png" loading="lazy" decoding="async" alt="Instalación y ejecución de Mailpit"></a><figcaption><strong>CAPTURE_01</strong><span>MAILPIT INSTALADO Y ESCUCHANDO EN LOCALHOST.</span></figcaption></figure>
+            <figure class="evidence-card"><a href="Evidencias04/capture_02.png" target="_blank"><img src="Evidencias04/capture_02.png" loading="lazy" decoding="async" alt="Bandeja local de Mailpit"></a><figcaption><strong>CAPTURE_02</strong><span>INTERFAZ WEB DEL BUZÓN LOCAL.</span></figcaption></figure>
+            <figure class="evidence-card"><a href="Evidencias04/capture_03.png" target="_blank"><img src="Evidencias04/capture_03.png" loading="lazy" decoding="async" alt="Prueba SMTP enviada con Python"></a><figcaption><strong>CAPTURE_03</strong><span>PRUEBA DE ENTREGA SMTP HACIA MAILPIT.</span></figcaption></figure>
+            <figure class="evidence-card"><a href="Evidencias04/capture_04.png" target="_blank"><img src="Evidencias04/capture_04.png" loading="lazy" decoding="async" alt="Correo de prueba recibido"></a><figcaption><strong>CAPTURE_04</strong><span>MENSAJE DE PRUEBA RECIBIDO EN EL BUZÓN.</span></figcaption></figure>
+          </div>
+        </div>
+
+        <div class="evidence-phase">
+          <div class="phase-head"><span>PHASE B</span><strong>SET MASS MAILER CAMPAIGN</strong></div>
+          <div class="evidence-grid">
+            <figure class="evidence-card"><a href="Evidencias04/capture_05.png" target="_blank"><img src="Evidencias04/capture_05.png" loading="lazy" decoding="async" alt="Menú principal de SET"></a><figcaption><strong>CAPTURE_05</strong><span>INICIO DE SOCIAL-ENGINEER TOOLKIT.</span></figcaption></figure>
+            <figure class="evidence-card"><a href="Evidencias04/capture_06.png" target="_blank"><img src="Evidencias04/capture_06.png" loading="lazy" decoding="async" alt="Selección de Mass Mailer en SET"></a><figcaption><strong>CAPTURE_06</strong><span>SELECCIÓN DEL VECTOR MASS MAILER.</span></figcaption></figure>
+            <figure class="evidence-card"><a href="Evidencias04/capture_07.png" target="_blank"><img src="Evidencias04/capture_07.png" loading="lazy" decoding="async" alt="Configuración local del correo en SET"></a><figcaption><strong>CAPTURE_07</strong><span>SMTP LOCAL, REMITENTE FICTICIO Y PRIORIDAD DEL MENSAJE.</span></figcaption></figure>
+            <figure class="evidence-card"><a href="Evidencias04/capture_08.png" target="_blank"><img src="Evidencias04/capture_08.png" loading="lazy" decoding="async" alt="Correo de la campaña recibido en Mailpit"></a><figcaption><strong>CAPTURE_08</strong><span>CAMPAÑA RECIBIDA EN MAILPIT.</span></figcaption></figure>
+            <figure class="evidence-card"><a href="Evidencias04/capture_09.png" target="_blank"><img src="Evidencias04/capture_09.png" loading="lazy" decoding="async" alt="Contenido de Urgent Security Updates"></a><figcaption><strong>CAPTURE_09</strong><span>CONTENIDO DEL MENSAJE URGENT SECURITY UPDATES.</span></figcaption></figure>
+          </div>
+        </div>
+
+        <div class="evidence-phase">
+          <div class="phase-head"><span>PHASE C</span><strong>CREDENTIAL HARVESTER</strong></div>
+          <div class="evidence-grid">
+            <figure class="evidence-card"><a href="Evidencias04/capture_10.png" target="_blank"><img src="Evidencias04/capture_10.png" loading="lazy" decoding="async" alt="Credential Harvester Custom Import"></a><figcaption><strong>CAPTURE_10</strong><span>SELECCIÓN DE CREDENTIAL HARVESTER + CUSTOM IMPORT.</span></figcaption></figure>
+            <figure class="evidence-card"><a href="Evidencias04/capture_11.png" target="_blank"><img src="Evidencias04/capture_11.png" loading="lazy" decoding="async" alt="Código del portal ficticio NEXORA"></a><figcaption><strong>CAPTURE_11</strong><span>CREACIÓN DEL PORTAL FICTICIO NEXORA.</span></figcaption></figure>
+            <figure class="evidence-card"><a href="Evidencias04/capture_12.png" target="_blank"><img src="Evidencias04/capture_12.png" loading="lazy" decoding="async" alt="Harvester configurado en localhost"></a><figcaption><strong>CAPTURE_12</strong><span>IMPORTACIÓN DEL SITIO Y POST BACK A 127.0.0.1.</span></figcaption></figure>
+            <figure class="evidence-card"><a href="Evidencias04/capture_13.png" target="_blank"><img src="Evidencias04/capture_13.png" loading="lazy" decoding="async" alt="Portal NEXORA abierto en localhost"></a><figcaption><strong>CAPTURE_13</strong><span>PORTAL NEXORA SERVIDO EN LOCALHOST.</span></figcaption></figure>
+            <figure class="evidence-card"><a href="Evidencias04/capture_14.png" target="_blank"><img src="Evidencias04/capture_14.png" loading="lazy" decoding="async" alt="SET registrando parámetros de la petición POST"></a><figcaption><strong>CAPTURE_14</strong><span>SET RECIBE Y REGISTRA LOS PARÁMETROS DEL POST.</span></figcaption></figure>
+            <figure class="evidence-card"><a href="Evidencias04/capture_15.png" target="_blank"><img src="Evidencias04/capture_15.png" loading="lazy" decoding="async" alt="Reporte XML de SET"></a><figcaption><strong>CAPTURE_15</strong><span>VERIFICACIÓN DEL REPORTE LOCAL GENERADO POR SET.</span></figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>06 // HOW THE HARVESTER WORKS</h2>
+          <span>TECHNICAL ANALYSIS</span>
+        </div>
+        <div class="analysis-grid technical-grid">
+          <article class="analysis-card"><span>HTTP_01</span><h3>Formulario</h3><p>El portal contiene campos con los nombres <code>username</code> y <code>password</code>. Al presionar el botón, el navegador construye una petición HTTP con los valores introducidos.</p></article>
+          <article class="analysis-card"><span>HTTP_02</span><h3>Petición POST</h3><p>La información viaja hacia el servidor local configurado en <code>127.0.0.1:80</code>. En el laboratorio no se utilizaron dominios externos ni tráfico publicado hacia Internet.</p></article>
+          <article class="analysis-card"><span>HTTP_03</span><h3>Servidor SET</h3><p>Credential Harvester recibe la petición, identifica los parámetros enviados por el formulario y los muestra en la terminal antes de incorporarlos a su registro.</p></article>
+          <article class="analysis-card distinction"><span>KEY_DISTINCTION</span><h3>Capturar ≠ vulnerar</h3><p>La técnica no descifra ni rompe una contraseña. El valor queda expuesto porque fue proporcionado al formulario y transmitido al servidor que controla la página.</p></article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>07 // PHISHING INDICATORS</h2>
+          <span>DETECTION MATRIX</span>
+        </div>
+        <div class="indicator-grid">
+          <article><span>01</span><div><strong>DOMINIO O URL INESPERADA</strong><p>El destino no coincide con el sitio que el usuario esperaba visitar. La apariencia visual no demuestra propiedad del dominio.</p></div></article>
+          <article><span>02</span><div><strong>SOLICITUD INESPERADA DE CREDENCIALES</strong><p>Un mensaje de sesión expirada obliga a preguntarse por qué se requiere autenticación nuevamente y desde qué origen.</p></div></article>
+          <article><span>03</span><div><strong>URGENCIA O PRESIÓN</strong><p>Mensajes marcados como urgentes reducen el tiempo que el usuario dedica a verificar el contexto antes de actuar.</p></div></article>
+          <article><span>04</span><div><strong>REMITENTE / CONTEXTO INCONSISTENTE</strong><p>El nombre visible del remitente puede ser persuasivo, pero debe contrastarse con la dirección real y el canal habitual.</p></div></article>
+          <article><span>05</span><div><strong>SEÑALES TÉCNICAS NO CONCLUYENTES</strong><p>Diseño, logotipo e incluso HTTPS pueden imitarse. La verificación debe centrarse en origen, dominio y contexto, no solo en apariencia.</p></div></article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>08 // SECURITY CONTROLS</h2>
+          <span>DEFENSIVE COUNTERMEASURES</span>
+        </div>
+        <div class="control-grid">
+          <article><span>MFA</span><h3>Autenticación multifactor / passkeys</h3><p>Reduce el impacto de una contraseña capturada. Su alcance depende del método: algunas formas de MFA todavía pueden ser objeto de phishing.</p></article>
+          <article><span>PWM</span><h3>Gestores de contraseñas</h3><p>El autocompletado ligado al dominio puede alertar cuando el sitio no coincide. No impide que una persona escriba los datos manualmente.</p></article>
+          <article><span>MAIL</span><h3>Filtrado de correo y URLs</h3><p>Los gateways y analizadores de enlaces pueden bloquear campañas conocidas, aunque no garantizan detectar mensajes nuevos o muy dirigidos.</p></article>
+          <article><span>DMARC</span><h3>SPF, DKIM y DMARC</h3><p>Ayudan a reducir la suplantación directa de dominios protegidos, pero no eliminan el riesgo de dominios visualmente similares.</p></article>
+          <article><span>USER</span><h3>Concientización y verificación</h3><p>Promueve verificar solicitudes sensibles mediante canales conocidos y acceder a servicios desde marcadores o direcciones escritas manualmente.</p></article>
+        </div>
+      </section>
+
+      <section class="activity-section conclusion-section">
+        <div class="section-title">
+          <h2>09 // CONCLUSION</h2>
+          <span>LESSONS LEARNED</span>
+        </div>
+        <div class="conclusion-grid">
+          <div class="conclusion-number">04</div>
+          <div>
+            <p>
+              La actividad permitió comprobar que la efectividad de una campaña de phishing no depende necesariamente de explotar una vulnerabilidad técnica. Una interfaz convincente, un mensaje con sentido de urgencia y una solicitud de autenticación pueden ser suficientes para provocar que la propia víctima entregue información.
+            </p>
+            <p>
+              Al observar el proceso dentro de localhost pudimos diferenciar la captura de parámetros de una vulneración de contraseña y reconocer que la defensa requiere combinar controles técnicos con hábitos de verificación por parte del usuario. Mantener toda la prueba dentro de un entorno ficticio permitió estudiar el riesgo sin involucrar sistemas, dominios ni credenciales reales.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="activity-section reference-section">
+        <div class="section-title">
+          <h2>10 // REFERENCES</h2>
+          <span>LAB SOURCES</span>
+        </div>
+        <div class="reference-list">
+          <a href="https://github.com/trustedsec/social-engineer-toolkit" target="_blank" rel="noopener noreferrer"><span>01</span><div><strong>Social-Engineer Toolkit</strong><small>TrustedSec // GitHub repository</small></div></a>
+          <a href="https://mailpit.axllent.org/docs/" target="_blank" rel="noopener noreferrer"><span>02</span><div><strong>Mailpit Documentation</strong><small>Local SMTP testing environment</small></div></a>
+          <div><span>03</span><div><strong>Actividad 04 — Una página demasiado convincente</strong><small>Material y rúbrica proporcionados para la práctica.</small></div></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>ACTIVITY NODE // 04</span></div>
+      <div><span>BRUNO LUNA · PACLONK D. MEI</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>CONTROLLED LAB</span></div>
+    </footer>
+  </div>
+</body>
+</html>
