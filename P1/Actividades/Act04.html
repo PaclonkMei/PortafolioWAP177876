@@ -11,6 +11,73 @@
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../styles.css">
   <link rel="stylesheet" href="actividad04.css">
+
+  <style>
+    .report-section {
+      position: relative;
+      overflow: hidden;
+      min-height: 320px;
+    }
+
+    .report-download-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.75fr);
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .report-copy,
+    .report-file-card {
+      padding: 1.2rem;
+      border: 1px solid var(--line-soft);
+      background: rgba(11, 17, 18, 0.76);
+    }
+
+    .report-copy h3,
+    .report-file-card strong {
+      color: var(--acid);
+    }
+
+    .report-copy p,
+    .report-file-card p {
+      color: #b8c5bd;
+      line-height: 1.62;
+    }
+
+    .report-file-meta {
+      display: grid;
+      gap: 0.45rem;
+      margin: 1rem 0;
+      padding: 0.85rem 0;
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+      color: var(--muted);
+      font: 0.68rem var(--font-mono);
+    }
+
+    .report-download-button {
+      width: 100%;
+      text-decoration: none;
+    }
+
+    .report-section .transmission-result {
+      --result-accent: #22df87;
+    }
+
+    .report-section .result-terminal-body {
+      min-height: 170px;
+    }
+
+    @media (max-width: 760px) {
+      .report-download-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .report-section {
+        min-height: 0;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="page-frame act04-page">
@@ -273,9 +340,87 @@
         </div>
       </section>
 
+
+      <section class="activity-section report-section" id="report-package">
+        <div class="section-title">
+          <h2>10 // REPORT PACKAGE</h2>
+          <span>PDF DELIVERABLE</span>
+        </div>
+
+        <div class="report-download-shell">
+          <article class="report-copy">
+            <span class="scenario-tag">DOCUMENT_NODE // ACT04</span>
+            <h3>Reporte técnico de la actividad</h3>
+            <p>
+              Documento final con la configuración del laboratorio, evidencias,
+              análisis del flujo de captura, indicadores de phishing, controles
+              defensivos y conclusión de la simulación.
+            </p>
+          </article>
+
+          <article class="report-file-card">
+            <strong>ACT04_Reporte_Bruno_Luna.pdf</strong>
+            <div class="report-file-meta">
+              <span>FORMAT // PDF</span>
+              <span>ROUTE // /P1/ACTIVIDADES/EVIDENCIAS04/</span>
+              <span>STATUS // READY TO DOWNLOAD</span>
+            </div>
+
+            <a
+              class="submit-button report-download-button"
+              id="report-download"
+              href="Evidencias04/ACT04_Reporte_Bruno_Luna.pdf"
+              download="ACT04_Reporte_Bruno_Luna.pdf"
+            >
+              <span>DOWNLOAD REPORT</span>
+              <small>PDF PACKAGE // ACT04</small>
+            </a>
+          </article>
+        </div>
+
+        <div
+          class="transmission-result success"
+          id="report-download-result"
+          aria-live="assertive"
+          hidden
+        >
+          <div class="result-terminal">
+            <div class="result-terminal-head">
+              <span>NET//FILE TRANSFER</span>
+              <small>STATUS 200</small>
+            </div>
+
+            <div class="result-terminal-body" id="report-terminal-body">
+              <span>&gt; locating ACT04 report package...</span>
+              <span>&gt; validating local artifact...</span>
+              <span>&gt; preparing secure transfer...</span>
+            </div>
+
+            <div class="result-terminal-foot" id="report-terminal-foot">
+              DOWNLOAD CHANNEL READY
+            </div>
+          </div>
+
+          <div class="result-daemon">
+            <small>DOCUMENT TRANSFER DAEMON</small>
+            <div class="daemon-card">
+              <strong id="report-daemon-state">READY</strong>
+              <div>
+                <span>ACT04_REPORT.PDF</span>
+                <p id="report-daemon-description">Academic report package linked to local portfolio node.</p>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="result-close" id="report-result-close">
+            EXIT INTERFACE
+          </button>
+        </div>
+      </section>
+
       <section class="activity-section reference-section">
         <div class="section-title">
-          <h2>10 // REFERENCES</h2>
+          <h2>11 // REFERENCES</h2>
           <span>LAB SOURCES</span>
         </div>
         <div class="reference-list">
@@ -292,5 +437,58 @@
       <div class="footer-status"><span class="state-dot"></span><span>CONTROLLED LAB</span></div>
     </footer>
   </div>
+
+  <script>
+    const reportDownload = document.getElementById("report-download");
+    const reportResult = document.getElementById("report-download-result");
+    const reportTerminalBody = document.getElementById("report-terminal-body");
+    const reportTerminalFoot = document.getElementById("report-terminal-foot");
+    const reportDaemonState = document.getElementById("report-daemon-state");
+    const reportDaemonDescription = document.getElementById("report-daemon-description");
+    const reportResultClose = document.getElementById("report-result-close");
+
+    if (reportDownload && reportResult) {
+      reportDownload.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const fileUrl = reportDownload.href;
+        const fileName = reportDownload.getAttribute("download") || "ACT04_Reporte.pdf";
+
+        reportResult.hidden = false;
+        reportResult.classList.add("success");
+
+        reportTerminalBody.innerHTML = [
+          "<span>&gt; report package detected...</span>",
+          "<span>&gt; validating PDF artifact...</span>",
+          "<span>&gt; route: EVIDENCIAS04/ACT04_REPORT...</span>",
+          "<span>&gt; transfer authorization: GRANTED</span>",
+          "<span>&gt; opening download channel...</span>"
+        ].join("");
+
+        reportTerminalFoot.textContent = "TRANSFER IN PROGRESS";
+        reportDaemonState.textContent = "ACTIVE";
+        reportDaemonDescription.textContent = "Preparing ACT04 academic report for local download.";
+
+        window.setTimeout(() => {
+          const hiddenDownload = document.createElement("a");
+          hiddenDownload.href = fileUrl;
+          hiddenDownload.download = fileName;
+          document.body.appendChild(hiddenDownload);
+          hiddenDownload.click();
+          hiddenDownload.remove();
+
+          reportTerminalBody.innerHTML += "<span>&gt; transfer complete // artifact delivered.</span>";
+          reportTerminalFoot.textContent = "FILE TRANSFER COMPLETE";
+          reportDaemonState.textContent = "INSTALLED";
+          reportDaemonDescription.textContent = "ACT04 report package delivered successfully.";
+        }, 1100);
+      });
+
+      reportResultClose.addEventListener("click", () => {
+        reportResult.hidden = true;
+      });
+    }
+  </script>
+
 </body>
 </html>
