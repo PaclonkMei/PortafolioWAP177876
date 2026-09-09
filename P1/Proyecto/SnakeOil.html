@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Proyecto del Parcial I: prueba de penetración y persistencia sobre la máquina virtual Snake Oil en un laboratorio controlado.">
+  <meta name="theme-color" content="#080b0d">
+  <title>PROYECTO P1 // Snake Oil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="snakeoil.css">
+</head>
+<body>
+  <div class="page-frame snakeoil-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>OFFENSIVE SECURITY PROJECT NODE</span>
+          <small>CONTROLLED LABORATORY // PARTIAL 01</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>LAB NODE VERIFIED</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../index.html"><span>01</span>PARCIAL 01</a>
+        <a class="nav-item active" href="SnakeOil.html"><span>04</span>PROYECTO SNAKE OIL</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="project-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">PORT 80 // WEB<br>PORT 8080 // API<br>ROOT ACCESS // VERIFIED<br>SSH PERSISTENCE // ACTIVE</div>
+
+        <div class="project-hero-grid">
+          <div>
+            <p class="project-kicker">PARTIAL 01 PROJECT // PENETRATION & PERSISTENCE LAB</p>
+            <h1>SNAKE OIL<br><span>FULL CHAIN COMPROMISE</span></h1>
+            <p class="hero-copy">
+              Prueba de penetración desarrollada sobre la máquina virtual Snake Oil dentro de un laboratorio controlado. El ejercicio documenta la progresión desde el reconocimiento y análisis de una API REST vulnerable hasta acceso privilegiado y persistencia verificada mediante autenticación SSH por llave.
+            </p>
+          </div>
+
+          <aside class="mission-card">
+            <header>MISSION PARAMETERS // SNAKE OIL</header>
+            <dl>
+              <div><dt>ENVIRONMENT</dt><dd>VirtualBox + NAT de laboratorio</dd></div>
+              <div><dt>TARGET</dt><dd>Snake Oil VM</dd></div>
+              <div><dt>WEB</dt><dd>Puerto 80</dd></div>
+              <div><dt>API</dt><dd>Puerto 8080</dd></div>
+              <div><dt>IMPACT</dt><dd>Acceso root</dd></div>
+              <div><dt>PERSISTENCE</dt><dd>SSH key verificada tras reinicio</dd></div>
+            </dl>
+          </aside>
+        </div>
+
+        <div class="safety-strip">
+          <span>AUTHORIZED LAB</span>
+          <span>ISOLATED NETWORK</span>
+          <span>TRAINING TARGET</span>
+          <span>NO THIRD-PARTY SYSTEMS</span>
+        </div>
+      </section>
+
+      <section class="project-section">
+        <div class="section-title">
+          <h2>01 // EXECUTIVE SUMMARY</h2>
+          <span>PROJECT OVERVIEW</span>
+        </div>
+        <div class="summary-grid">
+          <article class="text-panel">
+            <p>
+              Durante la práctica identificamos la superficie expuesta de Snake Oil, analizamos el comportamiento de su API REST y demostramos el impacto de una inyección de comandos del sistema operativo. A partir del acceso inicial se obtuvo una shell reversa, se revisó el código fuente, se localizaron credenciales almacenadas en texto plano y se accedió al sistema mediante SSH.
+            </p>
+            <p>
+              El compromiso avanzó hasta privilegios de superusuario debido a permisos administrativos excesivos. Finalmente se configuró persistencia por medio de una clave SSH autorizada y se comprobó su funcionamiento después de reiniciar la máquina.
+            </p>
+          </article>
+
+          <aside class="status-panel">
+            <div><span>DISCOVERY</span><strong>COMPLETE</strong></div>
+            <div><span>API ENUMERATION</span><strong>COMPLETE</strong></div>
+            <div><span>INITIAL ACCESS</span><strong>COMPLETE</strong></div>
+            <div><span>PRIVILEGE ESCALATION</span><strong>ROOT</strong></div>
+            <div><span>PERSISTENCE</span><strong>VERIFIED</strong></div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="project-section">
+        <div class="section-title">
+          <h2>02 // ATTACK CHAIN</h2>
+          <span>CONTROLLED LAB PATH</span>
+        </div>
+        <div class="attack-flow">
+          <div class="flow-node"><span>01</span><strong>RECON</strong><small>Descubrimiento del objetivo y servicios.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><span>02</span><strong>API</strong><small>Enumeración de rutas, métodos y sesión.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><span>03</span><strong>RCE</strong><small>Validación de inyección de comandos.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><span>04</span><strong>SSH</strong><small>Acceso estable con usuario legítimo.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><span>05</span><strong>ROOT</strong><small>Escalada por privilegios excesivos.</small></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-node"><span>06</span><strong>PERSIST</strong><small>Llave SSH comprobada tras reinicio.</small></div>
+        </div>
+      </section>
+
+      <section class="project-section">
+        <div class="section-title">
+          <h2>03 // LAB EVIDENCE</h2>
+          <span>REPORT EXTRACTS</span>
+        </div>
+        <div class="evidence-grid">
+          <figure class="evidence-card">
+            <a href="EvidenciasSnakeOil/reconocimiento.png" target="_blank" rel="noopener noreferrer"><img src="EvidenciasSnakeOil/reconocimiento.png" alt="Reconocimiento de red en la práctica Snake Oil"></a>
+            <figcaption><strong>RECONNAISSANCE</strong><span>Identificación del objetivo y enumeración inicial.</span></figcaption>
+          </figure>
+          <figure class="evidence-card">
+            <a href="EvidenciasSnakeOil/explotacion.png" target="_blank" rel="noopener noreferrer"><img src="EvidenciasSnakeOil/explotacion.png" alt="Etapa de explotación de la práctica Snake Oil"></a>
+            <figcaption><strong>INITIAL ACCESS</strong><span>Validación de la vulnerabilidad y obtención de acceso remoto.</span></figcaption>
+          </figure>
+          <figure class="evidence-card">
+            <a href="EvidenciasSnakeOil/hallazgos.png" target="_blank" rel="noopener noreferrer"><img src="EvidenciasSnakeOil/hallazgos.png" alt="Hallazgos de seguridad del laboratorio Snake Oil"></a>
+            <figcaption><strong>FINDINGS</strong><span>Cadena de debilidades documentada en el reporte.</span></figcaption>
+          </figure>
+          <figure class="evidence-card">
+            <a href="EvidenciasSnakeOil/persistencia.png" target="_blank" rel="noopener noreferrer"><img src="EvidenciasSnakeOil/persistencia.png" alt="Persistencia SSH verificada en Snake Oil"></a>
+            <figcaption><strong>PERSISTENCE</strong><span>Acceso por llave SSH validado después del reinicio.</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="project-section">
+        <div class="section-title">
+          <h2>04 // SECURITY FINDINGS</h2>
+          <span>ROOT CAUSE ANALYSIS</span>
+        </div>
+        <div class="findings-grid">
+          <article class="finding critical">
+            <span>F-01 // CWE-78</span>
+            <h3>Inyección de comandos</h3>
+            <p>La API procesaba entrada controlada por el usuario dentro de un shell del sistema sin una validación suficientemente estricta, permitiendo ejecución de comandos ajenos a la función prevista.</p>
+            <strong>SEVERITY // CRITICAL</strong>
+          </article>
+          <article class="finding high">
+            <span>F-02 // CWE-798</span>
+            <h3>Credenciales incrustadas</h3>
+            <p>Las credenciales del usuario Patrick estaban almacenadas directamente en el código fuente, lo que permitió convertir el acceso inicial en una sesión SSH estable.</p>
+            <strong>SEVERITY // HIGH</strong>
+          </article>
+          <article class="finding critical">
+            <span>F-03 // SUDO CONFIG</span>
+            <h3>Privilegios administrativos excesivos</h3>
+            <p>Los permisos disponibles para la cuenta comprometida reducían casi por completo la separación entre un usuario regular y root.</p>
+            <strong>SEVERITY // CRITICAL</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="project-section">
+        <div class="section-title">
+          <h2>05 // MITIGATION MATRIX</h2>
+          <span>DEFENSIVE CONTROLS</span>
+        </div>
+        <div class="mitigation-grid">
+          <article><span>01</span><h3>Eliminar ejecución insegura mediante shell</h3><p>Evitar <code>shell=True</code> cuando exista entrada dependiente del usuario y separar comandos de datos mediante argumentos explícitos.</p></article>
+          <article><span>02</span><h3>Validación estricta de entradas</h3><p>Aplicar listas blancas, restricciones de formato y pruebas específicas sobre parámetros que alcancen funciones del sistema operativo.</p></article>
+          <article><span>03</span><h3>Gestión segura de secretos</h3><p>Retirar contraseñas, tokens y llaves del código fuente y utilizar mecanismos dedicados de gestión de secretos.</p></article>
+          <article><span>04</span><h3>Principio de menor privilegio</h3><p>Restringir con precisión los comandos ejecutables mediante sudo y utilizar cuentas de servicio sin permisos administrativos.</p></article>
+          <article><span>05</span><h3>Fortalecer sesiones y monitoreo</h3><p>Gestionar de forma consistente los tokens de sesión y registrar eventos anómalos de autenticación, enumeración y acceso a endpoints sensibles.</p></article>
+        </div>
+      </section>
+
+      <section class="project-section video-section">
+        <div class="section-title">
+          <h2>06 // VIDEO EVIDENCE</h2>
+          <span>EMBEDDED DEMONSTRATION</span>
+        </div>
+        <div class="video-shell">
+          <iframe
+            src="https://www.youtube.com/embed/BNrGQu-s-Ck"
+            title="Proyecto Snake Oil - penetración y persistencia en laboratorio"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </section>
+
+      <section class="project-section report-section" id="report-package">
+        <div class="section-title">
+          <h2>07 // REPORT PACKAGE</h2>
+          <span>PDF DELIVERABLE</span>
+        </div>
+
+        <div class="report-download-shell">
+          <article class="report-copy">
+            <span class="report-tag">DOCUMENT_NODE // SNAKEOIL</span>
+            <h3>Reporte de penetración y persistencia</h3>
+            <p>
+              Informe completo de 17 páginas con resumen ejecutivo, objetivos, alcance, metodología, evidencias, hallazgos, persistencia, mitigaciones, resultados y conclusiones.
+            </p>
+          </article>
+
+          <article class="report-file-card">
+            <strong>Reporte_SnakeOil_177876.pdf</strong>
+            <div class="report-file-meta">
+              <span>FORMAT // PDF</span>
+              <span>STATUS // READY</span>
+              <span>NODE // SNAKE OIL LAB</span>
+            </div>
+
+            <div class="report-actions">
+              <a class="data-button" href="EvidenciasSnakeOil/Reporte_SnakeOil_177876.pdf" target="_blank" rel="noopener noreferrer">OPEN // PDF</a>
+              <a class="submit-button report-download-button" id="report-download" href="EvidenciasSnakeOil/Reporte_SnakeOil_177876.pdf" download="Reporte_SnakeOil_177876.pdf">
+                <span>DOWNLOAD REPORT</span>
+                <small>PDF PACKAGE // 177876</small>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="transmission-result success" id="report-download-result" aria-live="assertive" hidden>
+          <div class="result-terminal">
+            <div class="result-terminal-head">
+              <span>NET//FILE TRANSFER</span>
+              <small>STATUS 200</small>
+            </div>
+            <div class="result-terminal-body" id="report-terminal-body"></div>
+            <div class="result-terminal-foot" id="report-terminal-foot">DOWNLOAD CHANNEL READY</div>
+          </div>
+          <div class="result-daemon">
+            <small>DOCUMENT TRANSFER DAEMON</small>
+            <div class="daemon-card">
+              <strong id="report-daemon-state">READY</strong>
+              <div>
+                <span>SNAKEOIL_REPORT.PDF</span>
+                <p id="report-daemon-description">Academic report package linked to project node.</p>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="result-close" id="report-result-close">EXIT INTERFACE</button>
+        </div>
+      </section>
+
+      <section class="project-section conclusion-section">
+        <div class="section-title">
+          <h2>08 // CONCLUSION</h2>
+          <span>LESSONS LEARNED</span>
+        </div>
+        <div class="conclusion-grid">
+          <div class="conclusion-number">01</div>
+          <div>
+            <p>
+              Snake Oil permitió observar cómo varias malas prácticas independientes pueden encadenarse hasta producir un compromiso total. La inyección de comandos abrió el acceso inicial, pero la exposición de credenciales y los privilegios administrativos excesivos amplificaron significativamente el impacto.
+            </p>
+            <p>
+              La práctica también mostró que una prueba de penetración no termina al obtener una consola: la post-explotación, la validación de persistencia y el análisis de mitigaciones son esenciales para comprender el riesgo completo y convertir el ejercicio ofensivo en mejoras defensivas concretas.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>PROJECT NODE // SNAKE OIL</span></div>
+      <div><span>BRUNO LUNA · PACLONK D. MEI</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>CONTROLLED LAB</span></div>
+    </footer>
+  </div>
+
+  <script>
+    const reportDownload = document.getElementById("report-download");
+    const reportResult = document.getElementById("report-download-result");
+    const reportTerminalBody = document.getElementById("report-terminal-body");
+    const reportTerminalFoot = document.getElementById("report-terminal-foot");
+    const reportDaemonState = document.getElementById("report-daemon-state");
+    const reportDaemonDescription = document.getElementById("report-daemon-description");
+    const reportResultClose = document.getElementById("report-result-close");
+
+    if (reportDownload && reportResult) {
+      reportDownload.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const fileUrl = reportDownload.href;
+        const fileName = reportDownload.getAttribute("download") || "Reporte_SnakeOil_177876.pdf";
+
+        reportResult.hidden = false;
+        reportResult.classList.add("success");
+
+        reportTerminalBody.innerHTML = [
+          "<span>&gt; Snake Oil report detected...</span>",
+          "<span>&gt; validating PDF artifact...</span>",
+          "<span>&gt; verifying project node...</span>",
+          "<span>&gt; transfer authorization: GRANTED</span>",
+          "<span>&gt; opening download channel...</span>"
+        ].join("");
+
+        reportTerminalFoot.textContent = "TRANSFER IN PROGRESS";
+        reportDaemonState.textContent = "ACTIVE";
+        reportDaemonDescription.textContent = "Preparing Snake Oil penetration report for local download.";
+
+        window.setTimeout(() => {
+          const hiddenDownload = document.createElement("a");
+          hiddenDownload.href = fileUrl;
+          hiddenDownload.download = fileName;
+          document.body.appendChild(hiddenDownload);
+          hiddenDownload.click();
+          hiddenDownload.remove();
+
+          reportTerminalBody.innerHTML += "<span>&gt; transfer complete // artifact delivered.</span>";
+          reportTerminalFoot.textContent = "FILE TRANSFER COMPLETE";
+          reportDaemonState.textContent = "INSTALLED";
+          reportDaemonDescription.textContent = "Snake Oil report delivered successfully.";
+        }, 1100);
+      });
+
+      reportResultClose.addEventListener("click", () => {
+        reportResult.hidden = true;
+      });
+    }
+  </script>
+</body>
+</html>
