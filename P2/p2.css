@@ -1,0 +1,128 @@
+.archive-shell {
+  position: relative;
+  min-height: 680px;
+  margin-top: 1rem;
+  padding: clamp(1.2rem, 4vw, 3rem);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(125deg, rgba(36, 242, 208, 0.07), transparent 34%),
+    linear-gradient(315deg, rgba(216, 255, 62, 0.045), transparent 30%),
+    rgba(7, 11, 12, 0.48);
+}
+
+.p2-shell::before {
+  content: "P2 // WEB SECURITY TRACK";
+  position: absolute;
+  top: 0;
+  right: 2rem;
+  padding: 0.3rem 0.65rem;
+  color: #06100b;
+  background: var(--acid);
+  font: 0.62rem var(--font-mono);
+  letter-spacing: 0.08em;
+}
+
+.archive-heading {
+  position: relative;
+  z-index: 2;
+  max-width: 880px;
+  padding: clamp(1rem, 2vw, 2rem) 0 2.4rem;
+}
+
+.archive-heading h1 {
+  margin: 0.45rem 0 1rem;
+  color: var(--acid);
+  font-size: clamp(3.4rem, 9vw, 8rem);
+  line-height: 0.78;
+  letter-spacing: -0.065em;
+}
+
+.archive-heading > p:last-child {
+  max-width: 760px;
+  color: #b8c6be;
+  line-height: 1.68;
+}
+
+.archive-list {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.archive-card {
+  min-width: 0;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(36, 242, 208, 0.28);
+  color: inherit;
+  background: rgba(10, 17, 18, 0.86);
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+}
+
+.archive-card:not(.locked):hover {
+  transform: translateY(-4px);
+  border-color: var(--acid);
+  background: rgba(216, 255, 62, 0.045);
+}
+
+.archive-card small {
+  color: var(--cyan);
+  font: 0.66rem var(--font-mono);
+}
+
+.archive-card h2 {
+  margin: 0.45rem 0 0.7rem;
+  color: var(--acid);
+  font-size: clamp(1.6rem, 3vw, 2.65rem);
+}
+
+.archive-card p {
+  margin: 0;
+  color: #aebbb4;
+  line-height: 1.55;
+}
+
+.archive-card .status {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line-soft);
+  color: var(--cyan);
+  font: 0.64rem var(--font-mono);
+}
+
+.hof-card {
+  border-color: rgba(216, 255, 62, 0.45);
+  background:
+    linear-gradient(135deg, rgba(216, 255, 62, 0.08), transparent 48%),
+    rgba(10, 17, 18, 0.9);
+}
+
+.archive-card.locked {
+  opacity: 0.42;
+  filter: grayscale(0.55);
+}
+
+@media (max-width: 760px) {
+  .archive-shell {
+    min-height: auto;
+    padding: 1rem;
+  }
+
+  .archive-list {
+    grid-template-columns: 1fr;
+  }
+
+  .archive-card .status {
+    flex-direction: column;
+  }
+}

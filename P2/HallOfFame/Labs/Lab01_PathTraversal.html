@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Documentación del laboratorio File path traversal, traversal sequences blocked with absolute path bypass.">
+  <meta name="theme-color" content="#080b0d">
+  <title>HOF LAB 01 // Absolute Path Bypass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../styles.css">
+  <link rel="stylesheet" href="../halloffame.css">
+  <link rel="stylesheet" href="lab.css">
+</head>
+<body>
+  <div class="page-frame lab-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>WEB SECURITY LAB NODE</span>
+          <small>HALL OF FAME // LAB 01</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>LAB SOLVED</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../../index.html"><span>01</span>PARCIAL 02</a>
+        <a class="nav-item" href="../index.html"><span>02</span>ROAD TO HALL OF FAME</a>
+        <a class="nav-item active" href="Lab01_PathTraversal.html"><span>03</span>LAB 01</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="lab-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">GET /image?filename=45.jpg<br>filename=/etc/passwd<br>HTTP/1.1 200 OK<br>PATH_READ // CONFIRMED</div>
+
+        <div class="lab-hero-grid">
+          <div>
+            <p class="eyebrow">HOF://LAB_01/PATH_TRAVERSAL</p>
+            <h1>ABSOLUTE PATH<br><span>BYPASS</span></h1>
+            <p class="lab-title-long">File path traversal, traversal sequences blocked with absolute path bypass</p>
+            <p class="lab-summary">
+              Laboratorio de PortSwigger Web Security Academy resuelto dentro del entorno de práctica autorizado. La aplicación bloquea secuencias tradicionales de traversal, pero permite que el parámetro <code>filename</code> reciba una ruta absoluta del sistema.
+            </p>
+          </div>
+
+          <aside class="lab-status-card">
+            <header>LAB PARAMETERS // 001</header>
+            <dl>
+              <div><dt>CATEGORY</dt><dd>Path Traversal</dd></div>
+              <div><dt>TOOL</dt><dd>Burp Suite</dd></div>
+              <div><dt>MODULES</dt><dd>Proxy + Repeater</dd></div>
+              <div><dt>VECTOR</dt><dd>filename parameter</dd></div>
+              <div><dt>BYPASS</dt><dd>Absolute path</dd></div>
+              <div><dt>STATUS</dt><dd class="status-green">SOLVED</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="lab-section">
+        <div class="section-title">
+          <h2>01 // LAB OBJECTIVE</h2>
+          <span>VULNERABILITY CONTEXT</span>
+        </div>
+        <div class="objective-grid">
+          <article class="lab-copy-card">
+            <p>
+              El objetivo consiste en demostrar que una validación enfocada únicamente en bloquear secuencias como <code>../</code> puede ser insuficiente. Si el backend utiliza directamente el valor proporcionado por el usuario y acepta rutas absolutas, todavía puede accederse a archivos fuera del directorio esperado.
+            </p>
+            <p>
+              La comprobación se realiza sobre el endpoint que entrega imágenes de producto. Al sustituir el nombre normal de una imagen por <code>/etc/passwd</code>, la respuesta devuelve el contenido de ese archivo local del servidor.
+            </p>
+          </article>
+          <aside class="signal-card">
+            <span>VULNERABILITY SIGNAL</span>
+            <strong>filename=/etc/passwd</strong>
+            <small>EXPECTED RESULT // LOCAL FILE CONTENT</small>
+          </aside>
+        </div>
+      </section>
+
+      <section class="lab-section">
+        <div class="section-title">
+          <h2>02 // RESOLUTION PATH</h2>
+          <span>OFFICIAL 3-STEP FLOW</span>
+        </div>
+        <ol class="resolution-list">
+          <li><span>01</span><p>Usamos Burp Suite para interceptar e identificar una petición que obtiene una imagen de producto.</p></li>
+          <li><span>02</span><p>Modificamos el parámetro <code>filename</code> y asignamos el valor absoluto <code>/etc/passwd</code>.</p></li>
+          <li><span>03</span><p>Enviamos la petición y comprobamos que la respuesta contiene el contenido del archivo <code>/etc/passwd</code>.</p></li>
+        </ol>
+      </section>
+
+      <section class="lab-section evidence-run">
+        <div class="section-title">
+          <h2>03 // EVIDENCE RUN</h2>
+          <span>BURP SUITE CAPTURES</span>
+        </div>
+
+        <article class="evidence-step">
+          <div class="step-copy">
+            <span class="step-id">STEP_01 // DISCOVERY</span>
+            <h3>Localizamos la petición de imagen</h3>
+            <p>En <strong>Proxy → HTTP history</strong> identificamos solicitudes GET al endpoint <code>/image</code>. La petición seleccionada utiliza un valor normal como <code>filename=45.jpg</code>, confirmando que el servidor recibe el nombre del archivo mediante un parámetro controlable.</p>
+          </div>
+          <a class="evidence-image" href="../Evidencias/Lab01/01_http_history.png" target="_blank">
+            <img src="../Evidencias/Lab01/01_http_history.png" alt="HTTP history de Burp Suite mostrando una petición de imagen" loading="lazy">
+          </a>
+        </article>
+
+        <article class="evidence-step reverse">
+          <div class="step-copy">
+            <span class="step-id">STEP_01B // BASELINE</span>
+            <h3>Enviamos la petición a Repeater</h3>
+            <p>Antes de alterar el parámetro verificamos el comportamiento base en <strong>Repeater</strong>. La solicitud con <code>filename=45.jpg</code> devuelve <code>HTTP/1.1 200 OK</code> y datos JPEG, por lo que tenemos una referencia clara para comparar la modificación.</p>
+          </div>
+          <a class="evidence-image" href="../Evidencias/Lab01/02_repeater_baseline.png" target="_blank">
+            <img src="../Evidencias/Lab01/02_repeater_baseline.png" alt="Burp Repeater mostrando la respuesta normal de una imagen JPEG" loading="lazy">
+          </a>
+        </article>
+
+        <article class="evidence-step">
+          <div class="step-copy">
+            <span class="step-id">STEP_02-03 // BYPASS</span>
+            <h3>Sustituimos el nombre por una ruta absoluta</h3>
+            <p>Modificamos el parámetro a <code>filename=/etc/passwd</code> y reenviamos la petición. La aplicación responde con estado <code>200 OK</code> y muestra entradas del archivo de usuarios del sistema, demostrando lectura arbitraria de archivo mediante ruta absoluta.</p>
+            <div class="request-sample">
+              <small>MODIFIED REQUEST</small>
+              <code>GET /image?filename=/etc/passwd HTTP/1.1</code>
+            </div>
+          </div>
+          <a class="evidence-image" href="../Evidencias/Lab01/03_absolute_path_bypass.png" target="_blank">
+            <img src="../Evidencias/Lab01/03_absolute_path_bypass.png" alt="Burp Repeater mostrando filename /etc/passwd y el contenido del archivo" loading="lazy">
+          </a>
+        </article>
+
+        <article class="evidence-step solved-evidence reverse">
+          <div class="step-copy">
+            <span class="step-id">FINAL // VALIDATION</span>
+            <h3>Laboratorio resuelto</h3>
+            <p>La plataforma reconoce la condición requerida y marca el laboratorio como <strong>Solved</strong>. Esta captura conserva además el entorno de trabajo utilizado para la práctica como evidencia final del nodo.</p>
+          </div>
+          <a class="evidence-image" href="../Evidencias/Lab01/04_lab_solved.png" target="_blank">
+            <img src="../Evidencias/Lab01/04_lab_solved.png" alt="PortSwigger Web Security Academy mostrando el laboratorio resuelto" loading="lazy">
+          </a>
+        </article>
+      </section>
+
+      <section class="lab-section">
+        <div class="section-title">
+          <h2>04 // TECHNICAL ANALYSIS</h2>
+          <span>WHY THE BYPASS WORKS</span>
+        </div>
+        <div class="analysis-grid-lab">
+          <article><span>01</span><h3>Filtro incompleto</h3><p>El control bloquea secuencias de traversal, pero no impide que el usuario especifique una ruta absoluta.</p></article>
+          <article><span>02</span><h3>Entrada controlable</h3><p>El valor de <code>filename</code> llega al mecanismo que selecciona archivos en el servidor.</p></article>
+          <article><span>03</span><h3>Impacto</h3><p>Un atacante puede leer archivos locales accesibles para el proceso web, exponiendo información sensible del sistema.</p></article>
+          <article><span>04</span><h3>Mitigación</h3><p>La aplicación debe usar identificadores seguros o nombres permitidos, normalizar rutas y verificar que el archivo resuelto permanezca dentro de un directorio autorizado.</p></article>
+        </div>
+      </section>
+
+      <section class="lab-section report-link-section">
+        <div class="section-title">
+          <h2>05 // DOCUMENT PACKAGE</h2>
+          <span>HALL OF FAME PDF</span>
+        </div>
+        <div class="report-link-card">
+          <div>
+            <strong>ROAD TO HALL OF FAME // CURRENT BUILD</strong>
+            <p>Documento acumulado del segundo parcial con la documentación de este laboratorio.</p>
+          </div>
+          <a class="download-button" href="../Documentos/RoadToHallOfFame_P2.pdf" download="RoadToHallOfFame_P2.pdf"><span>DOWNLOAD PDF</span><small>LAB 01 INCLUDED</small></a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>HOF LAB NODE // 01</span></div>
+      <div><span>BRUNO LUNA · PACLONK D. MEI</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>LAB SOLVED</span></div>
+    </footer>
+  </div>
+</body>
+</html>

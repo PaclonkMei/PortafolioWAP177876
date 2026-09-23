@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Road to Hall of Fame: roadmap de laboratorios de seguridad web del segundo parcial.">
+  <meta name="theme-color" content="#080b0d">
+  <title>NET===TECH // Road to Hall of Fame</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="halloffame.css">
+</head>
+<body>
+  <div class="page-frame hof-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>WEB SECURITY PROGRESSION MATRIX</span>
+          <small>ROAD TO HALL OF FAME // PARTIAL 02</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>ROADMAP ACTIVE</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../index.html"><span>01</span>PARCIAL 02</a>
+        <a class="nav-item active" href="index.html"><span>02</span>ROAD TO HALL OF FAME</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hof-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">HTTP HISTORY // ACTIVE<br>REPEATER // READY<br>PATH TRAVERSAL // SOLVED<br>LAB NODE 001</div>
+
+        <div class="hof-hero-grid">
+          <div>
+            <p class="eyebrow">NODE://P2/HALL_OF_FAME</p>
+            <h1>ROAD TO<br><span>HALL OF FAME</span></h1>
+            <p>
+              Ruta de progreso dedicada a documentar laboratorios de seguridad web. Cada nodo conserva la evidencia original, una explicación técnica breve y el procedimiento aplicado dentro de un entorno autorizado de práctica.
+            </p>
+          </div>
+
+          <aside class="progress-core">
+            <span>PROGRESSION STATUS</span>
+            <strong>01</strong>
+            <small>LAB DOCUMENTED</small>
+            <div class="progress-track"><i></i></div>
+            <p>TRACK: PATH TRAVERSAL / HTML INJECTION</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="roadmap-section">
+        <div class="section-title">
+          <h2>01 // ACTIVE ROADMAP</h2>
+          <span>AUTHORIZED LAB PROGRESSION</span>
+        </div>
+
+        <div class="roadmap">
+          <article class="road-node solved">
+            <div class="road-marker"><span>01</span></div>
+            <div class="road-card">
+              <div class="road-card-copy">
+                <div class="road-meta">
+                  <span>PATH TRAVERSAL</span>
+                  <span class="solved-state">SOLVED</span>
+                </div>
+                <h3>File path traversal, traversal sequences blocked with absolute path bypass</h3>
+                <p>
+                  El laboratorio demuestra que bloquear secuencias de traversal no es suficiente si la aplicación continúa aceptando rutas absolutas controladas por el usuario en el parámetro <code>filename</code>.
+                </p>
+                <div class="tech-tags">
+                  <span>BURP SUITE</span>
+                  <span>HTTP HISTORY</span>
+                  <span>REPEATER</span>
+                  <span>ABSOLUTE PATH</span>
+                </div>
+                <a class="road-access" href="Labs/Lab01_PathTraversal.html">ACCESS LAB NODE →</a>
+              </div>
+              <a class="road-thumb" href="Labs/Lab01_PathTraversal.html" aria-label="Abrir laboratorio 01">
+                <img src="Evidencias/Lab01/04_lab_solved.png" alt="Laboratorio de path traversal marcado como resuelto" loading="lazy">
+              </a>
+            </div>
+          </article>
+
+          <article class="road-node pending">
+            <div class="road-marker"><span>02</span></div>
+            <div class="road-card placeholder-card">
+              <div>
+                <div class="road-meta"><span>NEXT LAB</span><span>PENDING</span></div>
+                <h3>AWAITING NEW TARGET</h3>
+                <p>Este nodo se activará cuando el siguiente laboratorio sea documentado.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="road-node pending">
+            <div class="road-marker"><span>03</span></div>
+            <div class="road-card placeholder-card">
+              <div>
+                <div class="road-meta"><span>FUTURE NODE</span><span>LOCKED</span></div>
+                <h3>ROAD CONTINUES...</h3>
+                <p>La ruta crecerá laboratorio por laboratorio durante el segundo parcial.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="document-section">
+        <div class="section-title">
+          <h2>02 // DOCUMENT PACKAGE</h2>
+          <span>CURRENT CUMULATIVE PDF</span>
+        </div>
+        <div class="document-card">
+          <div>
+            <span class="doc-kicker">ROAD_TO_HALL_OF_FAME.PDF</span>
+            <h3>Documento acumulado del recorrido</h3>
+            <p>La versión actual contiene el primer laboratorio documentado. El mismo archivo puede sustituirse y ampliarse conforme se agreguen nuevos nodos.</p>
+          </div>
+          <a class="download-button" href="Documentos/RoadToHallOfFame_P2.pdf" download="RoadToHallOfFame_P2.pdf">
+            <span>DOWNLOAD FULL DOCUMENT</span>
+            <small>PDF // CURRENT BUILD</small>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>ROAD TO HALL OF FAME</span></div>
+      <div><span>BRUNO LUNA · PACLONK D. MEI</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>01 NODE SOLVED</span></div>
+    </footer>
+  </div>
+</body>
+</html>
