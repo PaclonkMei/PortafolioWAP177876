@@ -135,7 +135,7 @@
             <p>Modificamos <code>filename</code> para que el valor siga comenzando con <code>/var/www/images/</code>, pero añadimos después el recorrido hacia el archivo objetivo. La aplicación acepta la entrada porque supera la comprobación inicial y devuelve <code>HTTP/1.1 200 OK</code> junto con el contenido de <code>/etc/passwd</code>.</p>
             <div class="request-sample">
               <small>MODIFIED REQUEST</small>
-              <code>GET /image?filename=AQUI VA EL ENCODE HTTP/1.1</code>
+              <code>GET /image?filename=/var/www/images/../../../etc/passwd</code>
             </div>
           </div>
           <a class="evidence-image" href="../Evidencias/Lab04/03_start_path_bypass.png" target="_blank">
