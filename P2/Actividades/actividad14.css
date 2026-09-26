@@ -1,0 +1,156 @@
+
+.act14-page main { display: grid; gap: 1rem; }
+
+.activity-hero,
+.activity-section {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(36, 242, 208, 0.24);
+  background: linear-gradient(90deg, rgba(36, 242, 208, 0.035), transparent 42%), rgba(7, 11, 12, 0.58);
+}
+
+.activity-hero { padding: clamp(1.25rem, 4vw, 3rem); }
+
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  gap: 1rem;
+}
+
+.activity-kicker { color: var(--cyan); font: 0.72rem var(--font-mono); letter-spacing: 0.08em; }
+
+.activity-hero h1 {
+  margin: 0.35rem 0 1rem;
+  color: var(--text);
+  font-size: clamp(3rem, 8vw, 6.6rem);
+  line-height: 0.84;
+  letter-spacing: -0.055em;
+}
+
+.activity-hero h1 span { color: var(--acid); }
+.activity-hero p { max-width: 760px; color: #b9c7bf; line-height: 1.65; }
+
+.mission-card {
+  border: 1px solid rgba(216, 255, 62, 0.34);
+  background: rgba(9, 14, 15, 0.88);
+}
+
+.mission-card header {
+  padding: 0.75rem 0.9rem;
+  color: #07100a;
+  background: var(--acid);
+  font: 0.7rem var(--font-mono);
+}
+
+.mission-card dl { margin: 0; padding: 0.9rem; }
+.mission-card dl div {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 0.7rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.mission-card dl div:last-child { border-bottom: 0; }
+.mission-card dt { color: var(--muted); font: 0.62rem var(--font-mono); }
+.mission-card dd { margin: 0; color: var(--cyan); font: 0.72rem var(--font-mono); }
+
+.activity-section { padding: clamp(1.1rem, 3vw, 2rem); }
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.section-title h2 { margin: 0; color: var(--acid); font-size: clamp(1.2rem, 3vw, 2rem); }
+.section-title span { color: var(--muted); font: 0.62rem var(--font-mono); }
+
+.infographic-shell { display: grid; gap: 1rem; }
+
+.infographic-frame {
+  display: block;
+  width: min(100%, 980px);
+  margin: 0 auto;
+  padding: 0.45rem;
+  border: 1px solid rgba(36, 242, 208, 0.34);
+  background: #030708;
+  box-shadow: 0 0 28px rgba(36, 242, 208, 0.07);
+}
+
+.infographic-frame img { display: block; width: 100%; height: auto; }
+
+.infographic-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.data-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  background: rgba(36, 242, 208, 0.03);
+  text-decoration: none;
+  font: 0.7rem var(--font-mono);
+}
+
+.data-button:hover { color: #06100b; background: var(--cyan); }
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.content-grid article {
+  min-width: 0;
+  padding: 1rem;
+  border: 1px solid var(--line-soft);
+  background: rgba(9, 14, 15, 0.72);
+}
+
+.content-grid article > span { color: var(--cyan); font: 0.72rem var(--font-mono); }
+.content-grid h3 { margin: 0.5rem 0; color: var(--acid); }
+.content-grid p { margin: 0; color: #b9c7bf; line-height: 1.55; }
+
+.conclusion-grid {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 1.2rem;
+}
+
+.conclusion-number {
+  display: grid;
+  place-items: center;
+  min-height: 120px;
+  border: 1px solid var(--cyan);
+  color: var(--acid);
+  font: 700 3rem var(--font-ui);
+  background: rgba(36, 242, 208, 0.035);
+}
+
+.conclusion-grid p { color: #b9c7bf; line-height: 1.65; }
+
+@media (max-width: 1000px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .content-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 700px) {
+  .section-title { align-items: flex-start; flex-direction: column; }
+  .content-grid { grid-template-columns: 1fr; }
+  .conclusion-grid { grid-template-columns: 1fr; }
+  .conclusion-number { min-height: 74px; }
+  .mission-card dl div { grid-template-columns: 1fr; gap: 0.2rem; }
+}
