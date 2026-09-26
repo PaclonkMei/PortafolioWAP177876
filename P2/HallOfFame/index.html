@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../styles.css">
   <link rel="stylesheet" href="halloffame.css">
+  <style>.progress-track i{width:36%;}</style>
 </head>
 <body>
   <div class="page-frame hof-page">
@@ -21,105 +22,87 @@
           <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
           <span class="brand-copy brand-tech">TECH</span>
         </a>
-
         <div class="protocol-title">
           <span>WEB SECURITY PROGRESSION MATRIX</span>
           <small>ROAD TO HALL OF FAME // PARTIAL 02</small>
         </div>
-
         <div class="connection-state">
           <span class="state-dot"></span>
           <span>ROADMAP ACTIVE</span>
         </div>
       </div>
-
       <nav class="main-nav" aria-label="Navegación">
         <a class="nav-item" href="../../index.html"><span>00</span>INICIO</a>
         <a class="nav-item" href="../index.html"><span>01</span>PARCIAL 02</a>
         <a class="nav-item active" href="index.html"><span>02</span>ROAD TO HALL OF FAME</a>
       </nav>
     </header>
-
     <main>
       <section class="hof-hero">
         <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
-
         <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">
           HTTP HISTORY // ACTIVE<br>
           REPEATER // READY<br>
           PATH TRAVERSAL // SOLVED<br>
-          LAB NODE 002
+          LAB NODE 003
         </div>
-
         <div class="hof-hero-grid">
           <div>
             <p class="eyebrow">NODE://P2/HALL_OF_FAME</p>
-
             <h1>
               ROAD TO<br>
               <span>HALL OF FAME</span>
             </h1>
-
             <p>
               Ruta de progreso dedicada a documentar laboratorios de seguridad web.
               Cada nodo conserva la evidencia original, una explicación técnica breve
               y el procedimiento aplicado dentro de un entorno autorizado de práctica.
             </p>
           </div>
-
           <aside class="progress-core">
             <span>PROGRESSION STATUS</span>
-            <strong>02</strong>
+            <strong>03</strong>
             <small>LABS DOCUMENTED</small>
             <div class="progress-track"><i></i></div>
             <p>TRACK: PATH TRAVERSAL / HTML INJECTION</p>
           </aside>
         </div>
       </section>
-
       <section class="roadmap-section">
         <div class="section-title">
           <h2>01 // ACTIVE ROADMAP</h2>
           <span>AUTHORIZED LAB PROGRESSION</span>
         </div>
-
         <div class="roadmap">
-
           <article class="road-node solved">
             <div class="road-marker"><span>08</span></div>
-
             <div class="road-card">
               <div class="road-card-copy">
                 <div class="road-meta">
                   <span>PATH TRAVERSAL</span>
                   <span class="solved-state">SOLVED</span>
                 </div>
-
                 <h3>
                   File path traversal, traversal sequences blocked
                   with absolute path bypass
                 </h3>
-
                 <p>
                   El laboratorio demuestra que bloquear secuencias de traversal
                   no es suficiente si la aplicación continúa aceptando rutas
                   absolutas controladas por el usuario en el parámetro
                   <code>filename</code>.
                 </p>
-
                 <div class="tech-tags">
                   <span>BURP SUITE</span>
                   <span>HTTP HISTORY</span>
                   <span>REPEATER</span>
                   <span>ABSOLUTE PATH</span>
                 </div>
-
                 <a class="road-access" href="Labs/Lab01_PathTraversal.html">
                   ACCESS ACTIVITY 08 →
                 </a>
               </div>
-
               <a class="road-thumb" href="Labs/Lab01_PathTraversal.html" aria-label="Abrir Actividad 08">
                 <img
                   src="Evidencias/Lab01/04_lab_solved.png"
@@ -129,22 +112,18 @@
               </a>
             </div>
           </article>
-
           <article class="road-node solved">
             <div class="road-marker"><span>09</span></div>
-
             <div class="road-card">
               <div class="road-card-copy">
                 <div class="road-meta">
                   <span>PATH TRAVERSAL</span>
                   <span class="solved-state">SOLVED</span>
                 </div>
-
                 <h3>
                   File path traversal, traversal sequences
                   stripped non-recursively
                 </h3>
-
                 <p>
                   En este laboratorio la aplicación intenta eliminar las
                   secuencias de path traversal proporcionadas por el usuario.
@@ -152,19 +131,16 @@
                   por lo que una secuencia anidada puede reconstruir
                   <code>../</code> después del procesamiento.
                 </p>
-
                 <div class="tech-tags">
                   <span>BURP SUITE</span>
                   <span>HTTP HISTORY</span>
                   <span>REPEATER</span>
                   <span>NESTED TRAVERSAL</span>
                 </div>
-
                 <a class="road-access" href="Labs/Lab02_PathTraversal_NonRecursive.html">
                   ACCESS ACTIVITY 09 →
                 </a>
               </div>
-
               <a
                 class="road-thumb"
                 href="Labs/Lab02_PathTraversal_NonRecursive.html"
@@ -178,39 +154,56 @@
               </a>
             </div>
           </article>
-
-          <article class="road-node pending">
+          <article class="road-node solved">
             <div class="road-marker"><span>10</span></div>
-
-            <div class="road-card placeholder-card">
-              <div>
+            <div class="road-card">
+              <div class="road-card-copy">
                 <div class="road-meta">
-                  <span>NEXT LAB</span>
-                  <span>PENDING</span>
+                  <span>PATH TRAVERSAL</span>
+                  <span class="solved-state">SOLVED</span>
                 </div>
-
-                <h3>AWAITING NEW TARGET</h3>
-
+                <h3>
+                  File path traversal, traversal sequences stripped
+                  with superfluous URL-decode
+                </h3>
                 <p>
-                  Este nodo se activará cuando el siguiente laboratorio sea
-                  documentado.
+                  La aplicación bloquea secuencias de path traversal antes de
+                  realizar una decodificación URL adicional. Una capa extra de
+                  codificación permite que la secuencia peligrosa se reconstruya
+                  después de la validación y alcance el sistema de archivos.
                 </p>
+                <div class="tech-tags">
+                  <span>BURP SUITE</span>
+                  <span>HTTP HISTORY</span>
+                  <span>REPEATER</span>
+                  <span>DOUBLE URL-DECODE</span>
+                </div>
+                <a class="road-access" href="Labs/Lab03_PathTraversal_URLDecode.html">
+                  ACCESS ACTIVITY 10 →
+                </a>
               </div>
+              <a
+                class="road-thumb"
+                href="Labs/Lab03_PathTraversal_URLDecode.html"
+                aria-label="Abrir Actividad 10"
+              >
+                <img
+                  src="Evidencias/Lab03/05_lab_solved.png"
+                  alt="Laboratorio de superfluous URL-decode marcado como resuelto"
+                  loading="lazy"
+                >
+              </a>
             </div>
           </article>
-
           <article class="road-node pending">
             <div class="road-marker"><span>--</span></div>
-
             <div class="road-card placeholder-card">
               <div>
                 <div class="road-meta">
                   <span>FUTURE NODE</span>
                   <span>LOCKED</span>
                 </div>
-
                 <h3>ROAD CONTINUES...</h3>
-
                 <p>
                   La ruta crecerá laboratorio por laboratorio durante el
                   segundo parcial.
@@ -218,28 +211,22 @@
               </div>
             </div>
           </article>
-
         </div>
       </section>
-
       <section class="document-section">
         <div class="section-title">
           <h2>02 // REPORT ARCHIVE</h2>
           <span>INDIVIDUAL LAB DOCUMENTATION</span>
         </div>
-
         <div class="document-card">
           <div>
             <span class="doc-kicker">ACTIVITY_08_REPORT.PDF</span>
-
             <h3>Absolute Path Bypass</h3>
-
             <p>
               Reporte individual de la Actividad 08 con el procedimiento,
               evidencias, explicación técnica y resultado del laboratorio.
             </p>
           </div>
-
           <a
             class="download-button"
             href="Documentos/Actividad08_PathTraversal_AbsolutePathBypass.pdf"
@@ -249,20 +236,16 @@
             <small>PDF // INDIVIDUAL REPORT</small>
           </a>
         </div>
-
         <div class="document-card">
           <div>
             <span class="doc-kicker">ACTIVITY_09_REPORT.PDF</span>
-
             <h3>Non-Recursive Stripping Bypass</h3>
-
             <p>
               Reporte individual de la Actividad 09 documentando el bypass
               mediante secuencias de traversal anidadas y la recuperación
               controlada de <code>/etc/passwd</code>.
             </p>
           </div>
-
           <a
             class="download-button"
             href="Documentos/Actividad09_PathTraversal_NonRecursive.pdf"
@@ -272,23 +255,39 @@
             <small>PDF // INDIVIDUAL REPORT</small>
           </a>
         </div>
+        <div class="document-card">
+          <div>
+            <span class="doc-kicker">ACTIVITY_10_REPORT.PDF</span>
+            <h3>Superfluous URL-Decode Bypass</h3>
+            <p>
+              Reporte individual de la Actividad 10 con la secuencia de trabajo
+              en Burp Suite, la evidencia del bypass y el análisis de la
+              decodificación URL adicional.
+            </p>
+          </div>
+          <a
+            class="download-button"
+            href="Documentos/Actividad10_PathTraversal_URLDecode.pdf"
+            download="Actividad10_PathTraversal_URLDecode.pdf"
+          >
+            <span>DOWNLOAD ACTIVITY 10</span>
+            <small>PDF // INDIVIDUAL REPORT</small>
+          </a>
+        </div>
       </section>
     </main>
-
     <footer class="site-footer">
       <div>
         <strong>NET===TECH</strong>
         <span>ROAD TO HALL OF FAME</span>
       </div>
-
       <div>
         <span>BRUNO LUNA · PACLONK D. MEI</span>
         <span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span>
       </div>
-
       <div class="footer-status">
         <span class="state-dot"></span>
-        <span>02 NODES SOLVED</span>
+        <span>03 NODES SOLVED</span>
       </div>
     </footer>
   </div>

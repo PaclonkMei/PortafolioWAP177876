@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actividad 10: File path traversal, traversal sequences stripped with superfluous URL-decode.">
+  <meta name="theme-color" content="#080b0d">
+  <title>HOF ACT10 // Superfluous URL-Decode Bypass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../styles.css">
+  <link rel="stylesheet" href="../halloffame.css">
+  <link rel="stylesheet" href="lab.css">
+</head>
+<body>
+  <div class="page-frame lab-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>WEB SECURITY LAB NODE</span>
+          <small>HALL OF FAME // ACTIVITY 10</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>LAB SOLVED</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../../index.html"><span>01</span>PARCIAL 02</a>
+        <a class="nav-item" href="../index.html"><span>02</span>ROAD TO HALL OF FAME</a>
+        <a class="nav-item active" href="Lab03_PathTraversal_URLDecode.html"><span>03</span>ACTIVIDAD 10</a>
+      </nav>
+    </header>
+    <main>
+      <section class="lab-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">GET /image?filename=61.jpg<br>INPUT FILTER // ACTIVE<br>URL-DECODE // SECOND PASS<br>/etc/passwd // READ</div>
+        <div class="lab-hero-grid">
+          <div>
+            <p class="eyebrow">HOF://ACTIVITY_10/PATH_TRAVERSAL</p>
+            <h1>SUPERFLUOUS<br><span>URL-DECODE</span></h1>
+            <p class="lab-title-long">File path traversal, traversal sequences stripped with superfluous URL-decode</p>
+            <p class="lab-summary">
+              Laboratorio de PortSwigger Web Security Academy resuelto dentro del entorno autorizado. La aplicación bloquea entradas que contienen secuencias de path traversal, pero después realiza una decodificación URL adicional antes de utilizar el valor del parámetro <code>filename</code>.
+            </p>
+          </div>
+          <aside class="lab-status-card">
+            <header>ACTIVITY PARAMETERS // 10</header>
+            <dl>
+              <div><dt>CATEGORY</dt><dd>Path Traversal</dd></div>
+              <div><dt>TOOL</dt><dd>Burp Suite</dd></div>
+              <div><dt>MODULES</dt><dd>Proxy + Repeater</dd></div>
+              <div><dt>VECTOR</dt><dd>filename parameter</dd></div>
+              <div><dt>BYPASS</dt><dd>Double URL-encoding</dd></div>
+              <div><dt>STATUS</dt><dd class="status-green">SOLVED</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+      <section class="lab-section">
+        <div class="section-title">
+          <h2>01 // LAB OBJECTIVE</h2>
+          <span>VULNERABILITY CONTEXT</span>
+        </div>
+        <div class="objective-grid">
+          <article class="lab-copy-card">
+            <p>
+              El objetivo consiste en recuperar el contenido de <code>/etc/passwd</code> desde el endpoint utilizado para cargar imágenes de producto. La aplicación intenta impedir el recorrido de directorios mediante un filtro que rechaza las secuencias de traversal visibles en la entrada.
+            </p>
+            <p>
+              La debilidad aparece porque el valor se vuelve a decodificar después de esa validación. Al enviar la secuencia peligrosa con una capa adicional de codificación, el filtro no observa directamente el traversal y una etapa posterior de decodificación reconstruye la ruta antes de que el servidor la utilice.
+            </p>
+          </article>
+          <aside class="signal-card">
+            <span>VULNERABILITY SIGNAL</span>
+            <strong>..%252f..%252f..%252fetc/passwd</strong>
+            <small>EXPECTED RESULT // LOCAL FILE CONTENT</small>
+          </aside>
+        </div>
+      </section>
+      <section class="lab-section">
+        <div class="section-title">
+          <h2>02 // RESOLUTION PATH</h2>
+          <span>OFFICIAL 3-STEP FLOW</span>
+        </div>
+        <ol class="resolution-list">
+          <li><span>01</span><p>Usamos Burp Suite para interceptar e identificar una petición que solicita una imagen de producto.</p></li>
+          <li><span>02</span><p>Enviamos la solicitud a Repeater y modificamos el parámetro <code>filename</code> con <code>..%252f..%252f..%252fetc/passwd</code>, aplicando la capa de codificación necesaria para atravesar la validación.</p></li>
+          <li><span>03</span><p>Enviamos la petición modificada y verificamos que la respuesta contiene el archivo <code>/etc/passwd</code>, confirmando el bypass.</p></li>
+        </ol>
+      </section>
+      <section class="lab-section evidence-run">
+        <div class="section-title">
+          <h2>03 // EVIDENCE RUN</h2>
+          <span>BURP SUITE CAPTURES</span>
+        </div>
+        <article class="evidence-step">
+          <div class="step-copy">
+            <span class="step-id">STEP_01 // DISCOVERY</span>
+            <h3>Identificamos la petición de imagen</h3>
+            <p>Desde <strong>Proxy → HTTP history</strong> localizamos una solicitud GET al endpoint <code>/image</code>. La petición seleccionada utiliza <code>filename=61.jpg</code>, confirmando que el recurso solicitado se controla mediante el parámetro <code>filename</code>.</p>
+          </div>
+          <a class="evidence-image" href="../Evidencias/Lab03/01_http_history.png" target="_blank">
+            <img src="../Evidencias/Lab03/01_http_history.png" alt="HTTP history de Burp Suite mostrando una solicitud de imagen con filename 61.jpg" loading="lazy">
+          </a>
+        </article>
+        <article class="evidence-step reverse">
+          <div class="step-copy">
+            <span class="step-id">STEP_02A // FIRST ENCODED ATTEMPT</span>
+            <h3>Probamos la representación codificada en Repeater</h3>
+            <p>Tras enviar la petición a <strong>Repeater</strong>, sustituimos el nombre de la imagen por una representación codificada del recorrido hacia el archivo objetivo. En este punto el servidor responde con <code>400 Bad Request</code> y el mensaje <code>No such file</code>, por lo que todavía no alcanzamos la interpretación requerida por la aplicación.</p>
+          </div>
+          <a class="evidence-image" href="../Evidencias/Lab03/02_encoded_attempt.png" target="_blank">
+            <img src="../Evidencias/Lab03/02_encoded_attempt.png" alt="Burp Repeater mostrando un primer intento codificado y una respuesta 400 Bad Request" loading="lazy">
+          </a>
+        </article>
+        <article class="evidence-step">
+          <div class="step-copy">
+            <span class="step-id">STEP_02B // EXTRA ENCODING LAYER</span>
+            <h3>Aplicamos una segunda capa de URL-encoding</h3>
+            <p>Seleccionamos el valor del parámetro y utilizamos la función de Burp <strong>Convert selection → URL → URL-encode all characters</strong>. Esta operación añade la capa extra de codificación necesaria para que la entrada supere el filtro inicial y sea reconstruida por la decodificación posterior de la aplicación.</p>
+            <div class="request-sample">
+              <small>ENCODED VALUE</small>
+              <code>..%252f..%252f..%252fetc/passwd</code>
+            </div>
+          </div>
+          <a class="evidence-image" href="../Evidencias/Lab03/03_url_encode_all_characters.png" target="_blank">
+            <img src="../Evidencias/Lab03/03_url_encode_all_characters.png" alt="Menú de Burp Repeater utilizado para aplicar URL-encode all characters" loading="lazy">
+          </a>
+        </article>
+        <article class="evidence-step reverse">
+          <div class="step-copy">
+            <span class="step-id">STEP_03 // BYPASS CONFIRMED</span>
+            <h3>La decodificación adicional reconstruye el traversal</h3>
+            <p>Reenviamos la solicitud con la nueva representación. La aplicación responde con <code>HTTP/1.1 200 OK</code> y el cuerpo contiene entradas de <code>/etc/passwd</code>, demostrando que el filtro se ejecuta antes de la transformación que reconstruye la ruta peligrosa.</p>
+            <div class="request-sample">
+              <small>MODIFIED REQUEST</small>
+              <code>GET /image?filename=..%252f..%252f..%252fetc/passwd HTTP/1.1</code>
+            </div>
+          </div>
+          <a class="evidence-image" href="../Evidencias/Lab03/04_url_decode_bypass.png" target="_blank">
+            <img src="../Evidencias/Lab03/04_url_decode_bypass.png" alt="Burp Repeater mostrando respuesta 200 OK y contenido del archivo etc passwd" loading="lazy">
+          </a>
+        </article>
+        <article class="evidence-step solved-evidence">
+          <div class="step-copy">
+            <span class="step-id">FINAL // VALIDATION</span>
+            <h3>Laboratorio resuelto</h3>
+            <p>PortSwigger reconoce la condición esperada y marca el laboratorio como <strong>Solved</strong>. La captura final conserva la evidencia de que el objetivo académico fue completado correctamente dentro del entorno autorizado.</p>
+          </div>
+          <a class="evidence-image" href="../Evidencias/Lab03/05_lab_solved.png" target="_blank">
+            <img src="../Evidencias/Lab03/05_lab_solved.png" alt="PortSwigger Web Security Academy mostrando el laboratorio de superfluous URL-decode resuelto" loading="lazy">
+          </a>
+        </article>
+      </section>
+      <section class="lab-section">
+        <div class="section-title">
+          <h2>04 // TECHNICAL ANALYSIS</h2>
+          <span>WHY THE BYPASS WORKS</span>
+        </div>
+        <div class="analysis-grid-lab">
+          <article><span>01</span><h3>Validación antes de normalizar</h3><p>El control inspecciona una representación de la entrada antes de que todas las transformaciones y decodificaciones hayan terminado.</p></article>
+          <article><span>02</span><h3>Decodificación adicional</h3><p>Una capa extra de URL-encoding oculta temporalmente los caracteres de traversal. La decodificación posterior vuelve a convertirlos en una ruta funcional.</p></article>
+          <article><span>03</span><h3>Impacto</h3><p>El comportamiento permite escapar del directorio destinado a imágenes y leer archivos locales accesibles para el proceso web.</p></article>
+          <article><span>04</span><h3>Mitigación</h3><p>La aplicación debe decodificar y canonicalizar la entrada antes de validarla, usar nombres o identificadores permitidos y comprobar que la ruta final permanezca dentro del directorio autorizado.</p></article>
+        </div>
+      </section>
+      <section class="lab-section report-link-section">
+        <div class="section-title">
+          <h2>05 // DOCUMENT PACKAGE</h2>
+          <span>ACTIVITY 10 REPORT</span>
+        </div>
+        <div class="report-link-card">
+          <div>
+            <strong>ROAD TO HALL OF FAME // CURRENT BUILD</strong>
+            <p>Reporte individual de la Actividad 10 con el procedimiento, evidencias y análisis del bypass mediante una decodificación URL adicional.</p>
+          </div>
+          <a class="download-button" href="../Documentos/Actividad10_PathTraversal_URLDecode.pdf" download="Actividad10_PathTraversal_URLDecode.pdf"><span>DOWNLOAD PDF</span><small>PDF // INDIVIDUAL REPORT</small></a>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>HOF ACTIVITY NODE // 10</span></div>
+      <div><span>BRUNO LUNA · PACLONK D. MEI</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>LAB SOLVED</span></div>
+    </footer>
+  </div>
+</body>
+</html>
