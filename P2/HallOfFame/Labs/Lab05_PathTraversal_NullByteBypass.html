@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actividad 12: File path traversal, validation of file extension with null byte bypass.">
+  <meta name="theme-color" content="#080b0d">
+  <title>HOF ACT12 // Null Byte Extension Bypass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../styles.css">
+  <link rel="stylesheet" href="../halloffame.css">
+  <link rel="stylesheet" href="lab.css">
+  <style>
+    .evidence-image.evidence-missing {
+      min-height: 260px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255, 229, 0, .28);
+      background:
+        linear-gradient(rgba(255, 229, 0, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 229, 0, .035) 1px, transparent 1px),
+        rgba(6, 9, 11, .82);
+      background-size: 22px 22px;
+      text-decoration: none;
+    }
+
+    .evidence-image.evidence-missing::after {
+      content: "EVIDENCE SLOT // ADD SCREENSHOT";
+      font-family: "Share Tech Mono", monospace;
+      color: rgba(255, 229, 0, .72);
+      letter-spacing: .08em;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-frame lab-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>WEB SECURITY LAB NODE</span>
+          <small>HALL OF FAME // ACTIVITY 12</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>LAB SOLVED</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../../index.html"><span>01</span>PARCIAL 02</a>
+        <a class="nav-item" href="../index.html"><span>02</span>ROAD TO HALL OF FAME</a>
+        <a class="nav-item active" href="Lab05_PathTraversal_NullByteBypass.html"><span>03</span>ACTIVIDAD 12</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="lab-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">
+          GET /image?filename=70.png<br>
+          EXTENSION CHECK // ACTIVE<br>
+          NULL TERMINATOR // BYPASS<br>
+          /etc/passwd // READ
+        </div>
+
+        <div class="lab-hero-grid">
+          <div>
+            <p class="eyebrow">HOF://ACTIVITY_12/PATH_TRAVERSAL</p>
+            <h1>NULL BYTE<br><span>EXTENSION BYPASS</span></h1>
+            <p class="lab-title-long">File path traversal, validation of file extension with null byte bypass</p>
+            <p class="lab-summary">
+              Laboratorio de PortSwigger Web Security Academy resuelto dentro del entorno autorizado. La aplicación intenta proteger el endpoint de imágenes comprobando que el valor de <code>filename</code> termine con la extensión esperada, pero la forma en que la ruta se procesa permite separar la validación de extensión del archivo que finalmente intenta abrir el backend.
+            </p>
+          </div>
+
+          <aside class="lab-status-card">
+            <header>ACTIVITY PARAMETERS // 12</header>
+            <dl>
+              <div><dt>CATEGORY</dt><dd>Path Traversal</dd></div>
+              <div><dt>TOOL</dt><dd>Burp Suite</dd></div>
+              <div><dt>MODULES</dt><dd>Proxy + Repeater</dd></div>
+              <div><dt>VECTOR</dt><dd>filename parameter</dd></div>
+              <div><dt>BYPASS</dt><dd>Null byte + expected extension</dd></div>
+              <div><dt>STATUS</dt><dd class="status-green">SOLVED</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="lab-section">
+        <div class="section-title">
+          <h2>01 // LAB OBJECTIVE</h2>
+          <span>VULNERABILITY CONTEXT</span>
+        </div>
+
+        <div class="objective-grid">
+          <article class="lab-copy-card">
+            <p>
+              El objetivo del laboratorio consiste en recuperar el contenido de <code>/etc/passwd</code> desde el endpoint que carga las imágenes de producto. En este caso, la aplicación valida que el nombre recibido mediante <code>filename</code> termine con la extensión de imagen esperada, por lo que una ruta de traversal directa hacia el archivo objetivo no supera la comprobación.
+            </p>
+            <p>
+              El bypass aprovecha una discrepancia entre la validación de la cadena y el procesamiento posterior de la ruta. Conservamos la terminación esperada por la aplicación, pero colocamos antes de ella el marcador de terminación correspondiente. Para mantener esta documentación compatible, la representación codificada se señala como <code>../../../etc/passwd%00.png</code>.
+            </p>
+          </article>
+
+          <aside class="signal-card">
+            <span>VULNERABILITY SIGNAL</span>
+            <strong>../../../etc/passwd%00.png</strong>
+            <small>EXPECTED RESULT // LOCAL FILE CONTENT</small>
+          </aside>
+        </div>
+      </section>
+
+      <section class="lab-section">
+        <div class="section-title">
+          <h2>02 // RESOLUTION PATH</h2>
+          <span>OFFICIAL 3-STEP FLOW</span>
+        </div>
+
+        <ol class="resolution-list">
+          <li>
+            <span>01</span>
+            <p>Usamos Burp Suite para interceptar e identificar una petición que obtiene una imagen de producto mediante el parámetro <code>filename</code>.</p>
+          </li>
+          <li>
+            <span>02</span>
+            <p>Enviamos la solicitud a Repeater y sustituimos el valor original por una ruta de traversal hacia <code>/etc/passwd</code>, seguida de <code>../../../etc/passwd%00.png</code> y la extensión <code>.jpg</code> que la aplicación espera validar.</p>
+          </li>
+          <li>
+            <span>03</span>
+            <p>Reenviamos la petición y comprobamos que la respuesta contiene el contenido de <code>/etc/passwd</code>, confirmando que la validación de extensión fue superada dentro del laboratorio.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section class="lab-section evidence-run">
+        <div class="section-title">
+          <h2>03 // EVIDENCE RUN</h2>
+          <span>BURP SUITE CAPTURES</span>
+        </div>
+
+        <article class="evidence-step">
+          <div class="step-copy">
+            <span class="step-id">STEP_01 // DISCOVERY</span>
+            <h3>Localizamos una solicitud de imagen válida</h3>
+            <p>
+              Desde <strong>Proxy → HTTP history</strong> identificamos una petición GET al endpoint <code>/image</code>. El parámetro <code>filename</code> contiene un archivo de imagen válido con la extensión esperada, lo que nos permite observar la estructura normal de la solicitud antes de modificarla.
+            </p>
+          </div>
+          <a class="evidence-image" href="../Evidencias/Lab05/01_http_history.png" target="_blank">
+            <img src="../Evidencias/Lab05/01_http_history.png" alt="HTTP history de Burp Suite mostrando una petición de imagen válida" loading="lazy" onerror="this.closest('a').classList.add('evidence-missing');this.remove();">
+          </a>
+        </article>
+
+        <article class="evidence-step reverse">
+          <div class="step-copy">
+            <span class="step-id">STEP_02-03 // NULL BYTE BYPASS</span>
+            <h3>Modificamos el parámetro y obtenemos el archivo objetivo</h3>
+            <p>
+              En <strong>Repeater</strong> sustituimos el valor original por una ruta de traversal hacia <code>/etc/passwd</code>. Después del nombre del archivo objetivo colocamos <code>../../../etc/passwd%00.png</code> y mantenemos <code>.jpg</code> al final de la cadena para satisfacer la validación de extensión presente en el laboratorio.
+            </p>
+            <div class="request-sample">
+              <small>MODIFIED REQUEST</small>
+              <code>GET /image?filename=../../../../etc/passwd%00.png HTTP/1.1</code>
+            </div>
+          </div>
+          <a class="evidence-image" href="../Evidencias/Lab05/03_null_byte_bypass.png" target="_blank">
+            <img src="../Evidencias/Lab05/03_null_byte_bypass.png" alt="Burp Repeater mostrando el bypass de la validación de extensión y la lectura del archivo objetivo" loading="lazy" onerror="this.closest('a').classList.add('evidence-missing');this.remove();">
+          </a>
+        </article>
+
+        <article class="evidence-step solved-evidence">
+          <div class="step-copy">
+            <span class="step-id">FINAL // VALIDATION</span>
+            <h3>Laboratorio resuelto</h3>
+            <p>
+              PortSwigger reconoce la condición requerida y marca el laboratorio como <strong>Solved</strong>. La evidencia final confirma que la Actividad 12 fue completada correctamente dentro del entorno académico autorizado.
+            </p>
+          </div>
+          <a class="evidence-image" href="../Evidencias/Lab05/04_lab_solved.png" target="_blank">
+            <img src="../Evidencias/Lab05/04_lab_solved.png" alt="PortSwigger Web Security Academy mostrando el laboratorio de null byte bypass resuelto" loading="lazy" onerror="this.closest('a').classList.add('evidence-missing');this.remove();">
+          </a>
+        </article>
+      </section>
+<section class="lab-section">
+        <div class="section-title">
+          <h2>04 // TECHNICAL ANALYSIS</h2>
+          <span>WHY THE BYPASS WORKS</span>
+        </div>
+
+        <div class="analysis-grid-lab">
+          <article>
+            <span>01</span>
+            <h3>Validación centrada en la extensión</h3>
+            <p>La aplicación comprueba que la cadena proporcionada finalice con la extensión de imagen esperada, pero esa condición por sí sola no garantiza que el archivo procesado sea realmente una imagen permitida.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Interpretación diferente de la ruta</h3>
+            <p>El laboratorio demuestra una discrepancia entre la validación inicial del valor y la forma en que una capa posterior interpreta la terminación del nombre de archivo.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Impacto</h3>
+            <p>Una validación insuficiente puede permitir la lectura de archivos locales accesibles para el proceso web, incluyendo información sensible del sistema o de la aplicación.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Mitigación</h3>
+            <p>Conviene evitar que rutas controladas por el usuario lleguen directamente a operaciones del sistema de archivos; cuando sea necesario, se deben usar valores permitidos, canonicalizar la ruta y comprobar que el destino final permanezca dentro del directorio autorizado.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="lab-section report-link-section">
+        <div class="section-title">
+          <h2>05 // DOCUMENT PACKAGE</h2>
+          <span>ACTIVITY 12 REPORT</span>
+        </div>
+
+        <div class="report-link-card">
+          <div>
+            <strong>ROAD TO HALL OF FAME // CURRENT BUILD</strong>
+            <p>Reporte individual de la Actividad 12 con el procedimiento, las evidencias y el análisis del bypass aplicado sobre la validación de extensión.</p>
+          </div>
+          <a class="download-button" href="../Documentos/Actividad12_PathTraversal_NullByteBypass.pdf" download="Actividad12_PathTraversal_NullByteBypass.pdf">
+            <span>DOWNLOAD PDF</span>
+            <small>PDF // INDIVIDUAL REPORT</small>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>HOF ACTIVITY NODE // 12</span></div>
+      <div><span>BRUNO LUNA · PACLONK D. MEI</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>LAB SOLVED</span></div>
+    </footer>
+  </div>
+</body>
+</html>
