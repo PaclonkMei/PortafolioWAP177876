@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actividad 13: Red Team Report sobre la evaluación de seguridad de My File Server 1. Entrega individual del Parcial 2.">
+  <meta name="theme-color" content="#080b0d">
+  <title>ACT13 // Red Team Report - My File Server 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="actividad13.css">
+</head>
+<body>
+  <div class="page-frame act13-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>RED TEAM ASSESSMENT ARCHIVE</span>
+          <small>ACTIVITY 13 // PARTIAL 02</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>REPORT VERIFIED</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../index.html"><span>01</span>PARCIAL 02</a>
+        <a class="nav-item" href="../HallOfFame/index.html"><span>02</span>HALL OF FAME</a>
+        <a class="nav-item active" href="Act13_RedTeamReport.html"><span>03</span>ACTIVIDAD 13</a>
+        <a class="nav-item" href="Act14_CiberseguridadEnUnaMirada.html"><span>04</span>ACTIVIDAD 14</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="activity-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">
+          TARGET // MY_FILE_SERVER_1<br>
+          MODE // BLACK_BOX<br>
+          ACCESS // ROOT<br>
+          RISK // CRITICAL
+        </div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="activity-kicker">ACTIVITY 13 // OFFENSIVE SECURITY</p>
+            <h1>RED TEAM<br><span>REPORT</span></h1>
+            <p class="hero-lead">
+              Evaluación de seguridad realizada sobre la máquina vulnerable <strong>My File Server 1</strong>, documentando el proceso de reconocimiento, enumeración, explotación, persistencia, escalada de privilegios, impacto y remediación.
+            </p>
+            <p class="individual-note">
+              La práctica se desarrolló originalmente en equipo. Para esta entrega individual se conserva el contenido técnico del trabajo y se actualizaron únicamente las portadas del informe y de la presentación para identificar a Bruno como autor de esta versión.
+            </p>
+          </div>
+
+          <aside class="mission-card">
+            <header>ENGAGEMENT PARAMETERS // ACT13</header>
+            <dl>
+              <div><dt>MODE</dt><dd>Individual delivery</dd></div>
+              <div><dt>TARGET</dt><dd>My File Server 1</dd></div>
+              <div><dt>TYPE</dt><dd>Black Box Pentest</dd></div>
+              <div><dt>METHOD</dt><dd>PTES workflow</dd></div>
+              <div><dt>RISK</dt><dd class="risk-critical">CRITICAL</dd></div>
+              <div><dt>STATUS</dt><dd>Completed</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>01 // ASSIGNMENT RUBRIC</h2>
+          <span>REQUIRED DELIVERABLES</span>
+        </div>
+
+        <div class="rubric-grid">
+          <article class="rubric-panel">
+            <div class="panel-tag">TECHNICAL REPORT</div>
+            <h3>Informe de pentesting</h3>
+            <p class="panel-intro">El informe debía presentar el engagement con estructura ejecutiva y técnica, evidencias, análisis de riesgo y propuestas de mitigación.</p>
+            <ol>
+              <li>Portada.</li>
+              <li>Executive Summary.</li>
+              <li>Alcance (scope).</li>
+              <li>Metodología aplicada.</li>
+              <li>Fases de reconocimiento.</li>
+              <li>Enumeración.</li>
+              <li>Explotación.</li>
+              <li>Escalada de privilegios.</li>
+              <li>Análisis de impacto mediante el modelo CIA.</li>
+              <li>Recomendaciones técnicas.</li>
+              <li>Tabla de hallazgos con vulnerabilidad, severidad, evidencia, impacto y recomendación.</li>
+            </ol>
+          </article>
+
+          <article class="rubric-panel accent-cyan">
+            <div class="panel-tag">EXECUTIVE PRESENTATION</div>
+            <h3>Presentación profesional</h3>
+            <p class="panel-intro">La segunda parte de la actividad solicita una presentación limpia, corporativa, con máximo 12 diapositivas y enfoque estratégico para un consejo directivo.</p>
+            <ol>
+              <li>Portada corporativa.</li>
+              <li>Contexto del Engagement.</li>
+              <li>Metodología aplicada.</li>
+              <li>Nivel general del riesgo.</li>
+              <li>Hallazgos críticos.</li>
+              <li>Escenario del impacto empresarial.</li>
+              <li>Matriz de riesgo.</li>
+              <li>Recomendaciones estratégicas.</li>
+              <li>Roadmap de remediación.</li>
+              <li>Conclusión ejecutiva.</li>
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>02 // ASSESSMENT SNAPSHOT</h2>
+          <span>ENGAGEMENT RESULT</span>
+        </div>
+
+        <div class="risk-banner">
+          <div>
+            <span class="mono-label">GLOBAL RISK</span>
+            <strong>CRITICAL</strong>
+          </div>
+          <p>
+            La evaluación concluyó con compromiso total del servidor. El acceso inicial derivó en persistencia mediante SSH y posteriormente en una escalada local hasta privilegios <strong>root</strong>.
+          </p>
+        </div>
+
+        <div class="impact-grid">
+          <article><span>CONFIDENTIALITY</span><strong>TOTAL IMPACT</strong><p>Exposición de información sensible y credenciales accesibles desde el servicio web.</p></article>
+          <article><span>INTEGRITY</span><strong>TOTAL IMPACT</strong><p>Capacidad de modificar archivos, inyectar llaves SSH y alterar recursos compartidos.</p></article>
+          <article><span>AUTHORIZATION</span><strong>COMPROMISED</strong><p>La escalada de privilegios permitió superar los controles del sistema operativo.</p></article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>03 // ATTACK PATH</h2>
+          <span>DOCUMENTED WORKFLOW</span>
+        </div>
+
+        <div class="attack-path" aria-label="Ruta general documentada durante el pentesting">
+          <article><span>01</span><h3>RECON</h3><p>Identificación del host objetivo dentro del entorno de red controlado.</p></article>
+          <i aria-hidden="true">→</i>
+          <article><span>02</span><h3>ENUM</h3><p>Detección de servicios HTTP, FTP, SSH, SMB, NFS y RPCbind.</p></article>
+          <i aria-hidden="true">→</i>
+          <article><span>03</span><h3>EXPLOIT</h3><p>Uso de credenciales expuestas para obtener acceso al servicio FTP.</p></article>
+          <i aria-hidden="true">→</i>
+          <article><span>04</span><h3>PERSIST</h3><p>Establecimiento de acceso interactivo mediante una llave SSH autorizada.</p></article>
+          <i aria-hidden="true">→</i>
+          <article><span>05</span><h3>ROOT</h3><p>Escalada de privilegios explotando CVE-2016-5195, Dirty COW.</p></article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>04 // CRITICAL FINDINGS</h2>
+          <span>FINDINGS MATRIX</span>
+        </div>
+
+        <div class="findings-grid">
+          <article>
+            <div class="finding-head"><span>VULN-01</span><b>CRITICAL</b></div>
+            <h3>Credenciales expuestas</h3>
+            <p>Un archivo público accesible desde HTTP contenía una contraseña en texto claro, habilitando el vector de acceso inicial.</p>
+          </article>
+          <article>
+            <div class="finding-head"><span>VULN-02</span><b>HIGH</b></div>
+            <h3>Permisos SMB inseguros</h3>
+            <p>Recursos compartidos con permisos de lectura y escritura incrementaban el riesgo de manipulación y exfiltración.</p>
+          </article>
+          <article>
+            <div class="finding-head"><span>VULN-03</span><b>CRITICAL</b></div>
+            <h3>Reutilización de credenciales</h3>
+            <p>La combinación inferida de usuario y contraseña permitió autenticación exitosa en un servicio expuesto.</p>
+          </article>
+          <article>
+            <div class="finding-head"><span>VULN-04</span><b>HIGH</b></div>
+            <h3>Integridad insuficiente en FTP</h3>
+            <p>Los permisos de escritura permitieron colocar una llave autorizada y establecer persistencia mediante SSH.</p>
+          </article>
+          <article>
+            <div class="finding-head"><span>VULN-05</span><b>CRITICAL</b></div>
+            <h3>Dirty COW</h3>
+            <p>La vulnerabilidad CVE-2016-5195 permitió una escalada local de privilegios hasta obtener control root.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section deliverable-section">
+        <div class="section-title">
+          <h2>05 // FINAL DELIVERABLE</h2>
+          <span>REPORT + EXECUTIVE DECK</span>
+        </div>
+
+        <div class="document-shell">
+          <div class="document-meta">
+            <div>
+              <span class="mono-label">FILE</span>
+              <strong>Act13_RedTeam_Report_Bruno.pdf</strong>
+            </div>
+            <div>
+              <span class="mono-label">CONTENT</span>
+              <strong>Technical report + presentation</strong>
+            </div>
+            <div>
+              <span class="mono-label">AUTHOR</span>
+              <strong>Puente Luna Bruno Axel - 177876</strong>
+            </div>
+          </div>
+
+          <div class="pdf-frame">
+            <object data="Evidencias13/Act13_RedTeam_Report_Bruno.pdf#view=FitH" type="application/pdf">
+              <p>Tu navegador no puede mostrar el PDF embebido. Puedes abrirlo con el botón que aparece debajo.</p>
+            </object>
+          </div>
+
+          <div class="document-actions">
+            <a class="data-button" href="Evidencias13/Act13_RedTeam_Report_Bruno.pdf" target="_blank" rel="noopener noreferrer">OPEN // FULL REPORT</a>
+            <a class="data-button" href="Evidencias13/Act13_RedTeam_Report_Bruno.pdf" download="Act13_RedTeam_Report_Bruno.pdf">DOWNLOAD // PDF</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="activity-section conclusion-section">
+        <div class="section-title">
+          <h2>06 // REMEDIATION PRIORITIES</h2>
+          <span>DEFENSIVE RESPONSE</span>
+        </div>
+        <div class="remediation-grid">
+          <article><span>01</span><h3>Credenciales</h3><p>Eliminar secretos de archivos públicos, rotar credenciales y aplicar políticas robustas de autenticación.</p></article>
+          <article><span>02</span><h3>Servicios</h3><p>Sustituir FTP por SFTP y restringir los permisos de escritura en recursos compartidos SMB.</p></article>
+          <article><span>03</span><h3>Acceso</h3><p>Aplicar el principio de menor privilegio y controlar estrictamente las llaves autorizadas para SSH.</p></article>
+          <article><span>04</span><h3>Patch Management</h3><p>Actualizar el kernel a una versión corregida y mantener un ciclo continuo de parchado.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>ACTIVITY NODE // 13</span></div>
+      <div><span>BRUNO LUNA · PACLONK D. MEI</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>RED TEAM REPORT READY</span></div>
+    </footer>
+  </div>
+</body>
+</html>
