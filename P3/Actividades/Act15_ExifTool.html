@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actividad 15: análisis de metadatos de documentos y fotografías mediante ExifTool.">
+  <meta name="theme-color" content="#080b0d">
+  <title>ACT15 // Metadata Trace · ExifTool</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="actividad15.css">
+</head>
+<body>
+  <div class="page-frame act15-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>DIGITAL FORENSICS NODE</span>
+          <small>ACTIVITY 15 // PARTIAL 03</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>REPORT ONLINE</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../../P1/index.html"><span>01</span>PARCIAL 01</a>
+        <a class="nav-item" href="../../P2/index.html"><span>02</span>PARCIAL 02</a>
+        <a class="nav-item" href="../index.html"><span>03</span>PARCIAL 03</a>
+        <a class="nav-item active" href="Act15_ExifTool.html"><span>04</span>ACTIVIDAD 15</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="activity-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">
+          EXIF // FILE SIGNATURES<br>
+          DOCX // DOCUMENT PROPERTIES<br>
+          GPS // GEOLOCATION DATA<br>
+          PRIVACY // METADATA SANITIZATION
+        </div>
+
+        <div class="hero-grid">
+          <div>
+            <p class="activity-kicker">ACTIVITY 15 // METADATA ANALYSIS</p>
+            <h1>METADATA<br><span>TRACE</span></h1>
+            <p>
+              Análisis de metadatos con ExifTool a partir de dos archivos de origen: un documento
+              DOCX y una fotografía JPG. El ejercicio identifica propiedades del documento,
+              atributos de captura y datos GPS, y relaciona estos hallazgos con la privacidad y
+              el manejo responsable de archivos digitales.
+            </p>
+          </div>
+          <aside class="mission-card">
+            <header>MISSION PARAMETERS // ACT15</header>
+            <dl>
+              <div><dt>TOOL</dt><dd>ExifTool</dd></div>
+              <div><dt>INPUT 01</dt><dd>DOCX document</dd></div>
+              <div><dt>INPUT 02</dt><dd>JPG photograph</dd></div>
+              <div><dt>FOCUS</dt><dd>Metadata + GPS</dd></div>
+              <div><dt>METHOD</dt><dd>Read / Interpret / Sanitize</dd></div>
+              <div><dt>STATUS</dt><dd>Documented</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>01 // ANALYSIS SCOPE</h2>
+          <span>INPUT FILES</span>
+        </div>
+        <div class="content-grid metadata-grid">
+          <article>
+            <span>FILE 01 // DOCX</span>
+            <h3>Propiedades documentales</h3>
+            <p>
+              Se revisaron campos como clasificación, plantilla utilizada, tiempo de edición,
+              compañía, creador, última modificación y fecha de creación del documento analizado.
+            </p>
+          </article>
+          <article>
+            <span>FILE 02 // JPG</span>
+            <h3>Datos de captura</h3>
+            <p>
+              Se identificaron valores EXIF vinculados con la fotografía, incluidos ISO,
+              longitud focal, uso del flash y fecha de captura.
+            </p>
+          </article>
+          <article>
+            <span>GPS // LOCATION</span>
+            <h3>Geolocalización</h3>
+            <p>
+              La muestra contenía coordenadas GPS que fueron convertidas a formato decimal
+              y contrastadas con una ubicación geográfica en el Reino Unido.
+            </p>
+          </article>
+          <article>
+            <span>PRIVACY // CLEANUP</span>
+            <h3>Saneamiento</h3>
+            <p>
+              El documento registra la eliminación de los metadatos de la imagen de muestra,
+              reforzando la importancia de revisar los datos embebidos antes de compartir archivos.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>02 // OBSERVED DATA</h2>
+          <span>SELECTED FINDINGS FROM THE REPORT</span>
+        </div>
+        <div class="findings-grid">
+          <article class="finding-card">
+            <div class="finding-head"><span>DOCX</span><span>01</span></div>
+            <h3>Document metadata</h3>
+            <p>El archivo contiene campos de clasificación, plantilla, duración de edición, compañía responsable y datos de autoría/modificación.</p>
+            <div class="finding-tags"><span>CLASSIFICATION</span><span>TEMPLATE</span><span>AUTHORSHIP</span><span>TIMESTAMPS</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>JPG / EXIF</span><span>02</span></div>
+            <h3>Capture properties</h3>
+            <div class="metric-line"><span>ISO</span><strong>100</strong></div>
+            <div class="metric-line"><span>FOCAL LENGTH</span><strong>3.8 mm</strong></div>
+            <div class="metric-line"><span>FLASH</span><strong>Off / Did not fire</strong></div>
+            <div class="metric-line"><span>CREATE DATE</span><strong>2020-05-28</strong></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>GPS</span><span>03</span></div>
+            <h3>Location data</h3>
+            <p>La interpretación de las coordenadas del archivo permitió situar la fotografía en Merrow Park Wildlands, Guildford, Reino Unido.</p>
+            <div class="finding-tags"><span>LATITUDE</span><span>LONGITUDE</span><span>ALTITUDE</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>EXIFTOOL</span><span>04</span></div>
+            <h3>Metadata removal</h3>
+            <p>El informe también documenta la eliminación de los metadatos de la muestra JPG como medida de reducción de exposición de información.</p>
+            <div class="finding-tags"><span>PRIVACY</span><span>SANITIZATION</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section privacy-section">
+        <div class="section-title">
+          <h2>03 // SECURITY TAKEAWAY</h2>
+          <span>WHY METADATA MATTERS</span>
+        </div>
+        <div class="conclusion-grid">
+          <div class="conclusion-number">15</div>
+          <div>
+            <h3>Los archivos pueden revelar más de lo que muestran.</h3>
+            <p>
+              Los metadatos pueden incluir información de autoría, herramientas y plantillas,
+              fechas de actividad, características del dispositivo y ubicación. La revisión con
+              ExifTool ayuda a reconocer estos datos y permite decidir qué información debe
+              conservarse o retirarse antes de distribuir un archivo.
+            </p>
+            <p class="source-note">
+              La evidencia adjunta conserva el informe original y sus respuestas completas.
+              Esta página resume el alcance y los principales resultados para su consulta dentro del portafolio.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>04 // REPORT EVIDENCE</h2>
+          <span>PDF // ORIGINAL DELIVERABLE</span>
+        </div>
+        <div class="report-shell">
+          <div class="report-header">
+            <div>
+              <span class="activity-kicker">EVIDENCE PACKAGE // ACT15</span>
+              <h3>PuenteLunaBrunoAxel-ACT15.pdf</h3>
+              <p>Informe de análisis de metadatos sobre un documento DOCX y una fotografía JPG.</p>
+            </div>
+            <div class="report-actions">
+              <a class="data-button" href="Evidencias15/PuenteLunaBrunoAxel-ACT15.pdf" target="_blank" rel="noopener noreferrer">OPEN // PDF</a>
+              <a class="data-button" href="Evidencias15/PuenteLunaBrunoAxel-ACT15.pdf" download="PuenteLunaBrunoAxel-ACT15.pdf">DOWNLOAD // PDF</a>
+            </div>
+          </div>
+          <iframe class="report-frame" src="Evidencias15/PuenteLunaBrunoAxel-ACT15.pdf#view=FitH" title="Informe original de análisis de metadatos con ExifTool" loading="lazy"></iframe>
+          <p class="viewer-fallback">Si el visor integrado no está disponible, utiliza OPEN // PDF para abrir el informe en otra pestaña.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>ACTIVITY NODE // 15</span></div>
+      <div><span>BRUNO LUNA · PACLONK D. MEI</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>METADATA TRACE COMPLETE</span></div>
+    </footer>
+  </div>
+</body>
+</html>
