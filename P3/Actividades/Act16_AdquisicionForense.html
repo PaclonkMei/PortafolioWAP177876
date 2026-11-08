@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actividad 16: adquisición forense de una imagen de almacenamiento con Guymager en Linux Mint.">
+  <meta name="theme-color" content="#080b0d">
+  <title>ACT16 // The Truth in Bits · Forensic Acquisition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="actividad16.css">
+</head>
+<body>
+  <div class="page-frame act16-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>DIGITAL FORENSICS NODE</span>
+          <small>ACTIVITY 16 // PARTIAL 03</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>EVIDENCE RECORD</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../../P1/index.html"><span>01</span>PARCIAL 01</a>
+        <a class="nav-item" href="../../P2/index.html"><span>02</span>PARCIAL 02</a>
+        <a class="nav-item" href="../index.html"><span>03</span>PARCIAL 03</a>
+        <a class="nav-item" href="Act15_ExifTool.html"><span>04</span>ACTIVIDAD 15</a>
+        <a class="nav-item active" href="Act16_AdquisicionForense.html"><span>05</span>ACTIVIDAD 16</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="activity-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">
+          FORENSIC // ACQUISITION<br>
+          GUYMAGER // LINUX MINT<br>
+          RAW IMAGE // .DD<br>
+          INTEGRITY // EVIDENCE
+        </div>
+
+        <div class="hero-grid">
+          <div>
+            <p class="activity-kicker">ACTIVITY 16 // LA VERDAD EN LOS BITS</p>
+            <h1>THE TRUTH<br><span>IN BITS</span></h1>
+            <p>
+              La actividad documenta la adquisición forense de un medio de almacenamiento
+              mediante la creación de una imagen en formato <strong>.dd</strong>. El trabajo se
+              realizó desde una ThinkPad T430s con Linux Mint 22.3, utilizando Guymager como
+              alternativa nativa para Linux.
+            </p>
+            <p class="implementation-note">
+              <strong>IMPLEMENTACIÓN:</strong> la guía de la práctica contempla FTK Imager en
+              Windows; para realizar la adquisición desde el entorno Linux disponible se utilizó
+              Guymager 0.8.13-2build2.
+            </p>
+          </div>
+
+          <aside class="mission-card">
+            <header>MISSION PARAMETERS // ACT16</header>
+            <dl>
+              <div><dt>TOOL</dt><dd>Guymager 0.8.13-2build2</dd></div>
+              <div><dt>PLATFORM</dt><dd>Linux Mint 22.3</dd></div>
+              <div><dt>HARDWARE</dt><dd>ThinkPad T430s</dd></div>
+              <div><dt>OUTPUT</dt><dd>Forensic image · .dd</dd></div>
+              <div><dt>REFERENCE</dt><dd>FTK Imager guide</dd></div>
+              <div><dt>STATUS</dt><dd>Acquisition completed</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>01 // ACTIVITY CONTEXT</h2>
+          <span>FORENSIC IMAGING</span>
+        </div>
+        <div class="content-grid acquisition-grid">
+          <article>
+            <span>OBJECTIVE // 01</span>
+            <h3>Adquisición forense</h3>
+            <p>
+              Obtener una imagen digital del medio seleccionado para conservar una copia de
+              trabajo que pueda utilizarse en las etapas posteriores de análisis.
+            </p>
+          </article>
+          <article>
+            <span>WORKSTATION // 02</span>
+            <h3>Entorno Linux</h3>
+            <p>
+              La actividad se completó desde la ThinkPad T430s con Linux Mint 22.3, sin cambiar
+              el sistema operativo de trabajo para utilizar una herramienta de Windows.
+            </p>
+          </article>
+          <article>
+            <span>ACQUISITION TOOL // 03</span>
+            <h3>Guymager</h3>
+            <p>
+              Se utilizó Guymager 0.8.13-2build2 para realizar la adquisición desde el entorno
+              Linux. La aplicación se empleó como alternativa a FTK Imager.
+            </p>
+          </article>
+          <article>
+            <span>OUTPUT FORMAT // 04</span>
+            <h3>Imagen DD</h3>
+            <p>
+              El resultado de la adquisición se generó en formato RAW con extensión
+              <strong>.dd</strong>. El nombre, tamaño y ubicación exactos se completan en el
+              registro de evidencia inferior.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>02 // ACQUISITION RECORD</h2>
+          <span>COMPLETE WITH YOUR ORIGINAL LOG</span>
+        </div>
+
+        <div class="record-grid">
+          <article class="record-item">
+            <span>SOURCE DEVICE</span>
+            <strong>/dev/sdb DataTraveler 2.0 "UNI"</strong>
+          </article>
+          <article class="record-item">
+            <span>IMAGE FILE</span>
+            <strong>infocrim_PuenteLunaBrunoAxel.dd</strong>
+          </article>
+          <article class="record-item">
+            <span>IMAGE SIZE</span>
+            <strong>7.3GB</strong>
+          </article>
+          <article class="record-item">
+            <span>ACQUISITION DATE</span>
+            <strong>2026-11-07 13:52:40</strong>
+          </article>
+          <article class="record-item">
+            <span>HASH ALGORITHM</span>
+            <strong>MD5, SHA-1 and SHA-256</strong>
+          </article>
+          <article class="record-item">
+            <span>HASH VALUE</span>
+            <strong class="pending-value">4d7aaab3920c404a1ff4cc77654df650 & a79d44dac8f5e34c1eeb056e024ae2caff98ec27</strong>
+          </article>
+          <article class="record-item">
+            <span>OUTPUT LOCATION</span>
+            <strong>infocrim_PuenteLunaBrunoAxel.info</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>03 // VISUAL EVIDENCE</h2>
+          <span>CAPTURES // INSERT YOUR FILES</span>
+        </div>
+
+        <div class="evidence-grid">
+          <figure class="evidence-card">
+            <img class="evidence-image"
+                   src="Evidencias16/capturas/01-entorno-guymager.png"
+                   alt="Entorno de trabajo y aplicación Guymager">
+            <figcaption>01 // Entorno de adquisición</figcaption>
+          </figure>
+
+          <figure class="evidence-card">
+            <img class="evidence-image"
+                   src="Evidencias16/capturas/02-medio-origen.png"
+                   alt="Entorno de trabajo y aplicación Guymager">
+            <figcaption>02 // Medio de origen</figcaption>
+          </figure>
+
+          <figure class="evidence-card">
+            <img class="evidence-image"
+                   src="Evidencias16/capturas/03-proceso-adquisicion.png"
+                   alt="Entorno de trabajo y aplicación Guymager">
+            <figcaption>03 // Proceso de adquisición</figcaption>
+          </figure>
+
+          <figure class="evidence-card">
+            <img class="evidence-image"
+                   src="Evidencias16/capturas/04-resultado-integridad.png"
+                   alt="Entorno de trabajo y aplicación Guymager">
+            <figcaption>04 // Resultado documentado</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>04 // DELIVERABLES</h2>
+          <span>REPORT</span>
+        </div>
+          <div class="report-shell">
+            <div class="report-header">
+              <div>
+                <span class="activity-kicker">EVIDENCE PACKAGE // ACT16</span>
+                <h3>PuenteLunaBrunoAxel-ACT16.pdf</h3>
+                <p>Informe de adquisición forense.</p>
+              </div>
+              <div class="report-actions">
+                <a class="data-button" href="Evidencias16/PuenteLunaBrunoAxel-ACT16.pdf"
+                   target="_blank" rel="noopener noreferrer">OPEN // PDF</a>
+                <a class="data-button" href="Evidencias16/PuenteLunaBrunoAxel-ACT16.pdf"
+                   download>DOWNLOAD // PDF</a>
+              </div>
+            </div>
+            <iframe class="report-frame"
+                    src="Evidencias16/PuenteLunaBrunoAxel-ACT16.pdf#view=FitH"
+                    title="Informe de la Actividad 16"
+                    loading="lazy"></iframe>
+            <p class="viewer-fallback">Si el visor no carga, utiliza OPEN // PDF.</p>
+          </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>05 // FORENSIC TAKEAWAY</h2>
+          <span>INTEGRITY + TRACEABILITY</span>
+        </div>
+        <div class="conclusion-grid">
+          <div class="conclusion-number">16</div>
+          <div>
+            <h3>Una imagen forense también necesita un registro verificable.</h3>
+            <p>
+              La adquisición constituye el punto de partida para examinar evidencia digital.
+              Por ello, la documentación debe permitir identificar el medio de origen, la
+              herramienta y el entorno utilizados, el archivo resultante y los valores de
+              integridad que efectivamente se hayan calculado y registrado.
+            </p>
+            <p class="source-note">
+              Realizamos la adquisición de una memoria USB desde Linux Mint 22.3 utilizando Guymager como alternativa a FTK Imager. Obtuvimos una imagen forense en formato DD (RAW), con un total de 15,240,576 sectores y sin registrar sectores defectuosos durante el procedimiento.
+              Para documentar y comprobar la integridad de la imagen calculamos los hashes MD5, SHA-1 y SHA-256. La verificación posterior de la imagen fue satisfactoria y los valores obtenidos coincidieron con los registrados durante la adquisición.
+              Finalmente, conservamos la imagen .dd y el archivo de información .info, que contiene los datos del dispositivo, la identificación del caso, las marcas de tiempo y los resultados del proceso. Así dejamos constancia de cómo se obtuvo la evidencia y de las comprobaciones realizadas sobre la copia generada.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>ACTIVITY NODE // 16</span></div>
+      <div><span>BRUNO LUNA · PACLONK D. MEI</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>FORENSIC ACQUISITION LOG</span></div>
+    </footer>
+  </div>
+</body>
+</html>
