@@ -37,7 +37,7 @@
         <a class="nav-item active" href="index.html"><span>03</span>PARCIAL 03</a>
         <a class="nav-item" href="Actividades/Act15_ExifTool.html"><span>04</span>ACTIVIDAD 15</a>
         <a class="nav-item" href="Actividades/Act16_AdquisicionForense.html"><span>05</span>ACTIVIDAD 16</a>
-        <a class="nav-item" href="#activity-18"><span>06</span>ACTIVIDAD 18</a>
+        <a class="nav-item" href="Actividades/Act18_HuellaDigital_Autopsy.html"><span>06</span>ACTIVIDAD 18</a>
         <a class="nav-item" href="Actividades/Act19_PrimerosMinutos.html"><span>07</span>ACTIVIDAD 19</a>
       </nav>
     </header>
@@ -49,7 +49,11 @@
           EXIF // METADATA TRACE<br>
           DOCX // PROPERTY ANALYSIS<br>
           GPS // LOCATION DATA<br>
-          PRIVACY_NODE // ACT15<br>GUYMAGER // IMAGE ACQUISITION<br>RAW_IMAGE // ACT16<br>LIVE_RESPONSE // ACT19
+          PRIVACY_NODE // ACT15<br>
+          AUTOPSY // WINDOWS XP // ACT18<br>
+          GUYMAGER // IMAGE ACQUISITION<br>
+          RAW_IMAGE // ACT16<br>
+          LIVE_RESPONSE // ACT19
         </div>
         <div class="archive-heading">
           <p class="eyebrow">NODE://ACADEMIC/P3</p>
@@ -57,8 +61,8 @@
           <p>
             Este nodo concentra las evidencias del tercer parcial de CNO IV — Seguridad Informática.
             Las actividades documentadas abarcan el análisis de metadatos con ExifTool, la adquisición
-            forense de una imagen de almacenamiento mediante Guymager y la recopilación inicial de
-            información de un sistema Linux para su análisis forense.
+            y el análisis de imágenes forenses, además de la recopilación inicial de información de un
+            sistema Linux en ejecución.
           </p>
         </div>
         <div class="archive-list">
@@ -76,7 +80,6 @@
               <span>ACCESS →</span>
             </div>
           </a>
-
           <a class="archive-card" href="Actividades/Act16_AdquisicionForense.html">
             <div>
               <small>ACTIVITY NODE // 16</small>
@@ -91,19 +94,21 @@
               <span>ACCESS →</span>
             </div>
           </a>
-
-          <div class="archive-card locked" id="activity-18" aria-disabled="true">
+          <a class="archive-card act18-card" id="activity-18" href="Actividades/Act18_HuellaDigital_Autopsy.html">
             <div>
-              <small>ACTIVITY NODE // 18 · NEXT</small>
-              <h2>AWAITING DATA // ACT18</h2>
-              <p>Actividad reservada para el siguiente módulo. Se incorporará aquí antes de la Actividad 19 cuando esté documentada.</p>
+              <small>ACTIVITY NODE // 18</small>
+              <h2>THE DIGITAL TRACE // AUTOPSY</h2>
+              <p>
+                Análisis de la imagen forense NIST CFReDS “Hacking Case”: verificación de integridad,
+                examen del registro de Windows XP, identificación de cuentas y reconstrucción de datos
+                relevantes del sistema investigado.
+              </p>
             </div>
             <div class="status">
-              <span>STATUS: IN PREPARATION</span>
-              <span>LOCKED</span>
+              <span>FOCUS: DIGITAL FORENSICS // DISK ANALYSIS</span>
+              <span>ACCESS →</span>
             </div>
-          </div>
-
+          </a>
           <a class="archive-card" href="Actividades/Act19_PrimerosMinutos.html">
             <div>
               <small>ACTIVITY NODE // 19</small>

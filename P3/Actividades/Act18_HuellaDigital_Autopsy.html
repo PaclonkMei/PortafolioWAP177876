@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actividad 18: investigación forense de la imagen NIST CFReDS Hacking Case mediante Autopsy.">
+  <meta name="theme-color" content="#080b0d">
+  <title>ACT18 // The Digital Trace · Autopsy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="actividad18.css">
+</head>
+<body>
+  <div class="page-frame act18-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>DIGITAL FORENSICS NODE</span>
+          <small>ACTIVITY 18 // PARTIAL 03</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>CASE FILE ONLINE</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../../P1/index.html"><span>01</span>PARCIAL 01</a>
+        <a class="nav-item" href="../../P2/index.html"><span>02</span>PARCIAL 02</a>
+        <a class="nav-item" href="../index.html"><span>03</span>PARCIAL 03</a>
+        <a class="nav-item" href="Act15_ExifTool.html"><span>04</span>ACTIVIDAD 15</a>
+        <a class="nav-item" href="Act16_AdquisicionForense.html"><span>05</span>ACTIVIDAD 16</a>
+        <a class="nav-item active" href="Act18_HuellaDigital_Autopsy.html"><span>06</span>ACTIVIDAD 18</a>
+        <a class="nav-item" href="Act19_PrimerosMinutos.html"><span>07</span>ACTIVIDAD 19</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="activity-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">
+          CFREDS // HACKING CASE<br>
+          AUTOPSY // IMAGE ANALYSIS<br>
+          WINDOWS XP // REGISTRY<br>
+          HASH // INTEGRITY // TIMELINE
+        </div>
+        <div class="hero-grid">
+          <div>
+            <p class="activity-kicker">ACTIVITY 18 // LA HUELLA DIGITAL DE UN CIBERCRIMINAL</p>
+            <h1>THE DIGITAL<br><span>TRACE</span></h1>
+            <p>
+              Análisis forense de la imagen de entrenamiento <strong>Hacking Case</strong> del proyecto
+              NIST CFReDS. La práctica utiliza Autopsy para examinar una imagen de disco dividida en
+              ocho segmentos, verificar su integridad y recuperar datos del sistema Windows XP y de
+              su registro.
+            </p>
+            <p class="implementation-note">
+              <strong>IMPLEMENTACIÓN:</strong> el análisis se realizó en Linux Mint 22.3 Xfce con
+              Autopsy 4.23.1 y The Sleuth Kit 4.15.0. Los módulos que requerían Windows o una licencia
+              comercial se excluyeron de la segunda ingesta; la fuente de datos permaneció incorporada
+              al caso y el procesamiento compatible finalizó correctamente.
+            </p>
+          </div>
+          <aside class="mission-card">
+            <header>CASE PARAMETERS // ACT18</header>
+            <dl>
+              <div><dt>CASE ID</dt><dd>INV01UPSLP</dd></div>
+              <div><dt>SOURCE</dt><dd>NIST CFReDS · Hacking Case</dd></div>
+              <div><dt>TOOL</dt><dd>Autopsy 4.23.1</dd></div>
+              <div><dt>FRAMEWORK</dt><dd>The Sleuth Kit 4.15.0</dd></div>
+              <div><dt>IMAGE</dt><dd>SCHARDT.001 — .008</dd></div>
+              <div><dt>STATUS</dt><dd>Analysis completed</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>01 // CASE CONTEXT</h2>
+          <span>NIST CFREDS // HACKING CASE</span>
+        </div>
+        <div class="content-grid case-grid">
+          <article>
+            <span>SCENARIO // 01</span>
+            <h3>Equipo recuperado</h3>
+            <p>El escenario describe una computadora portátil Dell CPi, número de serie VLQLW, encontrada el 20/09/2004 junto con una tarjeta inalámbrica PCMCIA y una antena externa 802.11b casera.</p>
+          </article>
+          <article>
+            <span>INVESTIGATION // 02</span>
+            <h3>Hipótesis del caso</h3>
+            <p>La investigación considera un posible uso del equipo para interceptar tráfico en puntos de acceso inalámbricos y obtener información sensible. La hipótesis debe contrastarse con artefactos; no se toma como conclusión por sí sola.</p>
+          </article>
+          <article>
+            <span>EVIDENCE // 03</span>
+            <h3>Imagen segmentada</h3>
+            <p>La evidencia se proporcionó en ocho archivos consecutivos, desde <code>SCHARDT.001</code> hasta <code>SCHARDT.008</code>, que Autopsy incorporó como una sola imagen RAW.</p>
+          </article>
+          <article>
+            <span>OBJECTIVE // 04</span>
+            <h3>Examen reproducible</h3>
+            <p>Crear el caso, añadir la imagen, verificar sus valores hash y consultar atributos del sistema y del registro para responder los incisos solicitados en la guía.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>02 // FORENSIC WORKFLOW</h2>
+          <span>ACQUISITION → INGEST → EXAMINATION</span>
+        </div>
+        <div class="workflow-grid">
+          <article class="workflow-step">
+            <span>PHASE 01</span>
+            <h3>Preparación</h3>
+            <p>Se reunieron los ocho segmentos en una misma carpeta, conservando sus nombres originales. Se instaló Autopsy y se creó el caso <code>INV01UPSLP</code> con número <code>01</code> y la organización institucional indicada en la actividad.</p>
+          </article>
+          <article class="workflow-step">
+            <span>PHASE 02</span>
+            <h3>Incorporación</h3>
+            <p>Se seleccionó <strong>Generate new host name based on data source name</strong> y el tipo <strong>Disk Image or VM File</strong>. Como origen se indicó <code>SCHARDT.001</code>, con zona de interpretación <code>America/Mexico_City</code> y tamaño de sector automático.</p>
+          </article>
+          <article class="workflow-step">
+            <span>PHASE 03</span>
+            <h3>Ingesta compatible</h3>
+            <p>El primer inicio informó módulos que requieren Windows y un módulo con licencia no disponible. Se conservó la fuente incorporada y se repitió la ingesta desactivando únicamente esos módulos; el procesamiento compatible terminó.</p>
+          </article>
+          <article class="workflow-step">
+            <span>PHASE 04</span>
+            <h3>Examen del registro</h3>
+            <p>Se consultaron los artefactos de Operating System Information y los hives <code>SOFTWARE</code>, <code>SYSTEM</code> y <code>SAM</code> para recuperar la instalación, zona horaria, apagado, propietario, nombre de equipo, dominio predeterminado y cuentas.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>03 // IMAGE INTEGRITY</h2>
+          <span>DATA SOURCE SUMMARY // CONTAINER</span>
+        </div>
+        <div class="metrics-grid">
+          <article class="metric-card"><span>IMAGE FORMAT</span><strong>RAW SINGLE</strong></article>
+          <article class="metric-card"><span>IMAGE SIZE</span><strong>4.87 GB</strong><small>4,871,301,120 bytes</small></article>
+          <article class="metric-card"><span>FILES</span><strong>26,634</strong></article>
+          <article class="metric-card"><span>ARTIFACTS</span><strong>11,596</strong></article>
+        </div>
+        <div class="hash-panel">
+          <div class="hash-heading"><span>HASH REGISTRY</span><span>CALCULATED BY AUTOPSY</span></div>
+          <div class="hash-row"><span>MD5</span><code>4243a034432dcd23e6dbdade94f9bc15</code></div>
+          <div class="hash-row"><span>SHA-1</span><code>2eea83d8f6356383b5cee7ca5e72917ce2f2eb0e</code></div>
+          <p class="record-warning">El MD5 de la concatenación independiente de los ocho segmentos coincidió con el MD5 reportado por Autopsy. Esta comprobación confirma que ambos cálculos utilizaron los mismos bytes; no sustituye un hash histórico tomado antes de la adquisición.</p>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>04 // SYSTEM PROFILE</h2>
+          <span>WINDOWS REGISTRY // QUESTIONS 04–11</span>
+        </div>
+        <div class="results-table-wrap">
+          <table class="results-table">
+            <thead><tr><th>INCISO</th><th>ATRIBUTO</th><th>RESULTADO OBTENIDO</th><th>FUENTE</th></tr></thead>
+            <tbody>
+              <tr><td>04</td><td>Sistema operativo</td><td><strong>Microsoft Windows XP</strong> · arquitectura x86</td><td>Operating System Information</td></tr>
+              <tr><td>05</td><td>Fecha de instalación</td><td>19/08/2004 · 17:48:27 CDT</td><td>SOFTWARE / CurrentVersion / InstallDate</td></tr>
+              <tr><td>06</td><td>Zona horaria</td><td>Central Standard Time UTC−6; horario de verano Central Daylight Time UTC−5</td><td>SYSTEM / TimeZoneInformation</td></tr>
+              <tr><td>07</td><td>Propietario registrado</td><td><strong>Greg Schardt</strong></td><td>SOFTWARE / RegisteredOwner</td></tr>
+              <tr><td>08</td><td>Nombre del equipo</td><td><code>N-1A9ODN6ZXK4LQ</code>; cuenta predeterminada <strong>Mr. Evil</strong></td><td>Operating System Information / Winlogon</td></tr>
+              <tr><td>09</td><td>Dominio predeterminado</td><td><code>N-1A9ODN6ZXK4LQ</code> (coincide con el nombre del equipo)</td><td>SOFTWARE / Winlogon / DefaultDomainName</td></tr>
+              <tr><td>10</td><td>Último apagado registrado</td><td>27/08/2004 · 10:46:33 CDT (15:46:33 UTC)</td><td>SYSTEM / Windows / ShutdownTime</td></tr>
+              <tr><td>11</td><td>Cuentas locales</td><td><strong>5</strong>: Administrator, Guest, HelpAssistant, Mr. Evil y SUPPORT_388945a0</td><td>SAM / Users / Names</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="record-warning">El valor DefaultDomainName es el nombre predeterminado usado por Winlogon y coincide con el nombre del equipo. El resultado no demuestra por sí solo la pertenencia a un dominio corporativo externo.</p>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>05 // INGEST CONSTRAINTS</h2>
+          <span>PLATFORM + MODULE AVAILABILITY</span>
+        </div>
+        <div class="limitations-grid">
+          <article>
+            <span>WINDOWS-ONLY MODULES</span>
+            <h3>Compatibilidad de plataforma</h3>
+            <p>Android Analyzer (aLEAPP), Plaso e iOS Analyzer (iLEAPP) indicaron que requieren Windows. YARA Analyzer se mostró disponible únicamente en Windows de 64 bits.</p>
+          </article>
+          <article>
+            <span>LICENSE REQUIREMENT</span>
+            <h3>Cyber Triage</h3>
+            <p>Cyber Triage Malware Scanner no pudo cargar una licencia válida. Se excluyó de la segunda ingesta para poder continuar con los módulos compatibles.</p>
+          </article>
+          <article>
+            <span>ANALYSIS BOUNDARY</span>
+            <h3>Interpretación prudente</h3>
+            <p>Las limitaciones de módulos se documentaron como restricciones del entorno. Los resultados obtenidos permiten describir el sistema y sus artefactos, pero no prueban por sí solos la comisión de fraude ni atribuyen una actividad a una persona.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>06 // VISUAL EVIDENCE</h2>
+          <span>REPORT PAGES // SELECT TO OPEN PDF</span>
+        </div>
+        <div class="evidence-grid">
+          <a class="evidence-card" href="Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf#page=2" target="_blank" rel="noopener noreferrer">
+            <img src="Evidencias18/Capturas/02-configuracion-caso.png" alt="Página del informe con instalación y configuración del caso Autopsy" loading="lazy">
+            <span>01 // CASE SETUP · PDF PAGE 02</span>
+          </a>
+          <a class="evidence-card" href="Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf#page=5" target="_blank" rel="noopener noreferrer">
+            <img src="Evidencias18/Capturas/05-origen-y-modulos.png" alt="Página del informe con selección de la fuente y módulos de ingesta" loading="lazy">
+            <span>02 // DATA SOURCE · PDF PAGE 05</span>
+          </a>
+          <a class="evidence-card" href="Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf#page=6" target="_blank" rel="noopener noreferrer">
+            <img src="Evidencias18/Capturas/06-incompatibilidad-modulos.png" alt="Página del informe que documenta los módulos incompatibles" loading="lazy">
+            <span>03 // INGEST LIMITS · PDF PAGE 06</span>
+          </a>
+          <a class="evidence-card" href="Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf#page=8" target="_blank" rel="noopener noreferrer">
+            <img src="Evidencias18/Capturas/08-ingesta-linux.png" alt="Página del informe con la ingesta compatible en Linux" loading="lazy">
+            <span>04 // INGEST RESTART · PDF PAGE 08</span>
+          </a>
+          <a class="evidence-card" href="Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf#page=10" target="_blank" rel="noopener noreferrer">
+            <img src="Evidencias18/Capturas/10-hash-y-sistema.png" alt="Página del informe con hash e identificación de Windows XP" loading="lazy">
+            <span>05 // HASH + OS · PDF PAGE 10</span>
+          </a>
+          <a class="evidence-card" href="Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf#page=11" target="_blank" rel="noopener noreferrer">
+            <img src="Evidencias18/Capturas/11-instalacion-y-zona.png" alt="Página del informe con fecha de instalación y zona horaria" loading="lazy">
+            <span>06 // INSTALL + TIMEZONE · PDF PAGE 11</span>
+          </a>
+          <a class="evidence-card" href="Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf#page=12" target="_blank" rel="noopener noreferrer">
+            <img src="Evidencias18/Capturas/12-propietario-y-cuenta.png" alt="Página del informe con propietario, cuenta y dominio" loading="lazy">
+            <span>07 // OWNER + DOMAIN · PDF PAGE 12</span>
+          </a>
+          <a class="evidence-card" href="Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf#page=13" target="_blank" rel="noopener noreferrer">
+            <img src="Evidencias18/Capturas/13-apagado-y-cuentas.png" alt="Página del informe con apagado y cuentas registradas" loading="lazy">
+            <span>08 // SHUTDOWN + ACCOUNTS · PDF PAGE 13</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>07 // EVIDENCE PACKAGE</h2>
+          <span>REPORT + TEXT EXPORTS</span>
+        </div>
+        <div class="folder-panel">
+          <div class="folder-heading">
+            <span class="folder-icon">▣</span>
+            <div><strong>Evidencias18/</strong><small>RUTA RELATIVA A P3/ACTIVIDADES/</small></div>
+          </div>
+          <p>El informe PDF ya está incluido en el paquete. Los TXT o CSV adicionales que exportes desde Autopsy deben colocarse en la carpeta indicada; no se generan ni se simulan archivos que no hayan sido exportados.</p>
+          <div class="file-list">
+            <a href="Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf" target="_blank" rel="noopener noreferrer">
+              <span>.PDF</span><strong>PuenteLunaBrunoAxel-ACT18.pdf</strong><small>Informe final · carpeta Reporte/</small>
+            </a>
+            <a href="Evidencias18/TXT/LEEME.txt" target="_blank" rel="noopener noreferrer">
+              <span>.TXT</span><strong>TXT/LEEME.txt</strong><small>Instrucciones para agregar exportaciones reales</small>
+            </a>
+          </div>
+          <pre class="directory-tree">P3/
+└── Actividades/
+    ├── Act18_HuellaDigital_Autopsy.html
+    ├── actividad18.css
+    └── Evidencias18/
+        ├── Reporte/
+        │   └── PuenteLunaBrunoAxel-ACT18.pdf
+        ├── Capturas/
+        │   └── [capturas de las páginas del informe]
+        └── TXT/
+            └── [exportaciones .txt o .csv de Autopsy]</pre>
+          <p class="folder-note"><strong>Ubicación para TXT:</strong> <code>P3/Actividades/Evidencias18/TXT/</code>. <strong>Ubicación del reporte:</strong> <code>P3/Actividades/Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf</code>.</p>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>08 // EXECUTIVE REPORT</h2>
+          <span>PDF // ORIGINAL DELIVERABLE</span>
+        </div>
+        <div class="report-shell">
+          <div class="report-header">
+            <div>
+              <span class="activity-kicker">EVIDENCE PACKAGE // ACT18</span>
+              <h3>PuenteLunaBrunoAxel-ACT18.pdf</h3>
+              <p>Informe de investigación forense y resultados de Autopsy.</p>
+              <small class="path-hint">INSERTAR EN: P3/Actividades/Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf</small>
+            </div>
+            <div class="report-actions">
+              <a class="data-button" href="Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf" target="_blank" rel="noopener noreferrer">OPEN // PDF</a>
+              <a class="data-button" href="Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf" download>DOWNLOAD // PDF</a>
+            </div>
+          </div>
+          <iframe class="report-frame" src="Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf#view=FitH" title="Informe de la Actividad 18" loading="lazy"></iframe>
+          <p class="viewer-fallback">Si el visor no carga, utiliza OPEN // PDF.</p>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>09 // FORENSIC TAKEAWAY</h2>
+          <span>INTEGRITY + REGISTRY + ATTRIBUTION LIMITS</span>
+        </div>
+        <div class="conclusion-grid">
+          <div class="conclusion-number">18</div>
+          <div>
+            <h3>Los artefactos describen el sistema; la correlación sostiene la interpretación.</h3>
+            <p>
+              El examen permitió identificar Windows XP, recuperar datos de instalación y configuración,
+              reconocer la cuenta Mr. Evil y contabilizar cinco cuentas locales. La coincidencia del MD5
+              calculado por Autopsy con el cálculo independiente sobre los ocho segmentos respalda que
+              ambos procedimientos procesaron el mismo conjunto de bytes.
+            </p>
+            <p class="source-note">
+              El propietario registrado Greg Schardt y la cuenta Mr. Evil son atributos encontrados en
+              el sistema, pero no demuestran por sí solos quién operó físicamente el equipo ni que se
+              haya consumado el fraude descrito en el escenario. Las restricciones de módulos y los
+              límites de ingesta se documentaron para mantener el alcance de las conclusiones.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>ACTIVITY NODE // 18</span></div>
+      <div><span>BRUNO LUNA · PACLONK D. MEI</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>FORENSIC CASE // DOCUMENTED</span></div>
+    </footer>
+  </div>
+</body>
+</html>

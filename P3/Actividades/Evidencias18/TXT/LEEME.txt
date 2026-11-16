@@ -1,0 +1,11 @@
+ACTIVIDAD 18 - EXPORTACIONES DE AUTOPSY
+
+Coloca en esta carpeta únicamente archivos TXT o CSV que hayas exportado realmente desde Autopsy para documentar el caso INV01UPSLP.
+
+No inventes salidas ni incluyas los ocho fragmentos SCHARDT.001 a SCHARDT.008 en esta carpeta. La imagen forense original debe conservarse aparte.
+
+Ruta dentro del repositorio:
+P3/Actividades/Evidencias18/TXT/
+
+El informe PDF se almacena en:
+P3/Actividades/Evidencias18/Reporte/PuenteLunaBrunoAxel-ACT18.pdf
