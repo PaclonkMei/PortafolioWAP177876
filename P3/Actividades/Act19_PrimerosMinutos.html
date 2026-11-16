@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Actividad 19: recopilación inicial de evidencia digital en un sistema Linux en ejecución.">
+  <meta name="theme-color" content="#080b0d">
+  <title>ACT19 // The First Minutes Count · Live Forensics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="actividad19.css">
+</head>
+<body>
+  <div class="page-frame act19-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>DIGITAL FORENSICS NODE</span>
+          <small>ACTIVITY 19 // PARTIAL 03</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>EVIDENCE RECORD</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../../P1/index.html"><span>01</span>PARCIAL 01</a>
+        <a class="nav-item" href="../../P2/index.html"><span>02</span>PARCIAL 02</a>
+        <a class="nav-item" href="../index.html"><span>03</span>PARCIAL 03</a>
+        <a class="nav-item" href="Act15_ExifTool.html"><span>04</span>ACTIVIDAD 15</a>
+        <a class="nav-item" href="Act16_AdquisicionForense.html"><span>05</span>ACTIVIDAD 16</a>
+        <a class="nav-item" href="../index.html#activity-18"><span>06</span>ACTIVIDAD 18</a>
+        <a class="nav-item active" href="Act19_PrimerosMinutos.html"><span>07</span>ACTIVIDAD 19</a>
+      </nav>
+    </header>
+    <main>
+      <section class="activity-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">
+          LIVE RESPONSE // FIRST MINUTES<br>
+          LINUX // SYSTEM STATE<br>
+          JOURNALD // HOSTS // NETWORK<br>
+          TIMELINE // FORENSIC TRIAGE
+        </div>
+        <div class="hero-grid">
+          <div>
+            <p class="activity-kicker">ACTIVITY 19 // LOS PRIMEROS MINUTOS CUENTAN</p>
+            <h1>THE FIRST<br><span>MINUTES COUNT</span></h1>
+            <p>
+              La actividad documenta la recopilación inicial de información de un sistema operativo
+              Linux en ejecución, simulando la intervención de un primer respondiente ante un posible
+              incidente digital. Se consultan datos del sistema, sesiones, procesos, servicios,
+              conexiones, configuración de red, registros y archivos relevantes para preservar
+              información volátil y orientar el análisis posterior.
+            </p>
+            <p class="implementation-note">
+              <strong>IMPLEMENTACIÓN:</strong> la práctica se desarrolló desde Linux Mint. Los comandos
+              utilizados corresponden a herramientas nativas del entorno Linux y se documentan como
+              equivalentes funcionales a las utilidades de Windows indicadas en la guía.
+            </p>
+          </div>
+          <aside class="mission-card">
+            <header>MISSION PARAMETERS // ACT19</header>
+            <dl>
+              <div><dt>FOCUS</dt><dd>Live response / triage</dd></div>
+              <div><dt>PLATFORM</dt><dd>Linux Mint</dd></div>
+              <div><dt>SHELL</dt><dd>Bash / CLI</dd></div>
+              <div><dt>SCOPE</dt><dd>System + network state</dd></div>
+              <div><dt>OUTPUT</dt><dd>TXT + executive report</dd></div>
+              <div><dt>STATUS</dt><dd>Evidence documented</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>01 // ACTIVITY CONTEXT</h2>
+          <span>LIVE FORENSIC TRIAGE</span>
+        </div>
+        <div class="content-grid triage-grid">
+          <article>
+            <span>OBJECTIVE // 01</span>
+            <h3>Primer respondiente</h3>
+            <p>Obtener una primera vista del estado del equipo sin apagarlo, considerando que parte de la información disponible puede ser volátil y cambiar durante la intervención.</p>
+          </article>
+          <article>
+            <span>SYSTEM STATE // 02</span>
+            <h3>Estado del sistema</h3>
+            <p>Consultar procesos, servicios, usuarios, tareas programadas, características del equipo y registros del sistema para identificar actividad que requiera revisión.</p>
+          </article>
+          <article>
+            <span>NETWORK STATE // 03</span>
+            <h3>Actividad de red</h3>
+            <p>Examinar interfaces, conexiones, vecinos de red, perfiles inalámbricos y configuración de resolución de nombres, interpretando cada fuente según su alcance.</p>
+          </article>
+          <article>
+            <span>OUTPUT // 04</span>
+            <h3>Registro y preservación</h3>
+            <p>Guardar las salidas de comandos y el informe ejecutivo en el paquete de evidencias para facilitar su consulta y mantener trazabilidad del trabajo.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>02 // ACQUISITION SCOPE</h2>
+          <span>COMMAND FAMILIES</span>
+        </div>
+        <div class="scope-grid">
+          <article class="scope-card">
+            <span>01 — 05</span>
+            <h3>System & sessions</h3>
+            <p>Fecha y hora, procesos activos, servicios, sesiones actuales e historial de inicios de sesión.</p>
+            <div class="scope-tags"><i>date</i><i>ps</i><i>systemctl</i><i>w</i><i>last -F</i></div>
+          </article>
+          <article class="scope-card">
+            <span>06 — 11</span>
+            <h3>Network & connections</h3>
+            <p>Interfaces, identificación NetBIOS, conexiones, procesos asociados a puertos, resolución DNS y tabla de vecinos.</p>
+            <div class="scope-tags"><i>ip addr</i><i>nbtscan</i><i>netstat / ss</i><i>resolvectl</i><i>ip neigh</i></div>
+          </article>
+          <article class="scope-card">
+            <span>12 — 16</span>
+            <h3>Configuration & environment</h3>
+            <p>Perfiles Wi-Fi, historial de terminal, dispositivos de almacenamiento, recursos compartidos e información del equipo.</p>
+            <div class="scope-tags"><i>nmcli</i><i>history</i><i>lsblk</i><i>smbstatus</i><i>hostnamectl</i></div>
+          </article>
+          <article class="scope-card">
+            <span>17 — 20</span>
+            <h3>Persistence & artifacts</h3>
+            <p>Tareas programadas, registros del sistema, archivo hosts y listado de rutas con marcas de tiempo.</p>
+            <div class="scope-tags"><i>cron</i><i>journalctl</i><i>/etc/hosts</i><i>find / stat</i></div>
+          </article>
+        </div>
+        <p class="record-warning">Las herramientas consultan fuentes distintas y no todas representan un historial completo. Por ejemplo, la tabla de vecinos refleja asociaciones almacenadas recientemente, mientras que la configuración DNS no equivale a un historial de dominios visitados.</p>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>03 // SELECTED FINDINGS</h2>
+          <span>OBSERVATIONS FROM THE COLLECTION</span>
+        </div>
+        <div class="findings-grid">
+          <article class="finding-card">
+            <div class="finding-head"><span>POINT 05</span><span>LOGIN HISTORY</span></div>
+            <h3>Sesiones anteriores</h3>
+            <p>Se seleccionó <strong>last -F</strong> para consultar el registro de sesiones anteriores mediante <code>/var/log/wtmp</code>. El archivo de salida previsto es <code>AllLogins.txt</code>; la interpretación de usuarios y horarios debe realizarse a partir de ese registro.</p>
+            <div class="finding-tags"><span>WTMP</span><span>LOGIN / LOGOUT</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>POINT 07</span><span>NETBIOS</span></div>
+            <h3>Nombre anunciado</h3>
+            <p>La consulta con <strong>nbtscan</strong> sobre <code>192.168.100.134</code> devolvió el nombre NetBIOS <strong>PACLONK</strong> y el campo User <strong>PACLONK</strong>. La MAC <code>00:00:00:00:00:00</code> reportada por el escaneo no se tomó como dirección física válida.</p>
+            <div class="finding-tags"><span>PACLONK</span><span>192.168.100.134</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>POINT 11</span><span>NEIGHBOR TABLE</span></div>
+            <h3>Asociaciones IP / MAC</h3>
+            <p><code>ip neigh show</code> mostró la dirección <code>192.168.100.1</code> asociada con <code>C0:F6:C2:FE:85:25</code> en las interfaces Wi-Fi y Ethernet. Los estados REACHABLE y STALE describen el estado de la entrada, no un historial completo de comunicaciones.</p>
+            <div class="finding-tags"><span>ARP / NDP</span><span>REACHABLE</span><span>STALE</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>POINT 18</span><span>SYSTEM LOGS</span></div>
+            <h3>Exportación de registros</h3>
+            <p>Se utilizó <code>journalctl -o export</code> para exportar registros administrados por systemd-journald al archivo <code>logs_sysPac.txt</code>, conservando campos estructurados para su análisis posterior.</p>
+            <div class="finding-tags"><span>JOURNALD</span><span>EVENT LOGS</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>POINT 19</span><span>HOSTS FILE</span></div>
+            <h3>Resolución local</h3>
+            <p>Se obtuvo una copia de <code>/etc/hosts</code> en <code>HostRegiPac.txt</code>. El contenido permite revisar asociaciones locales entre nombres y direcciones IP que podrían afectar la resolución de nombres del equipo.</p>
+            <div class="finding-tags"><span>/ETC/HOSTS</span><span>LOCAL MAPPING</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>POINT 20</span><span>TIMELINE</span></div>
+            <h3>Marcas de tiempo</h3>
+            <p>Se generó un inventario de rutas mediante <code>find</code> y <code>stat</code>. <code>/etc/hosts</code> reportó creación el 18/10/2026 a las 22:33:21 y modificación a las 22:38:27. En <code>/boot/efi</code> apareció el valor cero, que no debe interpretarse como fecha real.</p>
+            <div class="finding-tags"><span>STAT</span><span>BIRTH TIME</span><span>MTIME</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>04 // TXT EVIDENCE PACKAGE</h2>
+          <span>PLACE FILES IN THE DIRECTORY BELOW</span>
+        </div>
+        <div class="folder-panel">
+          <div class="folder-heading"><span class="folder-icon">▣</span><div><strong>Evidencias19 / txt /</strong><small>ARCHIVOS DE SALIDA DE COMANDOS</small></div></div>
+          <div class="file-list">
+            <a href="Evidencias19/txt/AllLogins.txt" download><span>.TXT</span><strong>AllLogins.txt</strong><small>Point 05 · last -F</small></a>
+            <a href="Evidencias19/txt/logs_sysPac.txt" download><span>.TXT</span><strong>logs_sysPac.txt</strong><small>Point 18 · journalctl -o export</small></a>
+            <a href="Evidencias19/txt/HostRegiPac.txt" download><span>.TXT</span><strong>HostRegiPac.txt</strong><small>Point 19 · /etc/hosts</small></a>
+            <a href="Evidencias19/txt/dircomp_creacion" download><span>.TXT</span><strong>dircomp_creacion</strong><small>Point 20 · consulta complementaria con stat</small></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>05 // EXECUTIVE REPORT</h2>
+          <span>PDF // ORIGINAL DELIVERABLE</span>
+        </div>
+        <div class="report-shell">
+          <div class="report-header">
+            <div>
+              <span class="activity-kicker">EVIDENCE PACKAGE // ACT19</span>
+              <h3>PuenteLunaBrunoAxel-ACT19.pdf</h3>
+              <p>Informe ejecutivo de adquisición inicial y recopilación de evidencia digital.</p>
+              <small class="path-hint">INSERTAR EN: P3/Actividades/Evidencias19/PuenteLunaBrunoAxel-ACT19.pdf</small>
+            </div>
+            <div class="report-actions">
+              <a class="data-button" href="Evidencias19/PuenteLunaBrunoAxel-ACT19.pdf" target="_blank" rel="noopener noreferrer">OPEN // PDF</a>
+              <a class="data-button" href="Evidencias19/PuenteLunaBrunoAxel-ACT19.pdf" download>DOWNLOAD // PDF</a>
+            </div>
+          </div>
+          <iframe class="report-frame" src="Evidencias19/PuenteLunaBrunoAxel-ACT19.pdf#view=FitH" title="Informe ejecutivo de la Actividad 19" loading="lazy"></iframe>
+          <p class="viewer-fallback">Cuando agregues el PDF a la ruta indicada, aparecerá aquí. Si el visor no carga, utiliza OPEN // PDF.</p>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>06 // FORENSIC TAKEAWAY</h2>
+          <span>VOLATILITY + CONTEXT + TRACEABILITY</span>
+        </div>
+        <div class="conclusion-grid">
+          <div class="conclusion-number">19</div>
+          <div>
+            <h3>Los primeros minutos ayudan a preservar el contexto del incidente.</h3>
+            <p>
+              La recopilación inicial permite registrar el estado observable del sistema antes de que
+              cambie: sesiones, procesos, servicios, conexiones y registros. Sin embargo, cada fuente
+              tiene límites; una tabla de vecinos no representa todas las comunicaciones, la configuración
+              DNS no equivale al historial de navegación y las marcas de tiempo deben interpretarse según
+              su disponibilidad y significado. Por ello, los resultados deben conservarse junto con el
+              procedimiento y el informe ejecutivo, sin atribuirles conclusiones que no respalden.
+            </p>
+            <p class="source-note">Las salidas TXT y el informe se incorporan desde la carpeta de evidencias indicada en esta página. Las capturas y el documento académico complementan el registro de la actividad.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>ACTIVITY NODE // 19</span></div>
+      <div><span>BRUNO LUNA · PACLONK D. MEI</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>LIVE FORENSICS // EVIDENCE LOGGED</span></div>
+    </footer>
+  </div>
+</body>
+</html>
