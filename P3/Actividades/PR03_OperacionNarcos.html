@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="PR03: análisis forense del expediente Narcos-1, relacionado con Steve Kowhai, mediante Autopsy.">
+  <meta name="theme-color" content="#080b0d">
+  <title>PR03 // Operation Narcos · Kowhai Dossier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="actividadPR03.css">
+</head>
+<body>
+  <div class="page-frame pr03-page">
+    <header class="site-header">
+      <div class="top-rail">
+        <a class="brand" href="https://cyberpunk.fandom.com/wiki/NetWatch" target="_blank" rel="noopener noreferrer" aria-label="Abrir la wiki de NetWatch">
+          <span class="brand-copy brand-net">NET</span>
+          <span class="brand-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <span class="brand-copy brand-tech">TECH</span>
+        </a>
+        <div class="protocol-title">
+          <span>FORENSIC CASEFILE // DIGITAL CORPORA</span>
+          <small>PROJECT PR03 // PARTIAL 03</small>
+        </div>
+        <div class="connection-state">
+          <span class="state-dot"></span>
+          <span>CASE RECORD</span>
+        </div>
+      </div>
+      <nav class="main-nav" aria-label="Navegación">
+        <a class="nav-item" href="../../index.html"><span>00</span>INICIO</a>
+        <a class="nav-item" href="../../P1/index.html"><span>01</span>PARCIAL 01</a>
+        <a class="nav-item" href="../../P2/index.html"><span>02</span>PARCIAL 02</a>
+        <a class="nav-item" href="../index.html"><span>03</span>PARCIAL 03</a>
+        <a class="nav-item" href="Act15_ExifTool.html"><span>04</span>ACTIVIDAD 15</a>
+        <a class="nav-item" href="Act16_AdquisicionForense.html"><span>05</span>ACTIVIDAD 16</a>
+        <a class="nav-item" href="../index.html#activity-18"><span>06</span>ACTIVIDAD 18</a>
+        <a class="nav-item" href="Act19_PrimerosMinutos.html"><span>07</span>ACTIVIDAD 19</a>
+        <a class="nav-item active" href="PR03_OperacionNarcos.html"><span>08</span>PROYECTO PR03</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="activity-hero">
+        <div class="vector-corner vector-corner-tl" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="vector-corner vector-corner-br" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="ambient-matrix ambient-matrix-a" aria-hidden="true">
+          NARCOS-1 // FORENSIC IMAGE<br>
+          STEVE KOWHAI // CASEFILE 2019<br>
+          AUTOPSY // WINDOWS ARTIFACTS<br>
+          BRISBANE // WELLINGTON // EASTBOURNE
+        </div>
+        <div class="hero-grid">
+          <div>
+            <p class="activity-kicker">PROJECT PR03 // OPERACIÓN NARCOS: EXPEDIENTE KOWHAI</p>
+            <h1>OPERATION<br><span>NARCOS</span></h1>
+            <p>
+              Análisis de la imagen forense <strong>Narcos-1</strong>, asociada en el escenario de práctica
+              con el equipo de Steve Kowhai. El examen se orientó a identificar artefactos del sistema,
+              actividad de navegación, documentos e imágenes, herramientas instaladas y referencias
+              geográficas que pudieran ayudar a reconstruir la logística investigada.
+            </p>
+            <p class="implementation-note">
+              <strong>ALCANCE:</strong> las observaciones se separan de las interpretaciones. La presencia
+              de un archivo, una aplicación o una ruta cartográfica no se considera por sí sola prueba de
+              ejecución, desplazamiento físico, entrega de sustancias o autoría.
+            </p>
+          </div>
+          <aside class="mission-card">
+            <header>CASE PARAMETERS // PR03</header>
+            <dl>
+              <div><dt>CASE</dt><dd>Expediente Kowhai</dd></div>
+              <div><dt>EVIDENCE</dt><dd>Narcos-1</dd></div>
+              <div><dt>TOOL</dt><dd>Autopsy 4.23.1</dd></div>
+              <div><dt>IMAGE</dt><dd>VMware Virtual Disk · RAW segments</dd></div>
+              <div><dt>PLATFORM</dt><dd>Linux Mint 22.3</dd></div>
+              <div><dt>STATUS</dt><dd>Image ingested · findings reviewed</dd></div>
+            </dl>
+          </aside>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>01 // CASE BACKGROUND</h2>
+          <span>SCENARIO SUMMARY</span>
+        </div>
+        <div class="content-grid case-grid">
+          <article>
+            <span>SCENARIO // 01</span>
+            <h3>Interceptación en Wellington</h3>
+            <p>El escenario describe a dos pasajeros procedentes de Australia, John Fredricksen y Jane Esteban, interceptados en el aeropuerto de Wellington con un kilogramo de metanfetamina oculto en una maleta.</p>
+          </article>
+          <article>
+            <span>FOLLOW-UP // 02</span>
+            <h3>Posibles puntos de entrega</h3>
+            <p>La investigación menciona la biblioteca de Eastbourne y un inmueble en Petone. En este último se habrían localizado sustancias ilícitas, armas de fuego y una computadora relacionada con Steve Kowhai.</p>
+          </article>
+          <article>
+            <span>FORENSIC OBJECTIVE // 03</span>
+            <h3>Reconstruir lo demostrable</h3>
+            <p>El objetivo del examen fue identificar qué actividades pueden sostenerse a partir del disco: perfiles, registros, navegación, archivos, metadatos y posibles herramientas de ocultación o cifrado.</p>
+          </article>
+          <article>
+            <span>METHOD // 04</span>
+            <h3>Correlación con límites</h3>
+            <p>Los hallazgos se valoraron por su procedencia y alcance. Se evitó equiparar una descarga con una ejecución, una ruta consultada con un viaje o la presencia de una aplicación con autoría de comunicaciones.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>02 // EVIDENCE INTEGRITY</h2>
+          <span>ACQUISITION & VERIFICATION RECORD</span>
+        </div>
+        <div class="record-grid">
+          <article class="record-item"><span>ACQUISITION TOOL</span><strong>FTK Imager 4.2.0.13</strong></article>
+          <article class="record-item"><span>IMAGE FORMAT</span><strong>VMware Virtual Disk · RAW segments</strong></article>
+          <article class="record-item"><span>IMAGE SIZE</span><strong>30,720 MB</strong></article>
+          <article class="record-item"><span>SEGMENTS</span><strong>Narcos-1.001 → Narcos-1.021</strong></article>
+          <article class="record-item"><span>SECTOR GEOMETRY</span><strong>62,914,560 sectors · 512 bytes</strong></article>
+          <article class="record-item"><span>MD5</span><strong>c63a3d19e9c9495b573f45be544e50f9</strong></article>
+          <article class="record-item"><span>SHA-1</span><strong>4d8e5041f47e0b0fc0eacc85d300661946537418</strong></article>
+          <article class="record-item"><span>VERIFICATION</span><strong class="verified-value">MD5 and SHA-1: verified</strong></article>
+          <article class="record-item"><span>MEMORY DUMP</span><strong>RAW (dd) · 4,096 MB · 3 segments</strong></article>
+          <article class="record-item"><span>MEMORY MD5</span><strong>9ca08c17b4a359d61f6f8f7bb6328c1c</strong></article>
+          <article class="record-item"><span>MEMORY SHA-1</span><strong>191a10f54e04ad05d9d6a430e01ef6203406accb</strong></article>
+        </div>
+        <p class="record-warning">
+          Los 15 volúmenes ZIP fueron reconocidos como un archivo ZIP64 dividido; la prueba de integridad
+          de 7-Zip finalizó con “Everything is Ok”. La extracción produjo 21 segmentos de disco y su TXT
+          de adquisición. El paquete también contiene un volcado de memoria de 4 GB, conservado como
+          fuente complementaria y no incorporado a este análisis del disco.
+        </p>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>03 // PART I — SYSTEM & USER ARTIFACTS</h2>
+          <span>QUESTIONS 01–15 · SELECTED RESULTS</span>
+        </div>
+        <div class="findings-grid">
+          <article class="finding-card">
+            <div class="finding-head"><span>Q01–02</span><span>WINDOWS PROFILE</span></div>
+            <h3>Equipo y perfil principal</h3>
+            <p>Operating System Information identificó <strong>Windows 10 Pro</strong>, arquitectura AMD64, nombre de equipo <code>SK-DESKTOP</code> y propietario registrado <strong>Steve</strong>. El perfil principal observado fue <code>C:\Users\Steve</code>.</p>
+            <div class="finding-tags"><span>WINDOWS 10 PRO</span><span>AMD64</span><span>STEVE</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>Q03</span><span>USERASSIST</span></div>
+            <h3>Actividad del perfil</h3>
+            <p>En el hive <code>NTUSER.DAT</code> se localizó <code>Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist</code>, con subclaves identificadas mediante GUID.</p>
+            <div class="finding-tags"><span>NTUSER.DAT</span><span>USERASSIST</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>Q04–05</span><span>BROWSER ARTIFACTS</span></div>
+            <h3>Chrome y Edge Legacy</h3>
+            <p>Se identificó la base SQLite <code>History</code> de Chrome. Su MD5 es <code>f3f979c6dee9fbb7cbdf5818aaa4b723</code>. También se observó el perfil <code>MicrosoftEdge\User\Default</code> y <code>WebCacheV01.dat</code>; este último formato puede ser compartido con componentes de Internet Explorer y no atribuye por sí solo cada registro a un navegador concreto.</p>
+            <div class="finding-tags"><span>CHROME HISTORY</span><span>EDGE LEGACY ARTIFACTS</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>Q06–07</span><span>IMAGE METADATA</span></div>
+            <h3>airport crystals.jpg</h3>
+            <p>Localizado en <code>C:\Users\Steve\Documents\Misc\airport crystals.jpg</code>. Autopsy mostró creación el <code>2019-01-30 15:25:18 CST</code>. La interpretación en NZDT debe conservar la zona horaria de origen y documentar la conversión aplicada.</p>
+            <div class="finding-tags"><span>DOCUMENTS / MISC</span><span>GEO-REFERENCE</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>Q12</span><span>IMAGE HASH</span></div>
+            <h3>BNE.png</h3>
+            <p>La imagen se ubicó en <code>C:\Users\Steve\Downloads\Misc\BNE.png</code>. Su MD5 observado en File Metadata fue <code>dffa98bdd7371d806adb09db27ba283</code>. La fotografía representa el Story Bridge de Brisbane.</p>
+            <div class="finding-tags"><span>DOWNLOADS / MISC</span><span>BRISBANE</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>Q13–14</span><span>TOOLS</span></div>
+            <h3>Esteganografía y cifrado</h3>
+            <p>Se localizaron instaladores de Image Steganography 1.5.2 y TrueCrypt 7.1a. TrueCrypt también aparece en Installed Programs, con ejecutables en <code>Program Files\TrueCrypt</code>. La presencia y la instalación no prueban uso efectivo.</p>
+            <div class="finding-tags"><span>TRUECRYPT 7.1A</span><span>IMAGE STEGANOGRAPHY 1.5.2</span></div>
+          </article>
+          <article class="finding-card">
+            <div class="finding-head"><span>Q15</span><span>APPLICATION DATA</span></div>
+            <h3>Discord y Windows Timeline</h3>
+            <p>Se localizaron artefactos locales asociados con Discord en el perfil de Steve y se examinó la ubicación de la base <code>ActivitiesCache.db</code> utilizada por Windows Timeline. La existencia de datos locales no permite reconstruir conversaciones no recuperadas.</p>
+            <div class="finding-tags"><span>DISCORD</span><span>ACTIVITIESCACHE.DB</span></div>
+          </article>
+          <article class="finding-card pending-card">
+            <div class="finding-head"><span>TRACEABILITY</span><span>FIELD NOTES</span></div>
+            <h3>Valores sujetos a evidencia puntual</h3>
+            <p>Los hashes y marcas temporales exactos de <code>dropoff.jpg</code> y <code>Method run.jpg</code>, así como el MD5 del instalador de esteganografía, deben incorporarse desde sus fichas File Metadata originales antes de cerrar la tabla de respuestas.</p>
+            <div class="finding-tags"><span>NO SUPONER VALORES</span><span>METADATA REQUIRED</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>04 // PART II — GEO & LOGISTICS CORRELATION</h2>
+          <span>QUESTIONS 16–17</span>
+        </div>
+        <div class="content-grid analysis-grid">
+          <article>
+            <span>OBSERVATION // BNE.png</span>
+            <h3>Brisbane reference</h3>
+            <p>La fotografía de Story Bridge y el nombre <code>BNE</code> coinciden con el código aeroportuario de Brisbane en el itinerario. Los metadatos señalan <code>about:internet</code>, por lo que es una imagen descargada, no una prueba de presencia física.</p>
+          </article>
+          <article>
+            <span>OBSERVATION // flightbookings.jpg</span>
+            <h3>Itinerary proposal</h3>
+            <p>La captura muestra BNE → WLG el 16/02/2019 y regreso WLG → AKL → BNE el 23/02/2019 para dos adultos. La página muestra una propuesta de reserva; no se aportó confirmación de compra, check-in o abordaje.</p>
+          </article>
+          <article>
+            <span>OBSERVATION // dropoff.jpg</span>
+            <h3>Eastbourne location</h3>
+            <p>La consulta cartográfica situó el punto en 38 Rimu Street, Eastbourne, Lower Hutt, región de Wellington. Su proximidad geográfica con el destino del itinerario es relevante, pero no demuestra una entrega.</p>
+          </article>
+          <article>
+            <span>OBSERVATION // MAP FILES</span>
+            <h3>Rutas en Lower Hutt</h3>
+            <p><code>airport crystals.jpg</code> y <code>Method run.jpg</code> contienen referencias a Wellington, Eastbourne, Naenae, Stokes Valley y Wainuiomata. La anotación “Home” aparece junto a Eastbourne en Method run; no se identificó quién la agregó ni se probó que las rutas fueran recorridas.</p>
+          </article>
+        </div>
+        <p class="record-warning">Interpretación: los elementos son compatibles con una planificación geográfica y logística entre Brisbane y Wellington, con referencias locales en Lower Hutt. La evidencia disponible no confirma que el viaje se realizara, que los pasajeros fueran los implicados del escenario ni que se concretara una entrega.</p>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>05 // COMMUNICATIONS & CONCEALMENT</h2>
+          <span>QUESTIONS 18–19</span>
+        </div>
+        <div class="content-grid analysis-grid">
+          <article>
+            <span>DISCORD // Q18</span>
+            <h3>Presencia de la aplicación</h3>
+            <p>Se observó el directorio local de Discord y artefactos de caché en el perfil de Steve. Esto respalda la presencia de datos asociados con la aplicación; sin mensajes verificables no es posible afirmar qué conversaciones existieron, quiénes participaron o quién escribió un mensaje.</p>
+          </article>
+          <article>
+            <span>TRUECRYPT // Q19</span>
+            <h3>Cifrado registrado</h3>
+            <p>TrueCrypt v7.1a aparece en Installed Programs y se encontraron <code>TrueCrypt.exe</code> y <code>TrueCrypt Format.exe</code> bajo Program Files. No se identificó en los datos revisados un volumen montado o contenedor cuya utilización permita demostrar cifrado efectivo.</p>
+          </article>
+          <article>
+            <span>IMAGE STEGANOGRAPHY // Q19</span>
+            <h3>Archivos de la herramienta</h3>
+            <p>Se encontró el instalador Image Steganography 1.5.2 en Downloads y el ejecutable bajo <code>AppData\Roaming\CPascoe\Image Steganography\ProgData</code>. La presencia de los archivos no demuestra que una imagen haya sido usada como portadora de información oculta.</p>
+          </article>
+          <article>
+            <span>SYSTEM / SHIMCACHE // Q19</span>
+            <h3>Marcas temporales con límite</h3>
+            <p>Los registros Run Programs mostraron entradas desde SYSTEM para los instaladores y ejecutables. Estas marcas se interpretan con cautela: ShimCache no proporciona, por sí solo, horas concluyentes de ejecución ni prueba uso efectivo.</p>
+          </article>
+        </div>
+        <div class="timeline-panel">
+          <div class="timeline-heading"><strong>REGISTROS TEMPORALES OBSERVADOS</strong><span>FECHAS MOSTRADAS POR AUTOPSY · CST</span></div>
+          <div class="timeline-row"><time>29/01/2019 · 17:28:33</time><span>TrueCrypt Setup 7.1a.exe — Downloads</span></div>
+          <div class="timeline-row"><time>29/01/2019 · 17:33:06</time><span>TrueCrypt Format.exe — Program Files</span></div>
+          <div class="timeline-row"><time>29/01/2019 · 18:34:14</time><span>TrueCrypt.exe — Program Files</span></div>
+          <div class="timeline-row"><time>31/01/2019 · 18:16:56</time><span>Image Steganography 1.5.2 Setup.exe — Downloads</span></div>
+          <div class="timeline-row"><time>31/01/2019 · 18:19:15</time><span>Image Steganography.exe — AppData\Roaming</span></div>
+          <p class="record-warning">Estas son marcas temporales presentadas en resultados asociados con SYSTEM/compatibilidad de aplicaciones. No deben etiquetarse como horas verificadas de ejecución. La cercanía temporal con las imágenes geográficas es una correlación cronológica, no prueba de que se hayan procesado con dichas herramientas.</p>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>06 // CASE HYPOTHESIS</h2>
+          <span>QUESTION 20 · COMPETING EXPLANATIONS</span>
+        </div>
+        <div class="hypothesis-grid">
+          <article class="hypothesis-card primary-hypothesis">
+            <span>HYPOTHESIS A // LOGISTICS PREPARATION</span>
+            <h3>Posible preparación de desplazamientos</h3>
+            <p>La combinación de la referencia visual de Brisbane, el itinerario BNE–WLG, la ubicación de Eastbourne y los mapas de rutas locales es compatible con una planificación logística previa a desplazamientos dentro de Wellington y Lower Hutt. La presencia de TrueCrypt e Image Steganography añade interés, aunque no demuestra que se usaran para ocultar información de la operación.</p>
+          </article>
+          <article class="hypothesis-card alternative-hypothesis">
+            <span>HYPOTHESIS B // PERSONAL ACTIVITY</span>
+            <h3>Explicación alternativa</h3>
+            <p>El equipo pudo utilizarse para actividades personales: investigar destinos, consultar mapas, guardar imágenes de ciudades y revisar vuelos para un viaje no relacionado con delitos. Las herramientas de cifrado y esteganografía también pudieron estar presentes por motivos de privacidad o experimentación.</p>
+          </article>
+        </div>
+        <div class="corroboration-grid">
+          <article><span>NEEDED EVIDENCE // 01</span><h3>Confirmación de viaje</h3><p>Reservas confirmadas, billetes, pasajeros identificados, check-in, manifiestos de vuelo y registros migratorios.</p></article>
+          <article><span>NEEDED EVIDENCE // 02</span><h3>Comunicaciones y ubicación</h3><p>Mensajes recuperables, identificadores de cuentas, registros de ubicación o dispositivos y evidencia física o videovigilancia vinculada con las fechas y lugares.</p></article>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>07 // VISUAL EVIDENCE</h2>
+          <span>CAPTURES FROM THE EXAMINATION</span>
+        </div>
+        <div class="evidence-grid">
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/01-sistema-operativo.png" alt="Autopsy: Operating System Information de SK-DESKTOP"><figcaption>01 // Operating System Information · Windows 10 Pro</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/02-perfil-steve.png" alt="Autopsy: perfil Steve dentro de Users"><figcaption>02 // Perfil principal · C:\Users\Steve</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/03-userassist.png" alt="Autopsy: clave UserAssist del NTUSER.DAT"><figcaption>03 // NTUSER.DAT · UserAssist</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/04-edge-legacy-profile.png" alt="Autopsy: estructura MicrosoftEdge del perfil"><figcaption>04 // MicrosoftEdge · perfil User Default</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/05-chrome-history-metadata.png" alt="Autopsy: metadatos del archivo History de Chrome"><figcaption>05 // Chrome History · MD5 y metadatos</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/06-bne-story-bridge.png" alt="Imagen BNE con el Story Bridge de Brisbane"><figcaption>06 // BNE.png · referencia visual de Brisbane</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/07-bne-metadata.png" alt="Autopsy: metadatos de BNE.png"><figcaption>07 // BNE.png · File Metadata</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/08-dropoff-eastbourne.png" alt="Google Maps: punto 38 Rimu Street, Eastbourne"><figcaption>08 // dropoff.jpg · referencia cartográfica de Eastbourne</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/09-flightbookings.png" alt="Captura del itinerario Brisbane-Wellington-Brisbane"><figcaption>09 // flightbookings.jpg · itinerario BNE–WLG–BNE</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/10-map-wellington-airport.png" alt="Mapa del aeropuerto de Wellington y la región"><figcaption>10 // Wellington · referencia de llegada</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/11-method-run-routes.png" alt="Mapa Method run con ubicaciones de Lower Hutt"><figcaption>11 // Method run.jpg · rutas y anotación Home</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/12-airport-crystals-route.png" alt="Mapa airport crystals con ruta de Wellington"><figcaption>12 // airport crystals.jpg · ruta representada</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/13-truecrypt-run-programs.png" alt="Autopsy: registros asociados con TrueCrypt"><figcaption>13 // TrueCrypt · registros Run Programs</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/14-steganography-run-programs.png" alt="Autopsy: instalador y ejecutable Image Steganography"><figcaption>14 // Image Steganography · registros Run Programs</figcaption></figure>
+          <figure class="evidence-card"><img class="evidence-image" src="EvidenciasPR03/Capturas/15-ingest-status.png" alt="Autopsy: resumen de módulos y estado de ingesta"><figcaption>15 // Ingest Inbox · procesamiento y alertas observadas</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>08 // EXECUTIVE REPORT</h2>
+          <span>PDF // ORIGINAL DELIVERABLE</span>
+        </div>
+        <div class="report-shell">
+          <div class="report-header">
+            <div>
+              <span class="activity-kicker">EVIDENCE PACKAGE // PR03</span>
+              <h3>PuenteLunaBrunoAxel-PR03.pdf</h3>
+              <p>Informe de investigación forense y resultados de Autopsy.</p>
+              <small class="path-hint">INSERTAR EN: P3/Actividades/EvidenciasPR03/Reporte/PuenteLunaBrunoAxel-PR03.pdf</small>
+            </div>
+            <div class="report-actions">
+              <a class="data-button" href="EvidenciasPR03/Reporte/PuenteLunaBrunoAxel-PR03.pdf" target="_blank" rel="noopener noreferrer">OPEN // PDF</a>
+              <a class="data-button" href="EvidenciasPR03/Reporte/PuenteLunaBrunoAxel-PR03.pdf" download>DOWNLOAD // PDF</a>
+            </div>
+          </div>
+          <iframe class="report-frame" src="EvidenciasPR03/Reporte/PuenteLunaBrunoAxel-PR03.pdf#view=FitH" title="Informe del proyecto PR03" loading="lazy"></iframe>
+          <p class="viewer-fallback">Si el visor no carga, utiliza OPEN // PDF.</p>
+        </div>
+      </section>
+
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>09 // REFERENCES</h2>
+          <span>MANDATORY SOURCES</span>
+        </div>
+        <ol class="references-list">
+          <li>
+            <strong>Referencia académica obligatoria — corpus forenses estandarizados.</strong>
+            Garfinkel, S., Farrell, P., Roussev, V., &amp; Dinolt, G. (2009). <em>Bringing Science to Digital Forensics with Standardized Forensic Corpora.</em> Digital Forensic Research Workshop (DFRWS), Montreal, Canadá.
+            <a href="https://simson.net/clips/academic/2009.DFRWS.Corpora.pdf" target="_blank" rel="noopener noreferrer">Consultar publicación académica (PDF)</a>
+          </li>
+          <li>
+            <strong>Escenario de evidencia obligatorio.</strong>
+            Digital Corpora. (2019). <em>2019 Narcos Scenario.</em> Digital Corpora.
+            <a href="https://digitalcorpora.org/corpora/scenarios/2019-narcos/" target="_blank" rel="noopener noreferrer">Consultar escenario Narcos</a>
+          </li>
+          <li>
+            <strong>Referencia técnica complementaria.</strong>
+            Microsoft Security. (s. f.). <em>Leveraging Windows Internals for Forensic Investigation.</em> Microsoft Incident Response Team.
+            <a href="https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/final/en-us/microsoft-brand/documents/IR-Guidebook-Final.pdf" target="_blank" rel="noopener noreferrer">Consultar guía técnica (PDF)</a>
+          </li>
+          <li>
+            <strong>Artefactos de Discord.</strong>
+            Department of Defense Cyber Crime Center (DC3). (2021). <em>Technical Advisory 2020-002: Discord Chat App Artifacts.</em>
+            <a href="https://content.govdelivery.com/accounts/USDODDC3/bulletins/2e036a8" target="_blank" rel="noopener noreferrer">Consultar aviso técnico</a>
+          </li>
+        </ol>
+      </section>
+
+      <section class="activity-section">
+        <div class="section-title">
+          <h2>10 // FORENSIC TAKEAWAY</h2>
+          <span>OBSERVATION · CORRELATION · LIMITS</span>
+        </div>
+        <div class="conclusion-grid">
+          <div class="conclusion-number">PR03</div>
+          <div>
+            <h3>Los indicios permiten plantear una hipótesis logística, no atribuir por sí solos una operación criminal.</h3>
+            <p>
+              Las referencias a Brisbane, el itinerario hacia Wellington, el punto cartográfico de Eastbourne
+              y los mapas de Lower Hutt forman una secuencia geográfica compatible con una posible preparación
+              de desplazamientos. La presencia de herramientas de cifrado y esteganografía amplía las líneas
+              de investigación, pero no demuestra su uso efectivo. La hipótesis requiere corroboración con
+              registros de viaje, comunicaciones recuperables y evidencia física o de ubicación.
+            </p>
+            <p class="source-note">El examen se documenta a partir de Narcos-1. Las conclusiones distinguen los datos observados de las inferencias y conservan las limitaciones de los artefactos analizados.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div><strong>NET===TECH</strong><span>PROJECT NODE // PR03</span></div>
+      <div><span>BRUNO AXEL PUENTE LUNA</span><span>UPSLP · CNO IV — SEGURIDAD INFORMÁTICA · 2026</span></div>
+      <div class="footer-status"><span class="state-dot"></span><span>KOWHAI CASEFILE // EVIDENCE REVIEWED</span></div>
+    </footer>
+  </div>
+</body>
+</html>
